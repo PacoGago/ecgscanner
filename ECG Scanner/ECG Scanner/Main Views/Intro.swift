@@ -10,11 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        
+        
+        VStack() {
+            
+        //Logo
+        Badge().frame(width: 180 , height: 180, alignment: .center)
+            
         NavigationView {
             VStack {
                 
-                //Logo
-                
+    
                 // Nuevo
                 NavigationLink(destination: Form()) {
                     HStack {
@@ -50,6 +56,9 @@ struct ContentView: View {
                 }//END: Cargar
             }
         }
+    }
+        
+        
     }
 }
 
