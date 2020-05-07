@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BadgeBackground: View {
     var body: some View {
+               
         GeometryReader { geometry in
             Circle()
             .fill(LinearGradient(
@@ -16,7 +17,9 @@ struct BadgeBackground: View {
                 startPoint: .init(x: 0.5, y: 0),
                 endPoint: .init(x: 0.5, y: 0.6)
             ))
-            .aspectRatio(1, contentMode: .fit)
+                .aspectRatio(1, contentMode: .fit)
+                .overlay(Image("base").resizable().scaledToFit())
+            
         }
     }
     static let gradientStart = Color(red: 221.0 / 255, green: 94.0 / 255, blue: 137.0 / 255)

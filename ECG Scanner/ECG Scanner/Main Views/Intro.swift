@@ -12,53 +12,54 @@ struct ContentView: View {
     var body: some View {
         
         
-        VStack() {
-            
-        //Logo
-        Badge().frame(width: 180 , height: 180, alignment: .center)
-            
-        NavigationView {
-            VStack {
-                
-    
-                // Nuevo
-                NavigationLink(destination: Form()) {
-                    HStack {
-                        Image(systemName: "plus.circle")
-                            .font(.body)
-                        Text("Nuevo")
-                            .fontWeight(.semibold)
-                            .font(.body)
-                            .frame(width: 80 , height: 15, alignment: .center)
-                            
-                    }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(5)
-                
-                }//END: Nuevo
-                
-                // Cargar
-                NavigationLink(destination: Form()) {
-                    HStack {
-                       Image(systemName: "square.and.arrow.down")
-                           .font(.body)
-                       Text("Abrir...")
-                           .fontWeight(.semibold)
-                           .font(.body)
-                           .frame(width: 80 , height: 15, alignment: .center)
-                    }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(5)
-                }//END: Cargar
-            }
+        
+        VStack{
+            NavigationView {
+                       
+                       Section {
+                           
+                           VStack{
+                               
+                               // Nuevo
+                               NavigationLink(destination: Form()) {
+                                   HStack {
+                                       Image(systemName: "plus.circle")
+                                           .font(.body)
+                                       Text("Nuevo")
+                                           .fontWeight(.semibold)
+                                           .font(.body)
+                                           .frame(width: 80 , height: 15, alignment: .center)
+
+                                   }
+                                   .padding()
+                                   .foregroundColor(.white)
+                                   .background(Color.red)
+                                   .cornerRadius(5)
+
+                               }//END: Nuevo
+
+                               // Cargar
+                               NavigationLink(destination: Form()) {
+                                   HStack {
+                                      Image(systemName: "square.and.arrow.down")
+                                          .font(.body)
+                                      Text("Abrir...")
+                                          .fontWeight(.semibold)
+                                          .font(.body)
+                                          .frame(width: 80 , height: 15, alignment: .center)
+                                   }
+                                   .padding()
+                                   .foregroundColor(.white)
+                                   .background(Color.red)
+                                   .cornerRadius(5)
+                               }//END: Cargar
+                           }.padding(180)
+                           
+                           
+                       }.navigationBarTitle(Text("ECG Scanner"))
+                   }
         }
-    }
-        
-        
+       
     }
 }
 

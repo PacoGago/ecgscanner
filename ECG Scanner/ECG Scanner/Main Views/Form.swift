@@ -11,10 +11,14 @@ import SwiftUI
 struct Form: View {
     var body: some View {
     
-        
-        Text("Hello World")
-        
-        
+        NavigationView {
+            
+                Section {
+                    Text("Hello World")
+                }
+            
+            .navigationBarTitle(Text("SwiftUI"))
+        }
     }
 }
 
