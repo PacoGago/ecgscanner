@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var cardNew: Card = Card(title: "Nuevo", subtitle: "Permite escaner una imagen de un ECG", img: "btn1")
+    var cardAdd: Card = Card(title: "Añadir", subtitle: "Seleccionar un ECG anterior", img: "btn1")
+    
     var body: some View {
-        
-        
         
         VStack{
             NavigationView {
@@ -20,46 +22,15 @@ struct ContentView: View {
                            
                            VStack{
                                
-                               // Nuevo
-                               NavigationLink(destination: Form()) {
-                                   HStack {
-                                       Image(systemName: "plus.circle")
-                                           .font(.body)
-                                       Text("Nuevo")
-                                           .fontWeight(.semibold)
-                                           .font(.body)
-                                           .frame(width: 80 , height: 15, alignment: .center)
-
-                                   }
-                                   .padding()
-                                   .foregroundColor(.white)
-                                   .background(Color.red)
-                                   .cornerRadius(5)
-
-                               }//END: Nuevo
-
-                               // Cargar
-                               NavigationLink(destination: Form()) {
-                                   HStack {
-                                      Image(systemName: "square.and.arrow.down")
-                                          .font(.body)
-                                      Text("Abrir...")
-                                          .fontWeight(.semibold)
-                                          .font(.body)
-                                          .frame(width: 80 , height: 15, alignment: .center)
-                                   }
-                                   .padding()
-                                   .foregroundColor(.white)
-                                   .background(Color.red)
-                                   .cornerRadius(5)
-                               }//END: Cargar
-                           }.padding(180)
-                           
+                            CardView(card: cardNew).padding()
+                            CardView(card: cardAdd).padding()
                            
                        }.navigationBarTitle(Text("ECG Scanner"))
                    }
-        }
+            }
        
+        }
+        
     }
 }
 
