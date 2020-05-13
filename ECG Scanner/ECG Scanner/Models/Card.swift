@@ -8,13 +8,13 @@
 
 class Card{
     
-    var title: String = ""
-    var subtitle: String = ""
     var img: String = ""
-
-    init(title: String, subtitle: String, img: String) {
-        self.title = title
-        self.subtitle = subtitle
+    var description: String = ""
+    var buttonText: String = ""
+    
+    init(img: String, description: String, buttonText: String) {
         self.img = img
+        self.description = description
+        self.buttonText = buttonText
     }
 }

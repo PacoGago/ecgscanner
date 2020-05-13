@@ -11,14 +11,17 @@ import SwiftUI
 struct Form: View {
     var body: some View {
     
-        NavigationView {
-            
-                Section {
-                    Text("Hello World")
-                }
-            
-            .navigationBarTitle(Text("SwiftUI"))
+        Button(action: {
+            print("Estoy haciendo tap al botón")
+        }) {
+            Text("Iniciar Sesión")
+                .font(.title)
+                .fontWeight(.bold)
         }
+        .foregroundColor(Color.white)
+        .padding()
+        .background(Color.blue)
+        .cornerRadius(10)
     }
 }
 

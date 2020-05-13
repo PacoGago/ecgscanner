@@ -21,47 +21,42 @@ struct CardView: View {
             // Logo de la tarjeta
             Image(card.img)
                 .resizable()
-                .frame(width: 100.0, height: 100.0)
+                .frame(width: 80.0, height: 80.0)
                 .aspectRatio(contentMode: .fit)
-                .padding()
+                .padding(10)
 
-            HStack {
+            VStack {
                 
-                // Texto
-                VStack(alignment: .leading, spacing: 0) {
-                    
-                    Text(card.title)
-                        .font(.title)
-                        .foregroundColor(.primary)
-                        .lineLimit(3)
-                    Text(card.subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                Text(card.description).font(.body).padding(5)
+                
+                Button(action: {
+                    print("Estoy haciendo tap al botón")
+                }) {
+//                    Image(systemName: "faceid")
+//                    .font(.largeTitle)
+                    Text(card.buttonText)
+                        .font(.body)
+                        .fontWeight(.bold)
                 }
-                .layoutPriority(100)
+                .frame(maxWidth: .infinity)
+                .foregroundColor(Color.white)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(10)
 
-                Spacer()
-                
-                //Indicador
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.secondary)
-                    .font(Font.body.weight(.semibold))
             }
-            .padding(.all, 10)
-            .background(Color.gray) // This is a custom color set
+            
         }
-        .cornerRadius(10)
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 1)
-        )
-       
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: Card(title: "Title",subtitle: "Subtitle", img: "btn1"))
+        CardView(card: Card(img: "btn1", description: "Title", buttonText: "Subtitle"))
     }
 }
+
+//#colorLiteral(red: 0.9999126792, green: 1, blue: 0.9998814464, alpha: 1)

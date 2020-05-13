@@ -10,14 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var cardNew: Card = Card(title: "Nuevo", subtitle: "Permite escaner una imagen de un ECG", img: "btn1")
-    var cardAdd: Card = Card(title: "Añadir", subtitle: "Seleccionar un ECG anterior", img: "btn1")
+    var cardNew: Card = Card(img: "btn1", description: "Permite escaner una imagen de un ECG", buttonText: "Nuevo")
+    var cardAdd: Card = Card(img: "btn1", description: "Seleccionar un ECG anterior", buttonText: "Añadir")
     
     var body: some View {
         
         VStack{
             NavigationView {
-                       
+                   ZStack {
+                    Color.init(#colorLiteral(red: 0.9441997409, green: 0.9489384294, blue: 0.9662023187, alpha: 1)).edgesIgnoringSafeArea(.all)
                        Section {
                            
                            VStack{
@@ -27,9 +28,14 @@ struct ContentView: View {
                            
                        }.navigationBarTitle(Text("ECG Scanner"))
                    }
-            }
+                    
+                }//ZStack
+            
+            }//Navigation
        
-        }
+        }//VStack
+        
+        
         
     }
 }
