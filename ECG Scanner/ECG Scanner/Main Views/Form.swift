@@ -11,17 +11,9 @@ import SwiftUI
 struct Form: View {
     var body: some View {
     
-        Button(action: {
-            print("Estoy haciendo tap al botón")
-        }) {
-            Text("Iniciar Sesión")
-                .font(.title)
-                .fontWeight(.bold)
-        }
-        .foregroundColor(Color.white)
-        .padding()
-        .background(Color.blue)
-        .cornerRadius(10)
+        ZStack(alignment: .topLeading) {
+            Text("Subtitle de ECG")
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
 }
 
