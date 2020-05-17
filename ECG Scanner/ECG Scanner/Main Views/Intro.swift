@@ -7,8 +7,12 @@
 //
 
 import SwiftUI
+import MobileCoreServices
 
 struct ContentView: View {
+    
+    @State private var showConfig = false
+    @State private var showDocPicker = false
     
     var cardNew: Card = Card(
         img: "btn_new_scan",
@@ -47,22 +51,44 @@ struct ContentView: View {
                     
                         VStack{
                             
+                            //Subtitle
                             Text("Subtitle de ECG")
                                 .font(.body)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                                .offset(x: 0, y: -20)
+                                .offset(x: 0, y: 5)
                             
                             //Nuevo ECG
                             NavigationLink(destination: Form()) {
                                 CardView(card: cardNew).padding()
-                            }.offset(x: 0, y: -20)
+                            }.offset(x: 0, y: -10)
                             
                             //Examinar un fichero
-                            NavigationLink(destination: Form()) {
+                            Button(action: {
+                                self.showDocPicker.toggle()
+                            }, label: {
                                 CardView(card: cardAdd).padding()
-                            }.offset(x: 0, y: -20)
+                            })
+                            .offset(x: 0, y: -30)
+                            .sheet(isPresented: self.$showDocPicker){
+                                 DocumentPickerView()
+                            }
+                            
+                            
+                            //Settings
+                            Button(action: {
+                                self.showConfig.toggle()
+                            }, label: {
+                                Image(systemName: "gear")
+                                .font(.system(size: 22.0))
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.black)
+                            })
+                            .offset(x: 150, y: -40)
+                            .sheet(isPresented: self.$showConfig){
+                                SettingsView()
+                            }
                            
                         }.navigationBarTitle(Text("ECG Scanner"))
                         
@@ -82,4 +108,15 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+struct DocumentPickerView: UIViewControllerRepresentable {
+  func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+    let documentPicker = UIDocumentPickerViewController(documentTypes: [(kUTTypeImage as String)], in: .import)
+    return documentPicker
+  }
+
+  func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {
+
+  }
 }
