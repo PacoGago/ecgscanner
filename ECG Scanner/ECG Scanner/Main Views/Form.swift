@@ -8,35 +8,69 @@
 
 import SwiftUI
 
-struct Form: View {
+struct FormView: View {
     
-    @State private var showConfig = false
+    @State private var name = ""
+    @State private var lastName = ""
+    @State private var hospital = ""
+    @State private var diabetic = false
+    @State private var age = 30
     
     var body: some View {
     
-        ZStack(alignment: .topLeading) {
         
-            //Settings
-            Button(action: {
-                self.showConfig.toggle()
-                print("I touch it")
-            }, label: {
-                Image(systemName: "gear")
-                .font(.system(size: 22.0))
-                .frame(width: 50, height: 50)
-                .foregroundColor(.black)
-            })
-            .sheet(isPresented: self.$showConfig){
-                Form()
+            
+            Form{
+                
+                Section(header: Text("Datos generales")){
+                    
+                    // Nombre
+                    TextField("Nombre", text: $name)
+                    
+                    //Apellidos
+                    TextField("Apellidos", text: $lastName)
+                    
+                    // Hospital
+                    Picker(selection: $hospital, label: Text("Hospital")){
+                        ForEach(HospitalList.allHospitals, id: \.self){
+                            hospital in Text(hospital).tag(hospital)
+                        }
+                    }
+                    
+                }
+                
+                Section(header: Text("Datos médicos")){
+                    
+                    // Diabético
+                    Toggle(isOn: $diabetic, label: {
+                        Text("Diabético")
+                    })
+                    
+                    Stepper(value: $age, in: 0...120, label: {
+                        Text("Edad: \(self.age) años")
+                    })
+                }
+                
             }
             
-            
-        }.frame(minWidth: 0, maxWidth: .infinity)
+        
+        
     }
 }
 
-struct Form_Previews: PreviewProvider {
+struct HospitalList {
+    
+    static let allHospitals = [
+        "Puerto Real",
+        "Cádiz",
+        "Jerez de la Frontera",
+        "Sevilla (Virgen del Rocío)"
+    ]
+    
+}
+
+struct FormView_Previews: PreviewProvider {
     static var previews: some View {
-        Form()
+        FormView()
     }
 }

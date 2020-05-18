@@ -60,11 +60,13 @@ struct ContentView: View {
                                 .offset(x: 0, y: 5)
                             
                             //Nuevo ECG
-                            NavigationLink(destination: Form()) {
+                            NavigationLink(destination: FormView()) {
                                 CardView(card: cardNew).padding()
                             }.offset(x: 0, y: -10)
                             
                             //Examinar un fichero
+                            //TODO: Tenemos que indicar cual el tipo de fichero que queremos
+                            //obtener con esta apertura.
                             Button(action: {
                                 self.showDocPicker.toggle()
                             }, label: {
