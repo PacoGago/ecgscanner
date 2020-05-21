@@ -25,7 +25,7 @@ struct FormView: View {
     
     @State private var genre = ""
     @State private var age = 30
-    @State private var weight = 30
+    @State private var weight = 50.0
     @State private var height = 30
     //Indice de masa corporal (body mass index)
     @State private var bmi = ""
@@ -50,13 +50,37 @@ struct FormView: View {
     
     // Variables de la vista
     private var genderOptions = ["Hombre", "Mujer"]
-    private var ageOptions = [0,1,2,3,4,5,6,7,8,9,10]
+    
     @State private var selectionGenre = 0
     @State private var pickerVisibleGenre = false
     @State private var selectionAge = 30
     @State private var pickerVisibleAge = false
+    @State private var selectionWeight = 100
+    @State private var pickerVisibleWeight = false
 
+    func weightData() -> [Double]{
+        
+        var res = Array<Double>()
+        
+        for index in 1...657 {
+            res.append(Double(index))
+            res.append(Double(index)+0.5)
+        }
 
+        return res
+    }
+    
+    func sanitanizeDoubleWeight(weight_: Double) -> String{
+        
+        //var weightString = String(format:"%.1f", weight_)
+        return String(format:"%.1f", weight_)
+    }
+    
+    func sanitanizeAge(weight_: Int) -> String{
+        
+        //var weightString = String(format:"%.1f", weight_)
+        return String(format:"%.1f", weight_)
+    }
     
     var body: some View {
     
@@ -124,7 +148,7 @@ struct FormView: View {
                     HStack{
                         Text("Edad")
                         Spacer()
-                        Button("\(self.selectionAge )"){
+                        Button("\(self.selectionAge ) " + (self.selectionAge>1 ? "años" : "año")){
                             self.pickerVisibleAge.toggle()
                         }.foregroundColor(self.pickerVisibleAge ? .red : .blue)
                     }
@@ -146,6 +170,40 @@ struct FormView: View {
                             Spacer()
                         }
                     }
+                    
+                    //Peso
+                    HStack{
+                        Text("Peso")
+                        Spacer()
+                        Button(self.sanitanizeDoubleWeight(weight_: self.weightData()[selectionWeight]) + " kg"){
+                            self.pickerVisibleWeight.toggle()
+                        }.foregroundColor(self.pickerVisibleWeight ? .red : .blue)
+                    }
+                    
+                    if pickerVisibleWeight {
+                        
+                        HStack{
+                            Spacer()
+                            Picker(selection: $selectionWeight, label: Text("")) {
+                                
+                                ForEach((0..<weightData().count)) {
+                                    
+                                    Text(self.sanitanizeDoubleWeight(weight_: self.weightData()[$0]) + " kg")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .onTapGesture {
+                                self.pickerVisibleWeight.toggle()
+                                self.weight = self.weightData()[self.selectionWeight]
+                                    
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    
+                    
                     
                 }
                    
