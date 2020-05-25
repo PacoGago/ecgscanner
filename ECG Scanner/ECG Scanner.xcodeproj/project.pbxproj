@@ -27,6 +27,7 @@
 		1986BFAB2463421A006313C4 /* BadgeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA72463421A006313C4 /* BadgeSymbol.swift */; };
 		1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAC24634278006313C4 /* HexagonParameters.swift */; };
 		1986BFB024634575006313C4 /* animationcurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAF24634575006313C4 /* animationcurves.swift */; };
+		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		1986BFA72463421A006313C4 /* BadgeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeSymbol.swift; sourceTree = "<group>"; };
 		1986BFAC24634278006313C4 /* HexagonParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
 		1986BFAF24634575006313C4 /* animationcurves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = animationcurves.swift; sourceTree = "<group>"; };
+		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		1957B0F92461F0FF0038E9F9 /* ECG Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				19B010F8247C56950045470A /* Utils */,
 				1986BFAE24634289006313C4 /* Models */,
 				1957B12E2461F15E0038E9F9 /* Main Views */,
 				1957B12D2461F1420038E9F9 /* Supporting Views */,
@@ -194,6 +197,14 @@
 				196AC1E32469DBEA001809F9 /* Card.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		19B010F8247C56950045470A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				19B010F9247C56B60045470A /* ConstantsViews.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +348,7 @@
 				1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */,
 				1986BFAA2463421A006313C4 /* BadgeBackground.swift in Sources */,
 				1957B1302461F3CC0038E9F9 /* Form.swift in Sources */,
+				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
 				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
 				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,

@@ -49,14 +49,22 @@ struct FormView: View {
     @State private var heartRate = ""
     
     // Variables de la vista
-    private var genderOptions = ["Hombre", "Mujer"]
+    
+    
+    @State private var selectionProvince = 0
+    @State private var pickerVisibleProvince = false
     
     @State private var selectionGenre = 0
     @State private var pickerVisibleGenre = false
+    
     @State private var selectionAge = 30
     @State private var pickerVisibleAge = false
+    
     @State private var selectionWeight = 100
     @State private var pickerVisibleWeight = false
+    
+    @State private var selectionHeight = 168
+    @State private var pickerVisibleHeight = false
 
     func weightData() -> [Double]{
         
@@ -88,11 +96,12 @@ struct FormView: View {
             
             Form{
                 
+                // DATOS GENERALES
                 Section(header: Text("Datos generales")){
                     
                     
                     // Nombre
-                    TextField("Nombre", text: $name)
+                    TextField("Nombre", text: $name).keyboardType(.numberPad)
                     
                     //Primer apellido
                     TextField("Primer apellido", text: $firstSurname)
@@ -100,29 +109,50 @@ struct FormView: View {
                     //Segundo apellido
                     TextField("Segundo apellido", text: $secondSurname)
                     
-                    
-                }//Datos generales
-                
-                Section(header: Text("")){
-                    
                     //Direccion
-                    TextField("Dirección", text: $address)
+                   TextField("Dirección", text: $address)
+                   
+                   //Ciudad
+                   TextField("Ciudad", text: $city)
+                   
+                    //Genero
+                    HStack{
+                        Text("Provincia")
+                        Spacer()
+                        Button(ConstantsViews.provinceOptions[selectionProvince]){
+                            self.pickerVisibleProvince.toggle()
+                        }.foregroundColor(self.pickerVisibleProvince ? .red : .blue)
+                    }
                     
-                    //Ciudad
-                    TextField("Ciudad", text: $city)
+                    if pickerVisibleProvince {
+                        HStack{
+                            Spacer()
+                            Picker(selection: $selectionProvince, label: Text("")) {
+                                ForEach(0..<ConstantsViews.provinceOptions.count) {
+                                    Text(ConstantsViews.provinceOptions[$0]).foregroundColor(.secondary)
+                                }
+        
+                            }.pickerStyle(WheelPickerStyle())
+                                .onTapGesture {
+                                    self.pickerVisibleProvince.toggle()
+                                    self.province = ConstantsViews.provinceOptions[self.selectionProvince]
+                            }
+                            Spacer()
+                        }
+                    }
                     
-                    //Provincia
-                    TextField("Provincia", text: $province)
                     
-                    //PostaCode
-                    TextField("C.P", text: $postalCode)
-                    
-                    
+                }//END: First Section - Datos generales
+                
+            
+                // DATOS MEDICOS
+                Section(header: Text("Datos médicos")){
+                
                     //Genero
                     HStack{
                         Text("Género")
                         Spacer()
-                        Button(genderOptions[selectionGenre]){
+                        Button(ConstantsViews.genderOptions[selectionGenre]){
                             self.pickerVisibleGenre.toggle()
                         }.foregroundColor(self.pickerVisibleGenre ? .red : .blue)
                     }
@@ -131,14 +161,14 @@ struct FormView: View {
                         HStack{
                             Spacer()
                             Picker(selection: $selectionGenre, label: Text("")) {
-                                ForEach(0..<genderOptions.count) {
-                                    Text(self.genderOptions[$0]).foregroundColor(.secondary)
+                                ForEach(0..<ConstantsViews.genderOptions.count) {
+                                    Text(ConstantsViews.genderOptions[$0]).foregroundColor(.secondary)
                                 }
         
                             }.pickerStyle(WheelPickerStyle())
                                 .onTapGesture {
                                     self.pickerVisibleGenre.toggle()
-                                    self.genre = self.genderOptions[self.selectionGenre]
+                                    self.genre = ConstantsViews.genderOptions[self.selectionGenre]
                             }
                             Spacer()
                         }
@@ -169,7 +199,7 @@ struct FormView: View {
                             }
                             Spacer()
                         }
-                    }
+                    }//End Edad
                     
                     //Peso
                     HStack{
@@ -179,15 +209,15 @@ struct FormView: View {
                             self.pickerVisibleWeight.toggle()
                         }.foregroundColor(self.pickerVisibleWeight ? .red : .blue)
                     }
-                    
+
                     if pickerVisibleWeight {
-                        
+
                         HStack{
                             Spacer()
                             Picker(selection: $selectionWeight, label: Text("")) {
-                                
+
                                 ForEach((0..<weightData().count)) {
-                                    
+
                                     Text(self.sanitanizeDoubleWeight(weight_: self.weightData()[$0]) + " kg")
                                         .foregroundColor(.secondary)
                                 }
@@ -196,28 +226,43 @@ struct FormView: View {
                             .onTapGesture {
                                 self.pickerVisibleWeight.toggle()
                                 self.weight = self.weightData()[self.selectionWeight]
-                                    
+
                             }
                             Spacer()
                         }
+                    }//End Peso
+                    
+                    //Altura
+                    HStack{
+                        Text("Altura")
+                        Spacer()
+                        Button("\(self.selectionHeight) cm"){
+                            self.pickerVisibleHeight.toggle()
+                        }.foregroundColor(self.pickerVisibleHeight ? .red : .blue)
                     }
-                    
-                    
-                    
+
+                    if pickerVisibleHeight {
+                        HStack{
+                            Spacer()
+                            Picker(selection: $selectionHeight, label: Text("")) {
+                                ForEach((1...299), id: \.self) {
+                                    Text("\($0) cm").foregroundColor(.secondary)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .onTapGesture {
+                                self.pickerVisibleHeight.toggle()
+                                self.age = self.selectionHeight
+
+                            }
+                            Spacer()
+                        }
+                    }//End Altura
                     
                 }
-                   
-                    
-
-                    
+                        
                 
-                
-                
-                
-                
-                
-                
-                
+                // DATOS MEDICOS
                 Section(header: Text("Datos médicos")){
                     
                     // Diabético
