@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAC24634278006313C4 /* HexagonParameters.swift */; };
 		1986BFB024634575006313C4 /* animationcurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAF24634575006313C4 /* animationcurves.swift */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
+		19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 19FFA208248055CE00E4BA02 /* KeyboardObserving */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +225,9 @@
 			dependencies = (
 			);
 			name = "ECG Scanner";
+			packageProductDependencies = (
+				19FFA208248055CE00E4BA02 /* KeyboardObserving */,
+			);
 			productName = "ECG Scanner";
 			productReference = 1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */;
 			productType = "com.apple.product-type.application";
@@ -295,6 +300,9 @@
 				Base,
 			);
 			mainGroup = 1957B0EE2461F0FF0038E9F9;
+			packageReferences = (
+				19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+			);
 			productRefGroup = 1957B0F82461F0FF0038E9F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -678,6 +686,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19FFA208248055CE00E4BA02 /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */ = {

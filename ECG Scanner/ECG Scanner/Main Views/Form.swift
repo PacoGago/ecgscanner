@@ -26,7 +26,7 @@ struct FormView: View {
     @State private var genre = ""
     @State private var age = 30
     @State private var weight = 60.0
-    @State private var height = 168
+    @State private var height = 170
     //Indice de masa corporal (body mass index)
     @State private var bmi = 21.25
     @State private var smoker = false
@@ -62,11 +62,15 @@ struct FormView: View {
     @State private var selectionWeight = 100
     @State private var pickerVisibleWeight = false
     
-    @State private var selectionHeight = 168
+    @State private var selectionHeight = 170
     @State private var pickerVisibleHeight = false
     
     @State private var bmiText = "(Normal)"
     @State private var bmiColor = Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
+    
+    @State var value : CGFloat = 0 // valor por defecto para el offset del teclado
+    
+    @State private var textStyle = UIFont.TextStyle.body
 
     func weightData() -> [Double]{
         
@@ -223,7 +227,7 @@ struct FormView: View {
                 
             
                 // DATOS MEDICOS
-                Section(header: Text("Datos médicos")){
+                Section(header: Text("Perfil de salud")){
                 
                     //Genero
                     HStack{
@@ -378,23 +382,47 @@ struct FormView: View {
                     }
                     
                     
-                    
-                    
                 }
                         
                 
                 // DATOS MEDICOS
                 Section(header: Text("Datos médicos")){
                     
-                    // Diabético
-                    Toggle(isOn: $smoker, label: {
-                        Text("Diabético")
-                    })
+                        // Diabético
+                        Toggle(isOn: $smoker, label: {
+                            Text("Fumador")
+                        })
+                        
+                        TextField("Alergías", text: $chronic)
+                        
+                        TextField("Enf. Crónicas", text: $chronic)
+                        
+                        TextField("Medicación", text: $medication)
+                        
+                        TextField("Hospital", text: $hospital)
+
+                }// END SECTION: DATOS MEDICOS
+                
+                
+            // Con esto evitamos que los campos del
+            // formulario queden ocultos
+            }.offset(y: -self.value)
+             .animation(.spring())
+             .onAppear{
+                
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main){ (noti) in
                     
+                    let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                    let height = value.height
                     
+                    self.value = height
                 }
                 
-            }
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main){ (noti) in
+                    
+                    self.value = 0
+                }
+            }//END FORM
             
         
         
