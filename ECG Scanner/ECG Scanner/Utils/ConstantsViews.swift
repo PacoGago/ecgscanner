@@ -26,5 +26,10 @@ struct ConstantsViews{
                                             "Sevilla", "Soria", "Tarragona", "Teruel",
                                             "Toledo", "Valencia", "Valladolid",
                                             "Zamora", "Zaragoza", "Ceuta","Melilla"]
+    static let HospitalJSONName: String  = "hospitals"
+    static let HospitalArray: String  = "features"
+    static let HospitalAttributes: String  = "attributes"
+    static let HospitalName: String  = "NOMBRE"
+    static let HospitalProvince: String  = "PROVINCIAS"
 
 }

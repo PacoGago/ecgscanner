@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191E994224B6247700B28F22 /* ArrayUtils.swift */; };
+		192757B024B4D70600EAF61F /* HospitalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757AF24B4D70600EAF61F /* HospitalData.swift */; };
+		192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757B124B4F92F00EAF61F /* IMCUtils.swift */; };
 		1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */; };
 		1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */; };
 		1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */; };
@@ -17,6 +20,7 @@
 		1957B1152461F1010038E9F9 /* ECG_ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B1142461F1010038E9F9 /* ECG_ScannerTests.swift */; };
 		1957B1202461F1010038E9F9 /* ECG_ScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B11F2461F1010038E9F9 /* ECG_ScannerUITests.swift */; };
 		1957B1302461F3CC0038E9F9 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B12F2461F3CC0038E9F9 /* Form.swift */; };
+		195B2E9B24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */; };
 		196AC1E42469DBEA001809F9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AC1E32469DBEA001809F9 /* Card.swift */; };
 		196AC1E62469DC8C001809F9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AC1E52469DC8C001809F9 /* CardView.swift */; };
 		19722B432471A7C3004EFD6F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19722B422471A7C3004EFD6F /* Settings.swift */; };
@@ -27,7 +31,11 @@
 		1986BFAB2463421A006313C4 /* BadgeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA72463421A006313C4 /* BadgeSymbol.swift */; };
 		1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAC24634278006313C4 /* HexagonParameters.swift */; };
 		1986BFB024634575006313C4 /* animationcurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAF24634575006313C4 /* animationcurves.swift */; };
+		198921DD24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */; };
+		198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */; };
+		198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 198921E324B3950A00EF3A0D /* SwiftyJSON */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
+		19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */; };
 		19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 19FFA208248055CE00E4BA02 /* KeyboardObserving */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191E994224B6247700B28F22 /* ArrayUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtils.swift; sourceTree = "<group>"; };
+		192757AF24B4D70600EAF61F /* HospitalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalData.swift; sourceTree = "<group>"; };
+		192757B124B4F92F00EAF61F /* IMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCUtils.swift; sourceTree = "<group>"; };
 		1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +76,7 @@
 		1957B11F2461F1010038E9F9 /* ECG_ScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ScannerUITests.swift; sourceTree = "<group>"; };
 		1957B1212461F1010038E9F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1957B12F2461F3CC0038E9F9 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebasUnitariasIMCUtils.swift; sourceTree = "<group>"; };
 		196AC1E32469DBEA001809F9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		196AC1E52469DC8C001809F9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		19722B422471A7C3004EFD6F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -75,7 +87,10 @@
 		1986BFA72463421A006313C4 /* BadgeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeSymbol.swift; sourceTree = "<group>"; };
 		1986BFAC24634278006313C4 /* HexagonParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
 		1986BFAF24634575006313C4 /* animationcurves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = animationcurves.swift; sourceTree = "<group>"; };
+		198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnSwipe.swift; sourceTree = "<group>"; };
+		198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnTap.swift; sourceTree = "<group>"; };
 		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
+		19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */,
 				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +169,7 @@
 		1957B1132461F1010038E9F9 /* ECG ScannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */,
 				1957B1142461F1010038E9F9 /* ECG_ScannerTests.swift */,
 				1957B1162461F1010038E9F9 /* Info.plist */,
 			);
@@ -204,7 +221,13 @@
 		19B010F8247C56950045470A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */,
+				198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */,
 				19B010F9247C56B60045470A /* ConstantsViews.swift */,
+				192757AF24B4D70600EAF61F /* HospitalData.swift */,
+				192757B124B4F92F00EAF61F /* IMCUtils.swift */,
+				191E994224B6247700B28F22 /* ArrayUtils.swift */,
+				19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -227,6 +250,7 @@
 			name = "ECG Scanner";
 			packageProductDependencies = (
 				19FFA208248055CE00E4BA02 /* KeyboardObserving */,
+				198921E324B3950A00EF3A0D /* SwiftyJSON */,
 			);
 			productName = "ECG Scanner";
 			productReference = 1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */;
@@ -302,6 +326,7 @@
 			mainGroup = 1957B0EE2461F0FF0038E9F9;
 			packageReferences = (
 				19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+				198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 1957B0F82461F0FF0038E9F9 /* Products */;
 			projectDirPath = "";
@@ -349,6 +374,7 @@
 				196AC1E62469DC8C001809F9 /* CardView.swift in Sources */,
 				1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */,
 				1986BFA92463421A006313C4 /* Badge.swift in Sources */,
+				198921DD24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift in Sources */,
 				1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */,
 				19722B432471A7C3004EFD6F /* Settings.swift in Sources */,
 				196AC1E42469DBEA001809F9 /* Card.swift in Sources */,
@@ -357,11 +383,16 @@
 				1986BFAA2463421A006313C4 /* BadgeBackground.swift in Sources */,
 				1957B1302461F3CC0038E9F9 /* Form.swift in Sources */,
 				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
+				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
 				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
 				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,
+				191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */,
 				1986BFA82463421A006313C4 /* RotatedBadgeSymbol.swift in Sources */,
+				192757B024B4D70600EAF61F /* HospitalData.swift in Sources */,
 				19722B452471A7FF004EFD6F /* Open.swift in Sources */,
+				192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */,
+				19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1957B1152461F1010038E9F9 /* ECG_ScannerTests.swift in Sources */,
+				195B2E9B24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +562,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P6N55ZT28;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +583,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P6N55ZT28;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,6 +723,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nickffox/KeyboardObserving";
@@ -699,6 +742,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		198921E324B3950A00EF3A0D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		19FFA208248055CE00E4BA02 /* KeyboardObserving */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;

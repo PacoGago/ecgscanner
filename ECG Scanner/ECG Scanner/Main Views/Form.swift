@@ -37,19 +37,27 @@ struct FormView: View {
     
     
     // Datos asociados al ECG del paciente
-    @State private var origin = ""
-    @State private var ecgModel = ""
+    //@State private var origin = ""
+    //@State private var ecgModel = ""
     //presion sanguinea (Body Pressure)
-    @State private var bp = 30
+    //@State private var bp = 30
     //temperatura corporal (body-temperature)
-    @State private var bt = 30
-    @State private var glucose = 30
-    @State private var reason = ""
-    @State private var ecgType = ""
-    @State private var heartRate = ""
+    //@State private var bt = 30
+    //@State private var glucose = 30
+    //@State private var reason = ""
+    //@State private var ecgType = ""
+    //@State private var heartRate = ""
     
     // Variables de la vista
-    
+    @State private var hospitalProvinces = HospitalProvinces()
+    @State private var selectionHospitalProvince = 0
+    @State private var pickerVisibleHospitalProvince = false
+    @State private var hospitalProvince = ""
+    @State private var hospitalNames = HospitalNames()
+    @State private var selectionHospitalName = 0
+    @State private var pickerVisibleHospitalName = false
+    @State private var hospitalName = ""
+
     @State private var selectionProvince = 0
     @State private var pickerVisibleProvince = false
     
@@ -59,12 +67,11 @@ struct FormView: View {
     @State private var selectionAge = 30
     @State private var pickerVisibleAge = false
     
+    let IMCUtil = IMCUtilsImpl()
     @State private var selectionWeight = 100
     @State private var pickerVisibleWeight = false
-    
     @State private var selectionHeight = 170
     @State private var pickerVisibleHeight = false
-    
     @State private var bmiText = "(Normal)"
     @State private var bmiColor = Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
     
@@ -72,102 +79,7 @@ struct FormView: View {
     
     @State private var textStyle = UIFont.TextStyle.body
 
-    func weightData() -> [Double]{
-        
-        var res = Array<Double>()
-        
-        for index in 1...657 {
-            res.append(Double(index))
-            res.append(Double(index)+0.5)
-        }
 
-        return res
-    }
-    
-    func sanitanizeDoubleWeight(weight_: Double) -> String{
-        
-        //var weightString = String(format:"%.1f", weight_)
-        return String(format:"%.1f", weight_)
-    }
-    
-   
-    //TODO: Sacar a una interfaz
-    func getAdultCategoryBMI(bmi_: Double) -> String{
-        
-        if (bmi_ < 18.50){
-            if (bmi_ < 16.0){
-                return "(Delgadez severa)"
-            }
-            
-            if (bmi_ >= 16.0 && bmi_ <= 16.99){
-                return "(Delgadez moderada)"
-            }
-              
-            if (bmi_ >= 17.00 && bmi_ <= 18.49){
-                return "(Delgadez leve)"
-            }
-        }
-        
-        if (bmi_ >= 18.5 && bmi_ <= 24.99){
-            return "(Normal)"
-        }
-        
-        if (bmi_ >= 25.00 && bmi_ <= 29.99){
-            return "(Sobrepeso)"
-        }
-        
-        if (bmi_ >= 30.00 && bmi_ <= 34.99){
-            return "(Obesidad leve)"
-        }
-        
-        if (bmi_ >= 35.00 && bmi_ <= 39.99){
-            return "(Obesidad media)"
-        }
-        
-        if (bmi_ >= 40.00){
-            return "(Obesidad mórbida)"
-        }
-        
-        return ""
-    }
-    func getAdultColorBMI(bmi_: Double) -> Color{
-        
-        if (bmi_ < 18.50){
-            if (bmi_ < 16.0){
-                return Color(.red)
-            }
-            
-            if (bmi_ >= 16.0 && bmi_ <= 16.99){
-                return Color(.red)
-            }
-              
-            if (bmi_ >= 17.00 && bmi_ <= 18.49){
-                return Color(.orange)
-            }
-        }
-        
-        if (bmi_ >= 18.5 && bmi_ <= 24.99){
-            return Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-        }
-        
-        if (bmi_ >= 25.00 && bmi_ <= 29.99){
-            return Color(.orange)
-        }
-        
-        if (bmi_ >= 30.00 && bmi_ <= 34.99){
-            return Color(.red)
-        }
-        
-        if (bmi_ >= 35.00 && bmi_ <= 39.99){
-            return Color(.red)
-        }
-        
-        if (bmi_ >= 40.00){
-            return Color(.red)
-        }
-        
-        return Color(.black)
-    }
     
     var body: some View {
     
@@ -180,10 +92,10 @@ struct FormView: View {
                     
                     
                     // Nombre
-                    TextField("Nombre", text: $name).keyboardType(.numberPad)
+                    TextField("Nombre", text: $name)
                     
                     //Primer apellido
-                    TextField("Primer apellido", text: $firstSurname).keyboardType(.default)
+                    TextField("Primer apellido", text: $firstSurname)
                     
                     //Segundo apellido
                     TextField("Segundo apellido", text: $secondSurname)
@@ -290,7 +202,7 @@ struct FormView: View {
                     HStack{
                         Text("Peso")
                         Spacer()
-                        Button(self.sanitanizeDoubleWeight(weight_: self.weightData()[selectionWeight]) + " kg"){
+                        Button(IMCUtil.sanitanizeDoubleWeight(weight_: IMCUtil.weightData()[selectionWeight]) + " kg"){
                             self.pickerVisibleWeight.toggle()
                         }.foregroundColor(self.pickerVisibleWeight ? .red : .blue)
                     }
@@ -301,30 +213,30 @@ struct FormView: View {
                             Spacer()
                             Picker(selection: $selectionWeight, label: Text("")) {
 
-                                ForEach((0..<weightData().count)) {
+                                ForEach((0..<self.IMCUtil.weightData().count)) {
 
-                                    Text(self.sanitanizeDoubleWeight(weight_: self.weightData()[$0]) + " kg")
+                                    Text(self.IMCUtil.sanitanizeDoubleWeight(weight_: self.IMCUtil.weightData()[$0]) + " kg")
                                         .foregroundColor(.secondary)
                                 }
                             }
                             .pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleWeight.toggle()
-                                self.weight = self.weightData()[self.selectionWeight]
+                                self.weight = self.IMCUtil.weightData()[self.selectionWeight]
                                 
                                 // Una vez introducido el peso debemos recalcular el BMI
                                 self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.getAdultColorBMI(bmi_: self.bmi)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
                                 
                             }.onDisappear{
                                 
-                                self.weight = self.weightData()[self.selectionWeight]
+                                self.weight = self.IMCUtil.weightData()[self.selectionWeight]
                                 
                                 // Una vez introducido el peso debemos recalcular el BMI
                                 self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.getAdultColorBMI(bmi_: self.bmi)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
                                 
                             }
                             Spacer()
@@ -355,8 +267,8 @@ struct FormView: View {
                                 
                                 // Una vez introducida la altura debemos recalcular el BMI
                                 self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.getAdultColorBMI(bmi_: self.bmi)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
 
                             }
                             .onDisappear{
@@ -364,8 +276,8 @@ struct FormView: View {
                                 
                                 // Una vez introducida la altura debemos recalcular el BMI
                                 self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.getAdultColorBMI(bmi_: self.bmi)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
                             }
                             
                             Spacer()
@@ -388,18 +300,84 @@ struct FormView: View {
                 // DATOS MEDICOS
                 Section(header: Text("Datos médicos")){
                     
-                        // Diabético
-                        Toggle(isOn: $smoker, label: {
-                            Text("Fumador")
-                        })
+                    // Diabético
+                    Toggle(isOn: $smoker, label: {
+                        Text("Fumador")
+                    })
+                    
+                    TextField("Alergías", text: $allergy)
+                        .dismissKeyboardOnTap()
+
+                    TextField("Enf. Crónicas", text: $chronic)
+                        .dismissKeyboardOnTap()
+                    
+                    TextField("Medicación", text: $medication)
+                        .dismissKeyboardOnTap()
+                    
+                    //Hospital
+                    HStack{
+                        Text("Hospital:")
+                    }
+                    
+                    HStack{
+                        Text("Provincia")
+                        Spacer()
+                        Button(self.hospitalProvinces.names[selectionHospitalProvince].capitalized){
+                            self.pickerVisibleHospitalProvince.toggle()
+                        }.foregroundColor(self.pickerVisibleHospitalProvince ? .red : .blue)
+                    }
+
+                    if pickerVisibleHospitalProvince {
                         
-                        TextField("Alergías", text: $chronic)
+                        HStack{
+                            Spacer()
+                            Picker(selection: $selectionHospitalProvince, label: Text("")) {
+                                ForEach(0..<self.hospitalProvinces.names.count) {
+                                    Text(self.hospitalProvinces.names[$0].capitalized).foregroundColor(.secondary)
+                                }
+
+                            }.pickerStyle(WheelPickerStyle())
+                            .onTapGesture {
+                                self.pickerVisibleHospitalProvince.toggle()
+                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince].capitalized
+                                self.hospitalNames = HospitalNames(province: self.hospitalProvinces.names[self.selectionHospitalProvince])
+                            }.onDisappear{
+                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince].capitalized
+                                self.hospitalNames = HospitalNames(province: self.hospitalProvinces.names[self.selectionHospitalProvince])
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    HStack{
+                        Text("Nombre")
+                        Spacer()
+                        Button(self.hospitalNames.names[selectionHospitalName].capitalized){
+                            self.pickerVisibleHospitalName.toggle()
+                        }.foregroundColor(self.pickerVisibleHospitalName ? .red : .blue)
+                    }
+
+                    if pickerVisibleHospitalName {
                         
-                        TextField("Enf. Crónicas", text: $chronic)
-                        
-                        TextField("Medicación", text: $medication)
-                        
-                        TextField("Hospital", text: $hospital)
+                        HStack{
+                            Spacer()
+                            Picker(selection: $selectionHospitalName, label: Text("")) {
+                                ForEach(0..<self.hospitalNames.names.count) {
+                                    Text(self.hospitalNames.names[$0].capitalized).foregroundColor(.secondary)
+                                }
+
+                            }.pickerStyle(WheelPickerStyle())
+                            .onTapGesture {
+                                self.pickerVisibleHospitalName.toggle()
+                                self.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                            }.onDisappear{
+                                self.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    
 
                 }// END SECTION: DATOS MEDICOS
                 
@@ -413,7 +391,11 @@ struct FormView: View {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main){ (noti) in
                     
                     let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-                    let height = value.height
+                    
+                    // Es un ajuste en la altura. en principio deberia ir bien sin el -80
+                    // Pero no se ajusta adecuadamente. Habria que realizar pruebas en distintos
+                    // dispositivos para obtener un delta lo adecuado para cada dispositivo
+                    let height = value.height - 80
                     
                     self.value = height
                 }
@@ -422,22 +404,10 @@ struct FormView: View {
                     
                     self.value = 0
                 }
+                
             }//END FORM
-            
-        
         
     }
-}
-
-struct HospitalList {
-    
-    static let allHospitals = [
-        "Puerto Real",
-        "Cádiz",
-        "Jerez de la Frontera",
-        "Sevilla (Virgen del Rocío)"
-    ]
-    
 }
 
 struct FormView_Previews: PreviewProvider {
