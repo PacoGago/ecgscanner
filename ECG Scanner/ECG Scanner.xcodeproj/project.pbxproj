@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190E442224C74D7800A0F53A /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442124C74D7800A0F53A /* Scan.swift */; };
+		190E442424C74E2600A0F53A /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442324C74E2600A0F53A /* CameraController.swift */; };
+		190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442524C74EE000A0F53A /* CameraViewController.swift */; };
+		190E442924C7541900A0F53A /* CameraView in Frameworks */ = {isa = PBXBuildFile; productRef = 190E442824C7541900A0F53A /* CameraView */; };
+		190E442B24C7648400A0F53A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442A24C7648400A0F53A /* ImagePicker.swift */; };
 		191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191E994224B6247700B28F22 /* ArrayUtils.swift */; };
 		192757B024B4D70600EAF61F /* HospitalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757AF24B4D70600EAF61F /* HospitalData.swift */; };
 		192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757B124B4F92F00EAF61F /* IMCUtils.swift */; };
+		194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D8E7B24C5FAC2004A2FEC /* Patient.swift */; };
 		1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */; };
 		1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */; };
 		1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */; };
@@ -57,9 +63,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		190E442124C74D7800A0F53A /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
+		190E442324C74E2600A0F53A /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		190E442524C74EE000A0F53A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		190E442A24C7648400A0F53A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		191E994224B6247700B28F22 /* ArrayUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtils.swift; sourceTree = "<group>"; };
 		192757AF24B4D70600EAF61F /* HospitalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalData.swift; sourceTree = "<group>"; };
 		192757B124B4F92F00EAF61F /* IMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCUtils.swift; sourceTree = "<group>"; };
+		194D8E7B24C5FAC2004A2FEC /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +111,7 @@
 			files = (
 				198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */,
 				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
+				190E442924C7541900A0F53A /* CameraView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +207,9 @@
 				1986BFA72463421A006313C4 /* BadgeSymbol.swift */,
 				1986BFA42463421A006313C4 /* RotatedBadgeSymbol.swift */,
 				196AC1E52469DC8C001809F9 /* CardView.swift */,
+				190E442324C74E2600A0F53A /* CameraController.swift */,
+				190E442524C74EE000A0F53A /* CameraViewController.swift */,
+				190E442A24C7648400A0F53A /* ImagePicker.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -206,6 +221,7 @@
 				1957B12F2461F3CC0038E9F9 /* Form.swift */,
 				19722B422471A7C3004EFD6F /* Settings.swift */,
 				19722B442471A7FF004EFD6F /* Open.swift */,
+				190E442124C74D7800A0F53A /* Scan.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -214,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				196AC1E32469DBEA001809F9 /* Card.swift */,
+				194D8E7B24C5FAC2004A2FEC /* Patient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +268,7 @@
 			packageProductDependencies = (
 				19FFA208248055CE00E4BA02 /* KeyboardObserving */,
 				198921E324B3950A00EF3A0D /* SwiftyJSON */,
+				190E442824C7541900A0F53A /* CameraView */,
 			);
 			productName = "ECG Scanner";
 			productReference = 1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */;
@@ -327,6 +345,7 @@
 			packageReferences = (
 				19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 				198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */,
 			);
 			productRefGroup = 1957B0F82461F0FF0038E9F9 /* Products */;
 			projectDirPath = "";
@@ -373,7 +392,10 @@
 			files = (
 				196AC1E62469DC8C001809F9 /* CardView.swift in Sources */,
 				1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */,
+				190E442224C74D7800A0F53A /* Scan.swift in Sources */,
+				190E442B24C7648400A0F53A /* ImagePicker.swift in Sources */,
 				1986BFA92463421A006313C4 /* Badge.swift in Sources */,
+				190E442424C74E2600A0F53A /* CameraController.swift in Sources */,
 				198921DD24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift in Sources */,
 				1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */,
 				19722B432471A7C3004EFD6F /* Settings.swift in Sources */,
@@ -386,6 +408,7 @@
 				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
 				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
+				190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */,
 				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,
 				191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */,
 				1986BFA82463421A006313C4 /* RotatedBadgeSymbol.swift in Sources */,
@@ -393,6 +416,7 @@
 				19722B452471A7FF004EFD6F /* Open.swift in Sources */,
 				192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */,
 				19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */,
+				194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +747,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/brettfazio/CameraView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -742,6 +774,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		190E442824C7541900A0F53A /* CameraView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */;
+			productName = CameraView;
+		};
 		198921E324B3950A00EF3A0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

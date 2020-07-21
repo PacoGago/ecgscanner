@@ -13,28 +13,7 @@ struct FormView: View {
     
     // Variables del model: Esto se pasara a un modelo Paciente
     // Datos relativos al paciente
-    @State private var id = ""
-    @State private var name = ""
-    @State private var firstSurname = ""
-    @State private var secondSurname = ""
-    
-    @State private var address = ""
-    @State private var city = ""
-    @State private var province = ""
-    @State private var postalCode = ""
-    
-    @State private var genre = ""
-    @State private var age = 30
-    @State private var weight = 60.0
-    @State private var height = 170
-    //Indice de masa corporal (body mass index)
-    @State private var bmi = 21.25
-    @State private var smoker = false
-    @State private var allergy = ""
-    @State private var chronic = ""
-    @State private var medication = ""
-    @State private var hospital = ""
-    
+    @EnvironmentObject var patient: Patient
     
     // Datos asociados al ECG del paciente
     //@State private var origin = ""
@@ -78,33 +57,31 @@ struct FormView: View {
     @State var value : CGFloat = 0 // valor por defecto para el offset del teclado
     
     @State private var textStyle = UIFont.TextStyle.body
-
-
     
+    @State private var isShowPhotoLibrary = false
+    @State private var image = UIImage()
+
     var body: some View {
-    
-        
             
-            Form{
+        Form{
                 
                 // DATOS GENERALES
                 Section(header: Text("Datos generales")){
                     
-                    
                     // Nombre
-                    TextField("Nombre", text: $name)
+                    TextField("Nombre", text: $patient.name)
                     
                     //Primer apellido
-                    TextField("Primer apellido", text: $firstSurname)
+                    TextField("Primer apellido", text: $patient.firstSurname)
                     
                     //Segundo apellido
-                    TextField("Segundo apellido", text: $secondSurname)
+                    TextField("Segundo apellido", text: $patient.secondSurname)
                     
                     //Direccion
-                    TextField("Dirección", text: $address)
+                    TextField("Dirección", text: $patient.address)
                    
                    //Ciudad
-                   TextField("Ciudad", text: $city)
+                   TextField("Ciudad", text: $patient.city)
                    
                     //Genero
                     HStack{
@@ -125,10 +102,10 @@ struct FormView: View {
         
                             }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
-                                    self.pickerVisibleProvince.toggle()
-                                    self.province = ConstantsViews.provinceOptions[self.selectionProvince]
+                                self.pickerVisibleProvince.toggle()
+                                self.patient.province = ConstantsViews.provinceOptions[self.selectionProvince]
                             }.onDisappear{
-                                    self.province = ConstantsViews.provinceOptions[self.selectionProvince]
+                                self.patient.province = ConstantsViews.provinceOptions[self.selectionProvince]
                             }
                             Spacer()
                         }
@@ -160,10 +137,10 @@ struct FormView: View {
         
                             }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
-                                    self.pickerVisibleGenre.toggle()
-                                    self.genre = ConstantsViews.genderOptions[self.selectionGenre]
+                                self.pickerVisibleGenre.toggle()
+                                self.patient.genre = ConstantsViews.genderOptions[self.selectionGenre]
                             }.onDisappear{
-                                    self.genre = ConstantsViews.genderOptions[self.selectionGenre]
+                                self.patient.genre = ConstantsViews.genderOptions[self.selectionGenre]
                             }
                             Spacer()
                         }
@@ -189,10 +166,10 @@ struct FormView: View {
                             .pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleAge.toggle()
-                                self.age = self.selectionAge
+                                self.patient.age = self.selectionAge
                                     
                             }.onDisappear{
-                                self.age = self.selectionAge
+                                self.patient.age = self.selectionAge
                             }
                             Spacer()
                         }
@@ -222,21 +199,21 @@ struct FormView: View {
                             .pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleWeight.toggle()
-                                self.weight = self.IMCUtil.weightData()[self.selectionWeight]
+                                self.patient.weight = self.IMCUtil.weightData()[self.selectionWeight]
                                 
                                 // Una vez introducido el peso debemos recalcular el BMI
-                                self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
+                                self.patient.bmi = Double(self.patient.weight) / pow((Double(self.patient.height)/100),2)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.patient.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
                                 
                             }.onDisappear{
                                 
-                                self.weight = self.IMCUtil.weightData()[self.selectionWeight]
+                                self.patient.weight = self.IMCUtil.weightData()[self.selectionWeight]
                                 
                                 // Una vez introducido el peso debemos recalcular el BMI
-                                self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
+                                self.patient.bmi = Double(self.patient.weight) / pow((Double(self.patient.height)/100),2)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.patient.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
                                 
                             }
                             Spacer()
@@ -263,21 +240,21 @@ struct FormView: View {
                             .pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleHeight.toggle()
-                                self.height = self.selectionHeight
+                                self.patient.height = self.selectionHeight
                                 
                                 // Una vez introducida la altura debemos recalcular el BMI
-                                self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
+                                self.patient.bmi = Double(self.patient.weight) / pow((Double(self.patient.height)/100),2)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.patient.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
 
                             }
                             .onDisappear{
-                                self.height = self.selectionHeight
+                                self.patient.height = self.selectionHeight
                                 
                                 // Una vez introducida la altura debemos recalcular el BMI
-                                self.bmi = Double(self.weight) / pow((Double(self.height)/100),2)
-                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.bmi)
-                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.bmi)
+                                self.patient.bmi = Double(self.patient.weight) / pow((Double(self.patient.height)/100),2)
+                                self.bmiText = self.IMCUtil.getAdultCategoryBMI(bmi_: self.patient.bmi)
+                                self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
                             }
                             
                             Spacer()
@@ -289,7 +266,7 @@ struct FormView: View {
                     HStack{
                         Text("IMC " + self.bmiText).foregroundColor(bmiColor)
                         Spacer()
-                        Button("\(String(format:"%.1f", self.bmi )) kg/m" + "\u{00B2}")
+                        Button("\(String(format:"%.1f", self.patient.bmi )) kg/m" + "\u{00B2}")
                         {}.foregroundColor(.gray)
                     }
                     
@@ -301,17 +278,17 @@ struct FormView: View {
                 Section(header: Text("Datos médicos")){
                     
                     // Diabético
-                    Toggle(isOn: $smoker, label: {
+                    Toggle(isOn: $patient.smoker, label: {
                         Text("Fumador")
                     })
                     
-                    TextField("Alergías", text: $allergy)
+                    TextField("Alergías", text: $patient.allergy)
                         .dismissKeyboardOnTap()
 
-                    TextField("Enf. Crónicas", text: $chronic)
+                    TextField("Enf. Crónicas", text: $patient.chronic)
                         .dismissKeyboardOnTap()
                     
-                    TextField("Medicación", text: $medication)
+                    TextField("Medicación", text: $patient.medication)
                         .dismissKeyboardOnTap()
                     
                     //Hospital
@@ -369,9 +346,9 @@ struct FormView: View {
                             }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleHospitalName.toggle()
-                                self.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
                             }.onDisappear{
-                                self.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
                             }
                             Spacer()
                         }
@@ -380,6 +357,24 @@ struct FormView: View {
                     
 
                 }// END SECTION: DATOS MEDICOS
+            
+                //DATOS DE IMAGEN
+                Section(header: Text("Datos de Imagen")){
+                    Button(action: {
+                        self.isShowPhotoLibrary = true
+                    }, label: {
+                        HStack {
+                            Text("Seleccionar")
+                            Spacer()
+                            Image(systemName: "camera.on.rectangle.fill")
+                        }
+                    })
+                    //.disabled(self.isShowPhotoLibrary)
+                }.sheet(isPresented: $isShowPhotoLibrary) {
+                    ImagePicker(sourceType: .camera, selectedImage: self.$image)
+                }
+                // END SECTION: DATOS MEDICOS
+            
                 
                 
             // Con esto evitamos que los campos del
@@ -405,7 +400,17 @@ struct FormView: View {
                     self.value = 0
                 }
                 
-            }//END FORM
+        }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
+         .navigationBarItems(trailing:
+            NavigationLink(destination: ScanView()) {
+                Text("Guardar")
+            }.navigationBarTitle("Navigation")
+        )//END FORM
+        
+       
+        
+        
+        
         
     }
 }

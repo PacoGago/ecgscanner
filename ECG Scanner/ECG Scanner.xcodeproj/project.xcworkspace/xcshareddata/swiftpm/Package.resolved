@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CameraView",
+        "repositoryURL": "https://github.com/brettfazio/CameraView",
+        "state": {
+          "branch": null,
+          "revision": "bb528e129ac23f2888dee51a309bbd4b10374673",
+          "version": "0.0.1"
+        }
+      },
+      {
         "package": "KeyboardObserving",
         "repositoryURL": "https://github.com/nickffox/KeyboardObserving",
         "state": {
