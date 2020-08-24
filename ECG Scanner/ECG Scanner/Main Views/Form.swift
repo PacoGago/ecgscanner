@@ -58,15 +58,48 @@ struct FormView: View {
     
     @State private var textStyle = UIFont.TextStyle.body
     
-    @State private var isShowPhotoLibrary = false
+    @State private var isSheetCameraOrLibrary = false
+    @State private var showingActionSheet = false
+    @State private var isCamera = false
     @State private var image = UIImage()
 
     var body: some View {
             
         Form{
-                
+                //DATOS DE IMAGEN
+                Section(header: ImageTextView(img: Image(systemName: "photo.fill"), txt: Text("Datos de Imagen").bold())){
+                    Button(action: {
+                        self.showingActionSheet = true
+                    }, label: {
+                        HStack {
+                            Text("Seleccionar")
+                            Spacer()
+                            Image(systemName: "camera.on.rectangle.fill")
+                        }
+                    })
+                }.sheet(isPresented: $isSheetCameraOrLibrary) {
+                    
+                    if self.isCamera == true {
+                        ImagePicker(sourceType: .camera, selectedImage: self.$image)
+                    }else{
+                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+                    }
+                    
+                }.actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Origen"), message: Text("Seleccione una opción"), buttons: [
+                        .default(Text("Cámara")) {
+                            self.isSheetCameraOrLibrary = true
+                            self.isCamera = true },
+                        .default(Text("Librería")) {
+                            self.isSheetCameraOrLibrary = true
+                            self.isCamera = false },
+                        .cancel()
+                    ])
+                }
+                // END SECTION: DATOS DE IMAGEN
+            
                 // DATOS GENERALES
-                Section(header: Text("Datos generales")){
+                Section(header: ImageTextView(img: Image(systemName: "info.circle.fill"), txt: Text("Datos generales").bold())){
                     
                     // Nombre
                     TextField("Nombre", text: $patient.name)
@@ -83,7 +116,7 @@ struct FormView: View {
                    //Ciudad
                    TextField("Ciudad", text: $patient.city)
                    
-                    //Genero
+                    //Provincia
                     HStack{
                         Text("Provincia")
                         Spacer()
@@ -112,11 +145,10 @@ struct FormView: View {
                     }
                     
                     
-                }//END: First Section - Datos generales
-                
+                }//END: DATOS GENERALES
             
                 // DATOS MEDICOS
-                Section(header: Text("Perfil de salud")){
+                Section(header: ImageTextView(img: Image(systemName: "person.circle.fill"), txt: Text("Perfil de salud"))){
                 
                     //Genero
                     HStack{
@@ -275,7 +307,7 @@ struct FormView: View {
                         
                 
                 // DATOS MEDICOS
-                Section(header: Text("Datos médicos")){
+                Section(header: ImageTextView(img: Image(systemName: "heart.circle.fill"), txt: Text("Datos médicos"))){
                     
                     // Diabético
                     Toggle(isOn: $patient.smoker, label: {
@@ -357,25 +389,6 @@ struct FormView: View {
                     
 
                 }// END SECTION: DATOS MEDICOS
-            
-                //DATOS DE IMAGEN
-                Section(header: Text("Datos de Imagen")){
-                    Button(action: {
-                        self.isShowPhotoLibrary = true
-                    }, label: {
-                        HStack {
-                            Text("Seleccionar")
-                            Spacer()
-                            Image(systemName: "camera.on.rectangle.fill")
-                        }
-                    })
-                    //.disabled(self.isShowPhotoLibrary)
-                }.sheet(isPresented: $isShowPhotoLibrary) {
-                    ImagePicker(sourceType: .camera, selectedImage: self.$image)
-                }
-                // END SECTION: DATOS MEDICOS
-            
-                
                 
             // Con esto evitamos que los campos del
             // formulario queden ocultos
@@ -402,15 +415,10 @@ struct FormView: View {
                 
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
          .navigationBarItems(trailing:
-            NavigationLink(destination: ScanView()) {
-                Text("Guardar")
-            }.navigationBarTitle("Navigation")
+            NavigationLink(destination: DetailsView()) {
+                Text("Continuar")
+            }
         )//END FORM
-        
-       
-        
-        
-        
         
     }
 }

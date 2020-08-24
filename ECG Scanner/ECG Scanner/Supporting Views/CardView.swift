@@ -6,8 +6,6 @@
 //  Copyright © 2020 Francisco Gago. All rights reserved.
 //
 
-import Foundation
-
 import SwiftUI
 
 struct CardView: View {

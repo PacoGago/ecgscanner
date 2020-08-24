@@ -24,6 +24,7 @@ class Patient: ObservableObject{
     @Published var age = 30
     @Published var weight = 60.0
     @Published var height = 170
+    
     //Indice de masa corporal (body mass index)
     @Published var bmi = 21.25
     @Published var smoker = false
