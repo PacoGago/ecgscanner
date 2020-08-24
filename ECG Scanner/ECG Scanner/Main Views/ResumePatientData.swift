@@ -18,6 +18,7 @@ struct ResumePatientDataView: View {
         List {
             Section(header: ImageTextView(img: Image(systemName: "info.circle.fill"), txt: Text("Datos generales").bold())) {
                 
+                Image(uiImage: p.image)
                 Text("Nombre: ").bold() + Text(p.name)
                 Text("Apellidos: ").bold() + Text(p.firstSurname + " " + p.secondSurname)
                 Text("Dirección: ").bold() + Text(p.address)

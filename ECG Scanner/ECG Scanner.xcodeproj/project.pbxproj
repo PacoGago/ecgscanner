@@ -44,6 +44,8 @@
 		198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */; };
 		198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 198921E324B3950A00EF3A0D /* SwiftyJSON */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
+		19CD794424F42B2E00CBC8E7 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */; };
+		19CD794C24F430A100CBC8E7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CD794B24F430A100CBC8E7 /* opencv2.framework */; };
 		19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */; };
 		19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 19FFA208248055CE00E4BA02 /* KeyboardObserving */; };
 /* End PBXBuildFile section */
@@ -106,6 +108,10 @@
 		198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnSwipe.swift; sourceTree = "<group>"; };
 		198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnTap.swift; sourceTree = "<group>"; };
 		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
+		19CD794024F42B2E00CBC8E7 /* ECG Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECG Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
+		19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		19CD794224F42B2E00CBC8E7 /* OpenCVWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenCVWrapper.hpp; sourceTree = "<group>"; };
+		19CD794B24F430A100CBC8E7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "ECG Scanner/opencv2.framework"; sourceTree = "<group>"; };
 		19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19CD794C24F430A100CBC8E7 /* opencv2.framework in Frameworks */,
 				198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */,
 				19146B0824D08AB600BEE559 /* SwiftUICharts in Frameworks */,
 				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
@@ -145,6 +152,7 @@
 				1957B1132461F1010038E9F9 /* ECG ScannerTests */,
 				1957B11E2461F1010038E9F9 /* ECG ScannerUITests */,
 				1957B0F82461F0FF0038E9F9 /* Products */,
+				19CD794A24F430A100CBC8E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +169,7 @@
 		1957B0F92461F0FF0038E9F9 /* ECG Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				19CD793F24F42AF800CBC8E7 /* opencv */,
 				19B010F8247C56950045470A /* Utils */,
 				1986BFAE24634289006313C4 /* Models */,
 				1957B12E2461F15E0038E9F9 /* Main Views */,
@@ -257,6 +266,24 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		19CD793F24F42AF800CBC8E7 /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+				19CD794224F42B2E00CBC8E7 /* OpenCVWrapper.hpp */,
+				19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */,
+				19CD794024F42B2E00CBC8E7 /* ECG Scanner-Bridging-Header.h */,
+			);
+			path = opencv;
+			sourceTree = "<group>";
+		};
+		19CD794A24F430A100CBC8E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19CD794B24F430A100CBC8E7 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -331,6 +358,7 @@
 				TargetAttributes = {
 					1957B0F62461F0FF0038E9F9 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1150;
 					};
 					1957B10F2461F1010038E9F9 = {
 						CreatedOnToolsVersion = 11.3;
@@ -420,6 +448,7 @@
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
 				19146B0A24D0A03D00BEE559 /* ResumePatientData.swift in Sources */,
 				190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */,
+				19CD794424F42B2E00CBC8E7 /* OpenCVWrapper.mm in Sources */,
 				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,
 				191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */,
 				1986BFA82463421A006313C4 /* RotatedBadgeSymbol.swift in Sources */,
@@ -594,11 +623,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P6N55ZT28;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+				);
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -606,6 +640,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ECG Scanner/OpenCV/ECG Scanner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -615,12 +651,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 4P6N55ZT28;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+				);
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -628,6 +669,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ECG Scanner/OpenCV/ECG Scanner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

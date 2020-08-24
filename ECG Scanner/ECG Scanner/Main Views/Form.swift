@@ -10,7 +10,6 @@ import SwiftUI
 
 struct FormView: View {
     
-    
     // Variables del model: Esto se pasara a un modelo Paciente
     // Datos relativos al paciente
     @EnvironmentObject var patient: Patient
@@ -62,6 +61,17 @@ struct FormView: View {
     @State private var showingActionSheet = false
     @State private var isCamera = false
     @State private var image = UIImage()
+    
+    //Procesamos la imagen capturada
+    func rgb2gray(imageOri: UIImage) -> UIImage{
+        
+        //Convertimos a una image de vista
+        //var resImage = OpenCVWrapper.toGray(imageOri)!
+        let resImage = OpenCVWrapper.toGray(imageOri)!
+        //let resImage = OpenCVWrapper.im2bw(imageOri)!
+        
+        return resImage
+    }
 
     var body: some View {
             
@@ -80,9 +90,9 @@ struct FormView: View {
                 }.sheet(isPresented: $isSheetCameraOrLibrary) {
                     
                     if self.isCamera == true {
-                        ImagePicker(sourceType: .camera, selectedImage: self.$image)
+                        ImagePicker(sourceType: .camera, selectedImage: self.$patient.image)
                     }else{
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$patient.image)
                     }
                     
                 }.actionSheet(isPresented: $showingActionSheet) {
@@ -415,7 +425,10 @@ struct FormView: View {
                 
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
          .navigationBarItems(trailing:
-            NavigationLink(destination: DetailsView()) {
+            NavigationLink(destination: DetailsView().onAppear {
+                //Revisar funcionamiento
+                //self.image = self.rgb2gray(imageOri: self.image)
+            }) {
                 Text("Continuar")
             }
         )//END FORM

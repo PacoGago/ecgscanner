@@ -33,4 +33,6 @@ class Patient: ObservableObject{
     @Published var medication = ""
     @Published var hospital = ""
     
+    @Published var image = UIImage()
+    
 }
