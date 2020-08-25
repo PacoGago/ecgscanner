@@ -14,6 +14,7 @@ struct DetailsView: View {
     @EnvironmentObject var patient: Patient
     @State var tabIndex:Int = 0
     @State var resumePatientDataView = ResumePatientDataView()
+    @State var ecgDataView = ECGDataView()
     
     var body: some View {
     
@@ -25,7 +26,7 @@ struct DetailsView: View {
                     Text("Resumen")
                 }}.tag(0)
             
-            LineCharts().tabItem { Group{
+            ecgDataView.tabItem { Group{
                     Image(systemName: "doc.richtext")
                     Text("Datos ECG")
                 }}.tag(1)
