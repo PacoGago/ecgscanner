@@ -60,17 +60,29 @@ struct FormView: View {
     @State private var isSheetCameraOrLibrary = false
     @State private var showingActionSheet = false
     @State private var isCamera = false
-    @State private var image = UIImage()
     
     //Procesamos la imagen capturada
     func rgb2gray(imageOri: UIImage) -> UIImage{
         
         //Convertimos a una image de vista
         //var resImage = OpenCVWrapper.toGray(imageOri)!
-        let resImage = OpenCVWrapper.toGray(imageOri)!
-        //let resImage = OpenCVWrapper.im2bw(imageOri)!
+        //let resImage = OpenCVWrapper.toGray(imageOri)!
+        let resImage = OpenCVWrapper.im2bw(imageOri)!
         
         return resImage
+    }
+    
+    func imageIsNullOrNot(imageName : UIImage)-> Bool{
+
+       let size = CGSize(width: 0, height: 0)
+       if (imageName.size.width == size.width)
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
     }
 
     var body: some View {
@@ -82,9 +94,9 @@ struct FormView: View {
                         self.showingActionSheet = true
                     }, label: {
                         HStack {
-                            Text("Seleccionar")
+                            Text(self.imageIsNullOrNot(imageName: self.patient.image) ? "Cambiar..." : "Seleccionar...")
                             Spacer()
-                            Image(systemName: "camera.on.rectangle.fill")
+                            Image(systemName: "camera.on.rectangle.fill").accentColor(self.imageIsNullOrNot(imageName: self.patient.image) ? .green : .red)
                         }
                     })
                 }.sheet(isPresented: $isSheetCameraOrLibrary) {
@@ -99,10 +111,12 @@ struct FormView: View {
                     ActionSheet(title: Text("Origen"), message: Text("Seleccione una opción"), buttons: [
                         .default(Text("Cámara")) {
                             self.isSheetCameraOrLibrary = true
-                            self.isCamera = true },
+                            self.isCamera = true
+                        },
                         .default(Text("Librería")) {
                             self.isSheetCameraOrLibrary = true
-                            self.isCamera = false },
+                            self.isCamera = false
+                        },
                         .cancel()
                     ])
                 }
@@ -427,7 +441,7 @@ struct FormView: View {
          .navigationBarItems(trailing:
             NavigationLink(destination: DetailsView().onAppear {
                 //Revisar funcionamiento
-                //self.image = self.rgb2gray(imageOri: self.image)
+                self.patient.image = OpenCVWrapper.toGray(self.patient.image)!
             }) {
                 Text("Continuar")
             }
