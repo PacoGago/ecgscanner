@@ -58,10 +58,9 @@ using namespace cv;
     
     Mat result;
     
-    // Punto n2:
+    // Punto n1:
     // pasar de color rgb a hsv
     cvtColor(source, result, COLOR_RGB2HSV);
-    
     
     // Punto n2:
     // Se deben determinar los determinar rangos de HSV
@@ -102,9 +101,6 @@ using namespace cv;
     
     // Punto n8:
     // Recorrer la imagen para transformar los pixeles en coordenadas
-    
-    
-
     
     return result;
 }
