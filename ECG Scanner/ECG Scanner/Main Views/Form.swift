@@ -14,17 +14,6 @@ struct FormView: View {
     // Datos relativos al paciente
     @EnvironmentObject var patient: Patient
     
-    // Datos asociados al ECG del paciente
-    //@State private var origin = ""
-    //@State private var ecgModel = ""
-    //presion sanguinea (Body Pressure)
-    //@State private var bp = 30
-    //temperatura corporal (body-temperature)
-    //@State private var bt = 30
-    //@State private var glucose = 30
-    //@State private var reason = ""
-    //@State private var ecgType = ""
-    //@State private var heartRate = ""
     
     // Variables de la vista
     @State private var hospitalProvinces = HospitalProvinces()
@@ -72,17 +61,15 @@ struct FormView: View {
         return resImage
     }
     
-    func imageIsNullOrNot(imageName : UIImage)-> Bool{
+    func imageIsNullOrNot(imageName : UIImage) -> Bool{
 
        let size = CGSize(width: 0, height: 0)
-       if (imageName.size.width == size.width)
-        {
-            return false
-        }
-        else
-        {
-            return true
-        }
+        
+       if (imageName.size.width == size.width){
+        return false
+       }else{
+        return true
+       }
     }
 
     var body: some View {
@@ -90,21 +77,23 @@ struct FormView: View {
         Form{
                 //DATOS DE IMAGEN
                 Section(header: ImageTextView(img: Image(systemName: "photo.fill"), txt: Text("Datos de Imagen").bold())){
+                    
+                    
                     Button(action: {
                         self.showingActionSheet = true
                     }, label: {
                         HStack {
-                            Text(self.imageIsNullOrNot(imageName: self.patient.image) ? "Cambiar..." : "Seleccionar...")
+                            Text(self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) ? "Cambiar..." : "Seleccionar...")
                             Spacer()
-                            Image(systemName: "camera.on.rectangle.fill").accentColor(self.imageIsNullOrNot(imageName: self.patient.image) ? .green : .red)
+                            Image(systemName: "camera.on.rectangle.fill").accentColor(self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) ? .green : .red)
                         }
                     })
                 }.sheet(isPresented: $isSheetCameraOrLibrary) {
                     
                     if self.isCamera == true {
-                        ImagePicker(sourceType: .camera, selectedImage: self.$patient.image)
+                        ImagePicker(sourceType: .camera, selectedImage: self.$patient.ecg.imageSource)
                     }else{
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$patient.image)
+                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$patient.ecg.imageSource)
                     }
                     
                 }.actionSheet(isPresented: $showingActionSheet) {
@@ -440,9 +429,12 @@ struct FormView: View {
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
          .navigationBarItems(trailing:
             NavigationLink(destination: DetailsView().onAppear {
-                //Revisar funcionamiento
-                self.patient.image = OpenCVWrapper.toGray(self.patient.image)!
-            }) {
+                
+                if (self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource)){
+                    self.patient.ecg.imagePro = OpenCVWrapper.toGray(self.patient.ecg.imageSource)!
+                }
+                
+            }){
                 Text("Continuar")
             }
         )//END FORM
