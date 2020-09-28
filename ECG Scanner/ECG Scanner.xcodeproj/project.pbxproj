@@ -45,6 +45,7 @@
 		198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */; };
 		198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 198921E324B3950A00EF3A0D /* SwiftyJSON */; };
 		199AD38424F56BE5008D55FE /* ECGData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AD38324F56BE5008D55FE /* ECGData.swift */; };
+		19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A92EBA2522544C00C2471F /* TestDataView.swift */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
 		19CD794424F42B2E00CBC8E7 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */; };
 		19CD794C24F430A100CBC8E7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CD794B24F430A100CBC8E7 /* opencv2.framework */; };
@@ -113,6 +114,7 @@
 		198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnSwipe.swift; sourceTree = "<group>"; };
 		198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnTap.swift; sourceTree = "<group>"; };
 		199AD38324F56BE5008D55FE /* ECGData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGData.swift; sourceTree = "<group>"; };
+		19A92EBA2522544C00C2471F /* TestDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataView.swift; sourceTree = "<group>"; };
 		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
 		19CD794024F42B2E00CBC8E7 /* ECG Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECG Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
 		19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				19146B0424D082EE00BEE559 /* Details.swift */,
 				19146B0924D0A03D00BEE559 /* ResumePatientData.swift */,
 				199AD38324F56BE5008D55FE /* ECGData.swift */,
+				19A92EBA2522544C00C2471F /* TestDataView.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
 				19146B0A24D0A03D00BEE559 /* ResumePatientData.swift in Sources */,
 				19E31E9924FD566D008AD45A /* ECG.swift in Sources */,
+				19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */,
 				190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */,
 				19CD794424F42B2E00CBC8E7 /* OpenCVWrapper.mm in Sources */,
 				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,

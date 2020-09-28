@@ -93,14 +93,22 @@ using namespace cv;
 
     // Punto n5:
     // Voltear verticalmente la imagen
-    //flip(result, result, 0);
+    flip(result, result, 1);
     
     // Punto n6:
     // Invertir: de fondo negro a fondo blanco limpio
     result = 255 - result;
     
+    // Punto n7:
+    // thinning
+    //result = cv2::ximgproc::thinning(cv2.cvtColor(image, cv2.COLOR_RGB2GRAY))
+    
+    //result = cv2::ximgproc::thinning(cv::cvtColor(result, result, cv::COLOR_RGB2GRAY))
+    
     // Punto n8:
     // Recorrer la imagen para transformar los pixeles en coordenadas
+    
+    
     
     return result;
 }

@@ -14,6 +14,7 @@ struct DetailsView: View {
     @EnvironmentObject var patient: Patient
     @State var tabIndex:Int = 0
     @State var resumePatientDataView = ResumePatientDataView()
+    @State var testDataView = TestDataView()
     @State var ecgDataView = ECGDataView()
     
     var body: some View {
@@ -21,10 +22,10 @@ struct DetailsView: View {
         
         TabView(selection: $tabIndex) {
             
-//            BarCharts().tabItem { Group{
-//                    Image(systemName: "bookmark")
-//                    Text("Resumen")
-//                }}.tag(0)
+            testDataView.tabItem { Group{
+                    Image(systemName: "bookmark")
+                    Text("Resumen")
+                }}.tag(0)
             
             ecgDataView.tabItem { Group{
                     Image(systemName: "doc.richtext")
