@@ -9,13 +9,13 @@ public class ECGDTO implements Serializable {
 	
 	private Integer id;
 	
-	private ArrayList<Float> values;
+	private ArrayList<Double> values;
 	
 	public ECGDTO() {
 		super();
 	}
 	
-	public ECGDTO(Integer id, ArrayList<Float> values) {
+	public ECGDTO(Integer id, ArrayList<Double> values) {
 		super();
 		this.id = id;
 		this.values = values;
@@ -29,11 +29,11 @@ public class ECGDTO implements Serializable {
 		this.id = id;
 	}
 
-	public ArrayList<Float> getValues() {
+	public ArrayList<Double> getValues() {
 		return values;
 	}
 
-	public void setValues(ArrayList<Float> values) {
+	public void setValues(ArrayList<Double> values) {
 		this.values = values;
 	}
 	

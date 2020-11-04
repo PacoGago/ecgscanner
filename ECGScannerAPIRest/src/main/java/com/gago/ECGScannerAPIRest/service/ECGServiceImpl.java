@@ -8,13 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 import javax.imageio.ImageIO;
 
@@ -121,7 +122,6 @@ public class ECGServiceImpl implements ECGService {
 	@Override
 	public ECGDTO digitalizeImage(MultipartFile file) throws FileStorageException, IllegalArgumentException, IllegalStateException, InterruptedException, RejectedExecutionException, ExecutionException {
 		
-		// Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -140,47 +140,28 @@ public class ECGServiceImpl implements ECGService {
             Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
             MatlabEngine eng = engine.get();
             
-            // Directorio donde se almacenan las funciones de matLab
-            eng.eval("cd /Users/gago/Dropbox/Proyecto/Dev/repo/ecgscanner/ECGScannerAPIRest/src/main/resources/external/");
+	            // Directorio donde se almacenan las funciones de matLab
+	            eng.eval("cd /Users/gago/Dropbox/Proyecto/Dev/repo/ecgscanner/ECGScannerAPIRest/src/main/resources/external/");
+	            
+	            File f = new File("/Users/gago/Dropbox/Proyecto/Dev/testupload/" + fileName);
+	            BufferedImage img = ImageIO.read(f);
+	            
+	            // Asi llamamos a la funcion que queremos ejecutar
+	            double res[] = eng.feval("main", f.getAbsolutePath());
             
-            File f = new File("/Users/gago/Dropbox/Proyecto/Dev/testupload/" + fileName);
-            BufferedImage img = ImageIO.read(f);
-            
-         // Matlab no acepta un fichero binario como tal para le paso de una funcion
-            // Asi que convertimos el fichero binario a una matriz(3) con los cada uno de
-            // los colores. Es decir, un pixel tedra tres valores (red, green, blue)
-            int width = img.getWidth();
-            int height = img.getHeight();
-            int colors = 3;
-            int matrix[][][] = new int[width][height][colors];
-            
-            
-            for (int y = 0; y < height; y++){
-               for (int x = 0; x < width; x++) {
-             	  
-                   int p = img.getRGB(x,y);
-                   
-                   matrix[x][y][0] = (p & 0x00ff0000) >> 16; //red
-                   matrix[x][y][1] = (p & 0x0000ff00) >> 8;  //green
-                   matrix[x][y][2] =  p & 0x000000ff; 	    //blue
-               }
-            }
-            
-            // Asi llamamos a la funcion que queremos ejecutar
-            
-            double test[] = eng.feval("main", f.getAbsolutePath());
-            System.out.println(Arrays.toString(test));
-            
-            // Cerramos la conexion con el motor de MatLab
             eng.close();
             
-         // ****************************** END SCRIPT MATLAB *******************************
+            // ******************************* END SCRIPT MATLAB ****************************
             
+            ECGDTO ecgdto = new ECGDTO();
+            ArrayList<Double> values = DoubleStream.of(res).boxed().collect(Collectors.toCollection(ArrayList::new));
+            ecgdto.setValues(values);
+            
+            return create(ecgdto);
             
         } catch (IOException ex) {
             throw new FileStorageException();
         }
         
-		return null;
 	}
 }

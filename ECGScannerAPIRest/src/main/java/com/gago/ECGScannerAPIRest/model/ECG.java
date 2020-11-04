@@ -17,7 +17,7 @@ public class ECG implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	private ArrayList<Float> values;
+	private ArrayList<Double> values;
 	
 	public Integer getId() {
 		return id;
@@ -27,11 +27,11 @@ public class ECG implements Serializable {
 		this.id = id;
 	}
 
-	public ArrayList<Float> getValues() {
+	public ArrayList<Double> getValues() {
 		return values;
 	}
 
-	public void setValues(ArrayList<Float> values) {
+	public void setValues(ArrayList<Double> values) {
 		this.values = values;
 	}
 	
