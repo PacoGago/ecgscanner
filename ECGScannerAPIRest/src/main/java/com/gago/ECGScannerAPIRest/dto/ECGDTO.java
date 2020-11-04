@@ -1,0 +1,40 @@
+package com.gago.ECGScannerAPIRest.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class ECGDTO implements Serializable {
+
+	private static final long serialVersionUID = 4990322289672892141L;
+	
+	private Integer id;
+	
+	private ArrayList<Float> values;
+	
+	public ECGDTO() {
+		super();
+	}
+	
+	public ECGDTO(Integer id, ArrayList<Float> values) {
+		super();
+		this.id = id;
+		this.values = values;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public ArrayList<Float> getValues() {
+		return values;
+	}
+
+	public void setValues(ArrayList<Float> values) {
+		this.values = values;
+	}
+	
+}

@@ -16,6 +16,8 @@
 #pragma clang pop
 #import "OpenCVWrapper.hpp"
 #pragma clang pop
+#import "opencv2/ximgproc.hpp"
+#pragma clang pop
 #endif
 
 using namespace std;
@@ -54,33 +56,50 @@ using namespace cv;
 #pragma mark Private
 
 + (Mat)_grayFrom:(Mat)source {
-    cout << "-> grayFrom ->";
+    cout << "-> grayFrom -> ";
     
     Mat result;
     
+    //createMaskbr
     // Punto n1:
     // pasar de color rgb a hsv
     cvtColor(source, result, COLOR_RGB2HSV);
     
+    
     // Punto n2:
     // Se deben determinar los determinar rangos de HSV
+    
     float rangeHmin = 0.000;
-    float rangeSmin = 0.000;
-    float rangeVmin = 165;
-    float rangeHmax = 254;
-    float rangeSmax = 168;
-    float rangeVmax = 255;
+    float rangeHmax = 168;
+    
+    float rangeSmin = 165;
+    float rangeSmax = 255;
+    
+    float rangeVmin = 0.000;
+    float rangeVmax = 254;
     
     // Punto n2:
     // Aplicar rangos
     inRange(result, Scalar(rangeHmin, rangeSmin, rangeVmin), Scalar(rangeHmax, rangeSmax, rangeVmax), result);
     
+
     // Punto n3:
     // Invertimos la mascara
     result = 255 - result;
     
+    
+    //createMaskbr
+    
     // Punto intermedio aun por determinar
-    threshold(result, result, 127, 255, 0);
+    
+    //0, 255,cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    //threshold(result, result, 0, 255, cv::THRESH_BINARY + cv::THRESH_OTSU);
+    cout << " threshold: ";
+    cout << cv::THRESH_BINARY + cv::THRESH_OTSU;
+    cout << " -> ";
+    
+    
+    threshold(result, result, 127, 255, cv::THRESH_BINARY);
     
     // Punto n4:
     // Limpiar la mascara: bwareaopen(BW,1260) en Matlab
@@ -89,26 +108,21 @@ using namespace cv;
     cv::Point p = cv::Point(erosion_size,erosion_size);
     cv::Size s = cv::Size(2*erosion_size + 1, 2*erosion_size+1);
 
-    morphologyEx(result, result, MORPH_OPEN, getStructuringElement(erosion_type,s,p));
-
+    morphologyEx(result, result, MORPH_DILATE, getStructuringElement(erosion_type,s,p));
+    
     // Punto n5:
     // Voltear verticalmente la imagen
-    flip(result, result, 1);
+    //flip(result, result, 0);
     
     // Punto n6:
     // Invertir: de fondo negro a fondo blanco limpio
     result = 255 - result;
     
     // Punto n7:
-    // thinning
-    //result = cv2::ximgproc::thinning(cv2.cvtColor(image, cv2.COLOR_RGB2GRAY))
-    
-    //result = cv2::ximgproc::thinning(cv::cvtColor(result, result, cv::COLOR_RGB2GRAY))
+    //ximgproc::thinning(result, result, cv::COLOR_RGB2GRAY);
     
     // Punto n8:
     // Recorrer la imagen para transformar los pixeles en coordenadas
-    
-    
     
     return result;
 }

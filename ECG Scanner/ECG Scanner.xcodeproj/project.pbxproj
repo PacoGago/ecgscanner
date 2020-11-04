@@ -47,11 +47,13 @@
 		199AD38424F56BE5008D55FE /* ECGData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AD38324F56BE5008D55FE /* ECGData.swift */; };
 		19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A92EBA2522544C00C2471F /* TestDataView.swift */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
+		19BAD29725239B2F00BE000D /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BAD29625239B2E00BE000D /* opencv2.framework */; };
 		19CD794424F42B2E00CBC8E7 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */; };
-		19CD794C24F430A100CBC8E7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CD794B24F430A100CBC8E7 /* opencv2.framework */; };
 		19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */; };
 		19E31E9924FD566D008AD45A /* ECG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9824FD566D008AD45A /* ECG.swift */; };
 		19E31E9C24FD6F2F008AD45A /* ECGEquipementModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */; };
+		19E3A4C1253781790067DF4A /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3A4C0253781790067DF4A /* LineView.swift */; };
+		19E3A4C3253782570067DF4A /* ECGChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3A4C2253782570067DF4A /* ECGChart.swift */; };
 		19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 19FFA208248055CE00E4BA02 /* KeyboardObserving */; };
 /* End PBXBuildFile section */
 
@@ -116,13 +118,15 @@
 		199AD38324F56BE5008D55FE /* ECGData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGData.swift; sourceTree = "<group>"; };
 		19A92EBA2522544C00C2471F /* TestDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataView.swift; sourceTree = "<group>"; };
 		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
+		19BAD29625239B2E00BE000D /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "ECG Scanner/opencv2.framework"; sourceTree = "<group>"; };
 		19CD794024F42B2E00CBC8E7 /* ECG Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECG Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
 		19CD794124F42B2E00CBC8E7 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		19CD794224F42B2E00CBC8E7 /* OpenCVWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenCVWrapper.hpp; sourceTree = "<group>"; };
-		19CD794B24F430A100CBC8E7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "ECG Scanner/opencv2.framework"; sourceTree = "<group>"; };
 		19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsUtils.swift; sourceTree = "<group>"; };
 		19E31E9824FD566D008AD45A /* ECG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG.swift; sourceTree = "<group>"; };
 		19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGEquipementModal.swift; sourceTree = "<group>"; };
+		19E3A4C0253781790067DF4A /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		19E3A4C2253782570067DF4A /* ECGChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19CD794C24F430A100CBC8E7 /* opencv2.framework in Frameworks */,
+				19BAD29725239B2F00BE000D /* opencv2.framework in Frameworks */,
 				198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */,
 				19146B0824D08AB600BEE559 /* SwiftUICharts in Frameworks */,
 				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
@@ -227,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				1986BFAF24634575006313C4 /* animationcurves.swift */,
+				19E3A4C0253781790067DF4A /* LineView.swift */,
 				1986BFAC24634278006313C4 /* HexagonParameters.swift */,
 				1986BFA52463421A006313C4 /* Badge.swift */,
 				1986BFA62463421A006313C4 /* BadgeBackground.swift */,
@@ -252,6 +257,7 @@
 				19146B0924D0A03D00BEE559 /* ResumePatientData.swift */,
 				199AD38324F56BE5008D55FE /* ECGData.swift */,
 				19A92EBA2522544C00C2471F /* TestDataView.swift */,
+				19E3A4C2253782570067DF4A /* ECGChart.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -294,7 +300,7 @@
 		19CD794A24F430A100CBC8E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				19CD794B24F430A100CBC8E7 /* opencv2.framework */,
+				19BAD29625239B2E00BE000D /* opencv2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
 				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
 				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
+				19E3A4C3253782570067DF4A /* ECGChart.swift in Sources */,
 				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
 				19146B0A24D0A03D00BEE559 /* ResumePatientData.swift in Sources */,
 				19E31E9924FD566D008AD45A /* ECG.swift in Sources */,
@@ -483,6 +490,7 @@
 				199AD38424F56BE5008D55FE /* ECGData.swift in Sources */,
 				192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */,
 				194478C324D87C0B00D43324 /* ImageText.swift in Sources */,
+				19E3A4C1253781790067DF4A /* LineView.swift in Sources */,
 				19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */,
 				194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */,
 				1906AFFC2519131700F168FF /* Info.swift in Sources */,
@@ -660,6 +668,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ECG\\ Scanner",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
 				);
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -688,6 +697,7 @@
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
 					"$(PROJECT_DIR)/ECG\\ Scanner",
 				);
 				INFOPLIST_FILE = "ECG Scanner/Info.plist";

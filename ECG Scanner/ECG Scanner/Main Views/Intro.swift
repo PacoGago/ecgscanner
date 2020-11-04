@@ -52,7 +52,7 @@ struct ContentView: View {
                         VStack{
                             
                             //Subtitle
-                            Text("Subtitle de ECG")
+                            Text("Digitalización de ECG")
                                 .font(.body)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)

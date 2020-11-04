@@ -89,3 +89,9 @@ fastlane/test_output
 
 iOSInjectionProject/
 ECG Scanner/ECG Scanner/opencv2.framework/*
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.properties
+ECGScannerAPIRest/.mvn/wrapper/MavenWrapperDownloader.java
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
