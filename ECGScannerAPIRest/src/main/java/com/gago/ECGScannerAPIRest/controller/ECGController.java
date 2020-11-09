@@ -1,5 +1,9 @@
 package com.gago.ECGScannerAPIRest.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.RejectedExecutionException;
@@ -7,6 +11,10 @@ import java.util.concurrent.RejectedExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.MediaType;
 
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
 import com.gago.ECGScannerAPIRest.exception.FileStorageException;
 import com.gago.ECGScannerAPIRest.exception.NoECGException;
 import com.gago.ECGScannerAPIRest.service.ECGService;
 import com.mathworks.engine.EngineException;
+
 
 @RestController
 @RequestMapping(value = "/ecg")
@@ -109,5 +119,20 @@ public class ECGController {
 
 		return ecgservice.digitalizeImage(file);
 	}
+	
+	
+	@RequestMapping(value = "/image/{id}", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage(@PathVariable("id") Integer id) throws IOException, NoECGException {
+        
+		File imgFile = ecgservice.findImageById(id);
+		
+		byte[] bytes = Files.readAllBytes(imgFile.toPath());
+        
+		return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(bytes);
+    }
 
 }

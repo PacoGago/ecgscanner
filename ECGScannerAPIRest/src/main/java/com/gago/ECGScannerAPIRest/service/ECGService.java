@@ -1,9 +1,11 @@
 package com.gago.ECGScannerAPIRest.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.RejectedExecutionException;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
@@ -23,5 +25,6 @@ public interface ECGService {
 	void deleteById(Integer id) throws NoECGException;
 	ECGDTO findById(Integer id) throws NoECGException;
 	ECGDTO digitalizeImage(MultipartFile file) throws FileStorageException, EngineException, IllegalArgumentException, IllegalStateException, InterruptedException, RejectedExecutionException, ExecutionException;
+	File findImageById(Integer id) throws NoECGException;
 
 }

@@ -1,17 +1,16 @@
 function HASIL_AKHIRAVF = main(x)
 
     Y = imread(x);
-    
     [BW,rgb] = createMaskbr(Y);
     bw4 = bwareaopen(BW,1260);
     imbwaa = flip(bw4 ,1);
     [ k ] = thinning( imbwaa );
-    
-    %ld=0.00635;%faktor penyesuaian amplitudo dengan mm;
 
-    ld=0.0483;%dengan mm 600dpi
-    target1R = 0 ;
-    %R = k;%(:,:,1);
+    %ld=0.00635; %factor de ajuste de amplitud en mm;
+    ld=0.0483;
+
+    target1R = 0;
+
     matches1 = k == target1R ;
     [x1, y1] = find(matches1);
 
@@ -47,16 +46,5 @@ function HASIL_AKHIRAVF = main(x)
     minim=min(HASIL_AKHIRAVF);
     media=median((HASIL_AKHIRAVF));
     HASIL_AKHIRAVF=HASIL_AKHIRAVF-media;
-    
-    TG=maksim-minim;
-    fs=23;
-    %fs=1%400;%figure(3)
-       figure, plot([0:length(HASIL_AKHIRAVF)-1]/fs,HASIL_AKHIRAVF);
-         grid on
-     PJ=length(HASIL_AKHIRAVF)/fs;
-        xlabel('Periode (mm)');
-        ylabel('Amplitude (mm)');
-    datacursormode on 
-    peak=findpeaks(HASIL_AKHIRAVF,'SortStr','descend');
-    
+
 end

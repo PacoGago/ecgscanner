@@ -19,6 +19,8 @@ public class ECG implements Serializable {
 	
 	private ArrayList<Double> values;
 	
+	private String file;
+
 	public Integer getId() {
 		return id;
 	}
@@ -33,6 +35,14 @@ public class ECG implements Serializable {
 
 	public void setValues(ArrayList<Double> values) {
 		this.values = values;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
 	}
 	
 }

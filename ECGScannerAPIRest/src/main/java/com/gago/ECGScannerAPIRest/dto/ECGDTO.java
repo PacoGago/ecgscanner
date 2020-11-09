@@ -11,6 +11,8 @@ public class ECGDTO implements Serializable {
 	
 	private ArrayList<Double> values;
 	
+	private String file;
+	
 	public ECGDTO() {
 		super();
 	}
@@ -35,6 +37,14 @@ public class ECGDTO implements Serializable {
 
 	public void setValues(ArrayList<Double> values) {
 		this.values = values;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
 	}
 	
 }

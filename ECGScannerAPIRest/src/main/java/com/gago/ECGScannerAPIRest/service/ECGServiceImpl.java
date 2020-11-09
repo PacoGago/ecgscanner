@@ -1,6 +1,5 @@
 package com.gago.ECGScannerAPIRest.service;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,29 +10,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-import javax.imageio.ImageIO;
-
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gago.ECGScannerAPIRest.constants.ConstantsUtils;
 import com.gago.ECGScannerAPIRest.dao.ECGDao;
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
 import com.gago.ECGScannerAPIRest.exception.FileStorageException;
 import com.gago.ECGScannerAPIRest.exception.NoECGException;
 import com.gago.ECGScannerAPIRest.model.ECG;
+import com.mathworks.engine.EngineException;
 import com.mathworks.engine.MatlabEngine;
+import com.mathworks.engine.MatlabExecutionException;
+import com.mathworks.engine.MatlabSyntaxException;
 
 @Service
 public class ECGServiceImpl implements ECGService {
+	
+	@Value("${file.upload-dir}")
+	private String uploadDir;
+	
+	@Value("${matlab.functions-dir}")
+	private String functionsDir;
 	
 	@Autowired
 	private ECGDao ecgDao;
@@ -131,31 +141,19 @@ public class ECGServiceImpl implements ECGService {
             }
 
             // Copiamos el fichero en una carpeta (esta parte es innecesaria)
-            Path targetLocation = Paths.get("/Users/gago/Dropbox/Proyecto/Dev/testupload/" + fileName);
+            Path targetLocation = Paths.get(uploadDir + fileName);
             
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-                      
-            // ******************************* SCRIPT MATLAB *******************************
+            File f = new File(uploadDir + fileName);
             
-            Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
-            MatlabEngine eng = engine.get();
+            // Digitalizamos la imagen y nos quedamos con los valores de la funcion
+            double[] ecgdigi = digitalizacion(f);
             
-	            // Directorio donde se almacenan las funciones de matLab
-	            eng.eval("cd /Users/gago/Dropbox/Proyecto/Dev/repo/ecgscanner/ECGScannerAPIRest/src/main/resources/external/");
-	            
-	            File f = new File("/Users/gago/Dropbox/Proyecto/Dev/testupload/" + fileName);
-	            BufferedImage img = ImageIO.read(f);
-	            
-	            // Asi llamamos a la funcion que queremos ejecutar
-	            double res[] = eng.feval("main", f.getAbsolutePath());
-            
-            eng.close();
-            
-            // ******************************* END SCRIPT MATLAB ****************************
-            
+            // Conversion
+            ArrayList<Double> values = DoubleStream.of(ecgdigi).boxed().collect(Collectors.toCollection(ArrayList::new));
             ECGDTO ecgdto = new ECGDTO();
-            ArrayList<Double> values = DoubleStream.of(res).boxed().collect(Collectors.toCollection(ArrayList::new));
             ecgdto.setValues(values);
+            ecgdto.setFile(fileName);
             
             return create(ecgdto);
             
@@ -164,4 +162,33 @@ public class ECGServiceImpl implements ECGService {
         }
         
 	}
+	
+	private double[] digitalizacion(File f) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
+		
+		double[] res = null;
+		
+		Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
+        MatlabEngine eng = engine.get();
+        
+        // Directorio donde se almacenan las funciones de matLab
+        eng.eval("cd " + functionsDir);
+        
+        // Procesamos la imagen
+        res = eng.feval("main", f.getAbsolutePath());
+        
+        eng.close();
+		
+		return res;
+	}
+
+	@Override
+	public File findImageById(Integer id) throws NoECGException {
+		
+		ECGDTO ecgdto = findById(id);
+		
+		File f = new File(uploadDir + ecgdto.getFile());
+		
+		return f;
+	}
+	
 }
