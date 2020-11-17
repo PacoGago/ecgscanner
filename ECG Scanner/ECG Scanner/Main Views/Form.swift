@@ -40,7 +40,7 @@ struct FormView: View {
     @State private var selectionHeight = 170
     @State private var pickerVisibleHeight = false
     @State private var bmiText = "(Normal)"
-    @State private var bmiColor = Color(#colorLiteral(red: 0.9884055257, green: 0.2643795907, blue: 0.1899998486, alpha: 1))
+    @State private var bmiColor = Color(#colorLiteral(red: 0.8352941176, green: 0, blue: 0.1019607843, alpha: 1))
     
     @State var value : CGFloat = 0 // valor por defecto para el offset del teclado
     

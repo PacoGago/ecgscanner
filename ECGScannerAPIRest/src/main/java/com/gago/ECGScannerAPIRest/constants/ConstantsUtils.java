@@ -7,5 +7,7 @@ public class ConstantsUtils {
 	}
 
 	public static final String SEPARATOR = "/";
+	public static final String HYPHEN = "-";
+	public static final String DOT = ".";
 	
 }

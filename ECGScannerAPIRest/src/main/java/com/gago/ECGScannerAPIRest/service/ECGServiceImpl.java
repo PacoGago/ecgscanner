@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,10 +18,10 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,35 +133,56 @@ public class ECGServiceImpl implements ECGService {
 	@Override
 	public ECGDTO digitalizeImage(MultipartFile file) throws FileStorageException, IllegalArgumentException, IllegalStateException, InterruptedException, RejectedExecutionException, ExecutionException {
 		
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		if (!file.isEmpty()) {
+			
+			// Usamos un nombre seguro
+	        String fileName = getSecureName(file);
+	       
+	        try {
+	        	
+	            if(fileName.contains("..")) {
+	                throw new FileStorageException();
+	            }
 
-        try {
-        	
-            if(fileName.contains("..")) {
-                throw new FileStorageException();
-            }
+	            // Copiamos el fichero en una carpeta (esta parte es innecesaria)
+	            Path targetLocation = Paths.get(uploadDir + fileName);
+	            
+	            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+	            File f = new File(uploadDir + fileName);
+	            
+	            // Digitalizamos la imagen y nos quedamos con los valores de la funcion
+	            double[] ecgdigi = digitalizacion(f);
+	            
+	            // Conversion
+	            ArrayList<Double> values = DoubleStream.of(ecgdigi).boxed().collect(Collectors.toCollection(ArrayList::new));
+	            ECGDTO ecgdto = new ECGDTO();
+	            ecgdto.setValues(values);
+	            ecgdto.setFile(fileName);
+	            
+	            return create(ecgdto);
+	            
+	        } catch (IOException ex) {
+	            throw new FileStorageException();
+	        }
+			
+		}else {
+			throw new FileStorageException();
+		}
+		
+	}
+	
+	private String getSecureName(MultipartFile file) {
 
-            // Copiamos el fichero en una carpeta (esta parte es innecesaria)
-            Path targetLocation = Paths.get(uploadDir + fileName);
-            
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            File f = new File(uploadDir + fileName);
-            
-            // Digitalizamos la imagen y nos quedamos con los valores de la funcion
-            double[] ecgdigi = digitalizacion(f);
-            
-            // Conversion
-            ArrayList<Double> values = DoubleStream.of(ecgdigi).boxed().collect(Collectors.toCollection(ArrayList::new));
-            ECGDTO ecgdto = new ECGDTO();
-            ecgdto.setValues(values);
-            ecgdto.setFile(fileName);
-            
-            return create(ecgdto);
-            
-        } catch (IOException ex) {
-            throw new FileStorageException();
-        }
-        
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		String extension = FilenameUtils.getExtension(fileName);
+		
+		fileName = FilenameUtils.getBaseName(fileName);
+		
+		fileName = fileName + ConstantsUtils.HYPHEN + timestamp.getTime() + ConstantsUtils.DOT + extension;
+		
+		return fileName;
 	}
 	
 	private double[] digitalizacion(File f) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
