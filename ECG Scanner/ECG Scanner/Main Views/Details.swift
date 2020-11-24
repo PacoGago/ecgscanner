@@ -22,25 +22,20 @@ struct DetailsView: View {
         
         TabView(selection: $tabIndex) {
             
-            testDataView.tabItem { Group{
-                    Image(systemName: "bookmark")
-                    Text("Resumen")
-                }}.tag(0)
-            
             ecgDataView.tabItem { Group{
                     Image(systemName: "doc.richtext")
                     Text("Datos ECG")
-                }}.tag(1)
+                }}.tag(0)
             
             resumePatientDataView.tabItem { Group{
                     Image(systemName: "person")
                     Text("Paciente")
-                }}.tag(2)
+                }}.tag(1)
             
             ecgChartView.tabItem { Group{
                 Image(systemName: "waveform.path.ecg")
                 Text("Visualizar")
-            }}.tag(3)
+            }}.tag(2)
             
         }.navigationBarTitle(Text("Resumen"), displayMode: .inline)
          .navigationBarItems(trailing:

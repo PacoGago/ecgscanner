@@ -19,6 +19,7 @@
 		192757B024B4D70600EAF61F /* HospitalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757AF24B4D70600EAF61F /* HospitalData.swift */; };
 		192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757B124B4F92F00EAF61F /* IMCUtils.swift */; };
 		194478C324D87C0B00D43324 /* ImageText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194478C224D87C0B00D43324 /* ImageText.swift */; };
+		19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19492E14256C3D1E00E0CE31 /* CropImageView.swift */; };
 		194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D8E7B24C5FAC2004A2FEC /* Patient.swift */; };
 		1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */; };
 		1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */; };
@@ -86,6 +87,7 @@
 		192757AF24B4D70600EAF61F /* HospitalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalData.swift; sourceTree = "<group>"; };
 		192757B124B4F92F00EAF61F /* IMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCUtils.swift; sourceTree = "<group>"; };
 		194478C224D87C0B00D43324 /* ImageText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageText.swift; sourceTree = "<group>"; };
+		19492E14256C3D1E00E0CE31 /* CropImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageView.swift; sourceTree = "<group>"; };
 		194D8E7B24C5FAC2004A2FEC /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		1957B12D2461F1420038E9F9 /* Supporting Views */ = {
 			isa = PBXGroup;
 			children = (
+				19492E14256C3D1E00E0CE31 /* CropImageView.swift */,
 				1986BFAF24634575006313C4 /* animationcurves.swift */,
 				19E3A4C0253781790067DF4A /* LineView.swift */,
 				1986BFAC24634278006313C4 /* HexagonParameters.swift */,
@@ -475,6 +478,7 @@
 				1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */,
 				1986BFAA2463421A006313C4 /* BadgeBackground.swift in Sources */,
 				1957B1302461F3CC0038E9F9 /* Form.swift in Sources */,
+				19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */,
 				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
 				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
 				19711F3E255C770E000423DC /* LoadingView.swift in Sources */,
