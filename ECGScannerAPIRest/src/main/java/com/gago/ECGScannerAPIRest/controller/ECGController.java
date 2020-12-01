@@ -36,7 +36,6 @@ import com.mathworks.engine.EngineException;
 @RequestMapping(value = "/ecg")
 public class ECGController {
 	
-	
 	@Autowired
 	private ECGService ecgservice;
 	
