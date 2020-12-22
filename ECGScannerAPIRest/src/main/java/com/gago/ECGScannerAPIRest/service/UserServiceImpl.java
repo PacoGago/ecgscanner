@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService{
 		if(performAuthentication(username,pwd)) {
 			user.setUser(username);
 			user.setToken(token);
+			user.setPwd("null");
 		}else {
 			user.setUser(username);
 		}

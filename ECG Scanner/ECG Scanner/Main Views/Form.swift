@@ -14,7 +14,6 @@ struct FormView: View {
     // Datos relativos al paciente
     @EnvironmentObject var patient: Patient
     
-    
     // Variables de la vista
     @State private var hospitalProvinces = HospitalProvinces()
     @State private var selectionHospitalProvince = 0

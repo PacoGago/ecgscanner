@@ -13,6 +13,10 @@ struct ContentView: View {
     
     @State private var showConfig = false
     @State private var showDocPicker = false
+    @State private var user: String = UserDefaults.standard.string(forKey: "user") ?? ""
+    @State private var pwd: String = UserDefaults.standard.string(forKey: "pwd") ?? ""
+    @State private var jwt: String = UserDefaults.standard.string(forKey: "jwt") ?? ""
+    @State private var preferences = APIPreferencesLoader.load()
     
     var cardNew: Card = Card(
         img: "btn_new_scan",
@@ -77,7 +81,6 @@ struct ContentView: View {
                                  DocumentPickerView()
                             }
                             
-                            
                             //Settings
                             Button(action: {
                                 self.showConfig.toggle()
@@ -100,11 +103,86 @@ struct ContentView: View {
             
             }//Navigation
        
+        }.onAppear(){
+            
+            if (!self.isServiceActive()){
+                self.login()
+            }
+            
         }//VStack
         
     }//body
     
-}//View
+    func isServiceActive() -> Bool{
+        
+//        let parameters = "user=" + user + "&password=" + pwd
+//        let postData =  parameters.data(using: .utf8)
+//        var res = false
+//
+//        var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/healthcheck")!,timeoutInterval: Double.infinity)
+//        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//
+//        request.httpMethod = "POST"
+//        request.httpBody = postData
+//
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//
+//            if let data = data {
+//
+//                if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
+//
+//                    DispatchQueue.main.async {
+//                        if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
+//                            self.jwt = JWTResponse.token
+//                        }
+//                        res = true
+//                    }
+//                }else{
+//                    res = false
+//                }
+//            }
+//
+//            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+//
+//        }.resume()
+//        return res
+        
+        return false
+    }
+    
+    func login(){
+        
+        let parameters = "user=" + user + "&password=" + pwd
+        let postData =  parameters.data(using: .utf8)
+
+        var request = URLRequest(url: URL(string: "http://" + self.preferences.baseURL + ":8080/user")!,timeoutInterval: Double.infinity)
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+        request.httpMethod = "POST"
+        request.httpBody = postData
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+          
+            if let data = data {
+                
+                if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
+                    
+                    DispatchQueue.main.sync {
+                        if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
+                            self.jwt = JWTResponse.token
+                            UserDefaults.standard.set(self.jwt, forKey: "jwt")
+                        }
+                    }
+                }else{
+                    self.showConfig.toggle()
+                }
+            }
+            
+        }.resume()
+        
+    }
+    
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

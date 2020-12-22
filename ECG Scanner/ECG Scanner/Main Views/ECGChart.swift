@@ -23,6 +23,7 @@ struct ECGChartView: View {
     let boundary = "example.boundary.\(ProcessInfo.processInfo.globallyUniqueString)"
     
     @State var values = [Double]()
+    @State var jwt: String = ""
     
    @GestureState private var isPressed = false
     
@@ -80,7 +81,7 @@ struct ECGChartView: View {
                 Text("Error: ")
             }
             
-        }.onAppear(perform: uploadImage)
+        }.onAppear(perform: getTokenAuth)
         
         
 
@@ -111,6 +112,7 @@ struct ECGChartView: View {
     
     func uploadImage() {
         
+        print(self.jwt)
         
         var headers: HTTPHeaders {
             return [
@@ -125,6 +127,7 @@ struct ECGChartView: View {
         var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/ecg/upload")!)
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(self.jwt, forHTTPHeaderField: "Authorization")
         request.httpMethod = "POST"
         
         request.httpBody = createHttpBody(binaryData: imageData, mimeType: mimeType)
@@ -153,6 +156,42 @@ struct ECGChartView: View {
         }.resume()
         
     }
+    
+    func getTokenAuth(){
+
+        let parameters = "user=gago&password=password"
+        let postData =  parameters.data(using: .utf8)
+
+        var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/user")!,timeoutInterval: Double.infinity)
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+        request.httpMethod = "POST"
+        request.httpBody = postData
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+          
+            if let data = data {
+                
+                if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
+                    
+                    DispatchQueue.main.async {
+                        self.jwt = JWTResponse.token
+                        self.uploadImage()
+                    }
+                    
+                }
+                
+                return
+            }
+            
+            // En caso de error
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            self.showErrorView = true
+            self.showLoadingView = false
+            
+        }.resume()
+        
+    }
 }
 
 struct ECGJSON : Codable {
@@ -167,8 +206,8 @@ struct ECGJSON : Codable {
         case file = "file"
         case values = "values"
     }
-    
 }
+
 
 struct ECGChartView_Previews: PreviewProvider {
     static var previews: some View {

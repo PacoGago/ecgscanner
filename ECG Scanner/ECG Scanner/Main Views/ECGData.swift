@@ -25,7 +25,6 @@ struct ECGDataView: View {
     //@State private var ecgType = ""
     //@State private var heartRate = ""
     
-    
     //Variables de la vista
     @State private var ecgequipementModalView: Bool = false
     @State var value : CGFloat = 0 // valor por defecto para el offset del teclado
