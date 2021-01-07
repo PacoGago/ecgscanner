@@ -19,11 +19,14 @@ struct ECGChartView: View {
     @State private var showLoadingView = true
     @State private var showDigitalizationView = false
     @State private var showErrorView = false
+    @State private var preferences = APIPreferencesLoader.load()
+    @State private var jwt: String = UserDefaults.standard.string(forKey: "jwt") ?? ""
     
     let boundary = "example.boundary.\(ProcessInfo.processInfo.globallyUniqueString)"
+    let APIUtils = APIUtilsImpl()
     
     @State var values = [Double]()
-    @State var jwt: String = ""
+    
     
    @GestureState private var isPressed = false
     
@@ -81,7 +84,7 @@ struct ECGChartView: View {
                 Text("Error: ")
             }
             
-        }.onAppear(perform: getTokenAuth)
+        }.onAppear(perform: uploadImage)
         
         
 
@@ -112,7 +115,6 @@ struct ECGChartView: View {
     
     func uploadImage() {
         
-        print(self.jwt)
         
         var headers: HTTPHeaders {
             return [
@@ -124,7 +126,8 @@ struct ECGChartView: View {
         let imageData = p.ecg.imageSource.jpegData(compressionQuality: 1)!
         let mimeType = imageData.mimeType!
 
-        var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/ecg/upload")!)
+        var request = URLRequest(url: URL(string: APIUtils.getProtocol(sslPreference: self.preferences.ssl) + "://" + self.preferences.baseURL + ":" + self.preferences.port + "/ecg/upload")!)
+        
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(self.jwt, forHTTPHeaderField: "Authorization")
@@ -157,41 +160,6 @@ struct ECGChartView: View {
         
     }
     
-    func getTokenAuth(){
-
-        let parameters = "user=gago&password=password"
-        let postData =  parameters.data(using: .utf8)
-
-        var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/user")!,timeoutInterval: Double.infinity)
-        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
-        request.httpMethod = "POST"
-        request.httpBody = postData
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-          
-            if let data = data {
-                
-                if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
-                    
-                    DispatchQueue.main.async {
-                        self.jwt = JWTResponse.token
-                        self.uploadImage()
-                    }
-                    
-                }
-                
-                return
-            }
-            
-            // En caso de error
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-            self.showErrorView = true
-            self.showLoadingView = false
-            
-        }.resume()
-        
-    }
 }
 
 struct ECGJSON : Codable {

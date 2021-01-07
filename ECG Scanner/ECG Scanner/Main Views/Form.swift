@@ -429,9 +429,7 @@ struct FormView: View {
          .navigationBarItems(trailing:
             NavigationLink(destination: DetailsView().onAppear {
                 
-                if (self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource)){
-                    self.patient.ecg.imagePro = OpenCVWrapper.toGray(self.patient.ecg.imageSource)!
-                }
+                
                 
             }){
                 Text("Continuar")

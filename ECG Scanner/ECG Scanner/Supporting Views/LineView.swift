@@ -24,39 +24,40 @@ struct LineView: View {
     }
     
     public var body: some View {
-        GeometryReader{ geometry in
-            
-            VStack(alignment: .leading, spacing: 8) {
-                
-//                Group{
-//                    if (self.title != nil){
-//                        Text(self.title!)
-//                            .font(.title)
-//                    }
-//                    if (self.subtitle != nil){
-//                        Text(self.subtitle!)
-//                            .font(.body)
-//                        .offset(x: 5, y: 0)
-//                    }
-//                }.offset(x: 0, y: 0)
-                
-                ZStack{
-                    GeometryReader{ reader in
-                        Line(data: self.data,
-                             frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width , height: reader.frame(in: .local).height))
-                        )
-                            .offset(x: 0, y: 0)
-                    }
-                    .frame(width: geometry.frame(in: .local).size.width, height: 300)
-                    .offset(x: 0, y: -100)
-
-                }
-                .frame(width: geometry.frame(in: .local).size.width, height: 300)
-                
         
+       //ScrollView(.horizontal) {
+            ZStack {
+                
+                GridChartView()
+                
+                GeometryReader{ geometry in
+
+                    VStack(alignment: .leading, spacing: 8) {
+
+
+                        ZStack{
+
+
+                            GeometryReader{ reader in
+                                Line(data: self.data,
+                                     frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width , height: reader.frame(in: .local).height))
+                                )
+                                .offset(x: 0, y: 0)
+                            }
+                            //.frame(width: geometry.frame(in: .local).size.width, height: 300)
+                            .frame(width: UIScreen.main.bounds.size.width, height: 300)
+                            .offset(x: 0, y: -20)
+
+                        }.frame(width: geometry.frame(in: .local).size.width, height: 300)
+
+
+                    }
+                }
             }
-        }
+        //}
+
     }
+    
 }
 
 struct LineView_Previews: PreviewProvider {
@@ -554,9 +555,15 @@ struct Line: View {
         
         return 0
     }
+    
     var path: Path {
         let points = self.data
         return Path.lineChart(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
+    }
+    
+    var r: CGPoint{
+        let points = self.data
+        return CGPoint.rInChart(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
     }
     
     public var body: some View {
@@ -564,10 +571,17 @@ struct Line: View {
         ZStack {
 
             self.path
-                .stroke(Color(#colorLiteral(red: 0.8352941176, green: 0, blue: 0.1882352941, alpha: 1)) ,style: StrokeStyle(lineWidth: 1, lineCap: .round, lineJoin: .round, miterLimit: 10, dash: [], dashPhase: 0))
+                .stroke(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)) ,style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 10, dash: [], dashPhase: 0))
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .drawingGroup()
+                
+                // colocar un punto sobre la curva
+                //.overlay(
+                    //PointView(label: "R").offset(x: -108, y: -61)
+                    //.offset(x: self.r.x, y: self.r.y)
+                //)
+            
         }
     }
 }
@@ -587,5 +601,22 @@ extension Path {
             path.addLine(to: p2)
         }
         return path
+    }
+    
+    
+}
+
+extension CGPoint {
+    
+    static func rInChart(points:[Double], step:CGPoint) -> CGPoint{
+        
+        var RPoint = CGPoint()
+        
+        guard let offset = points.min() else { return RPoint }
+        RPoint = CGPoint(x: 0, y: CGFloat(points[10]-offset)*step.y)
+        
+        
+        
+        return RPoint
     }
 }

@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var pwd: String = UserDefaults.standard.string(forKey: "pwd") ?? ""
     @State private var jwt: String = UserDefaults.standard.string(forKey: "jwt") ?? ""
     @State private var preferences = APIPreferencesLoader.load()
+    let APIUtils = APIUtilsImpl()
     
     var cardNew: Card = Card(
         img: "btn_new_scan",
@@ -104,58 +105,17 @@ struct ContentView: View {
             }//Navigation
        
         }.onAppear(){
-            
-            if (!self.isServiceActive()){
-                self.login()
-            }
-            
+            self.login()
         }//VStack
         
     }//body
-    
-    func isServiceActive() -> Bool{
         
-//        let parameters = "user=" + user + "&password=" + pwd
-//        let postData =  parameters.data(using: .utf8)
-//        var res = false
-//
-//        var request = URLRequest(url: URL(string: "http://192.168.1.33:8080/healthcheck")!,timeoutInterval: Double.infinity)
-//        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//
-//        request.httpMethod = "POST"
-//        request.httpBody = postData
-//
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//
-//            if let data = data {
-//
-//                if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
-//
-//                    DispatchQueue.main.async {
-//                        if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
-//                            self.jwt = JWTResponse.token
-//                        }
-//                        res = true
-//                    }
-//                }else{
-//                    res = false
-//                }
-//            }
-//
-//            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-//
-//        }.resume()
-//        return res
-        
-        return false
-    }
-    
     func login(){
         
         let parameters = "user=" + user + "&password=" + pwd
         let postData =  parameters.data(using: .utf8)
-
-        var request = URLRequest(url: URL(string: "http://" + self.preferences.baseURL + ":8080/user")!,timeoutInterval: Double.infinity)
+        
+        var request = URLRequest(url: URL(string: APIUtils.getProtocol(sslPreference: self.preferences.ssl) + "://" + self.preferences.baseURL + ":" + self.preferences.port + "/user")!,timeoutInterval: Double.infinity)
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"

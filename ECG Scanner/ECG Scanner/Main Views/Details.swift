@@ -6,6 +6,7 @@
 //  Copyright © 2020 Francisco Gago. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct DetailsView: View {
@@ -39,10 +40,22 @@ struct DetailsView: View {
             
         }.navigationBarTitle(Text("Resumen"), displayMode: .inline)
          .navigationBarItems(trailing:
-            NavigationLink(destination: ContentView()) {
-                Text("Guardar")
-            }
-        )
+             Button(action: {
+                 
+                self.saveFile()
+                
+             }) {
+                 Image(systemName: "square.and.arrow.up").imageScale(.large)
+             }
+         )
+    }
+    
+    func saveFile() {
+        
+
+        print("Test")
+        //let activityController = UIActivityViewController(activityItems: [documentData], applicationActivities: nil)
+        //self.present(activityController, animated: true, completion: nil)
     }
 }
 

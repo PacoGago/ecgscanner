@@ -7,7 +7,9 @@
 //
 
 struct APIPreferences: Codable {
-  var baseURL: String
+    var baseURL: String
+    var ssl: Bool
+    var port: String
 }
 
 class APIPreferencesLoader {
@@ -24,7 +26,7 @@ class APIPreferencesLoader {
     {
        return preferences
     }
-    return APIPreferences(baseURL: "")
+    return APIPreferences(baseURL: "", ssl: false, port: "")
   }
 }
 

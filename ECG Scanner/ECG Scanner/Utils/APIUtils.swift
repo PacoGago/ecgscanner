@@ -6,11 +6,17 @@
 //  Copyright © 2020 Francisco Gago. All rights reserved.
 //
 
-class APIUtils{
+import SwiftUI
+
+protocol APIUtils {
+    func getProtocol(sslPreference: Bool) -> String
+}
+
+class APIUtilsImpl: APIUtils{
     
-    func login() -> Bool{
-        
-        return false
+    func getProtocol(sslPreference: Bool) -> String{
+        let res = sslPreference ? "https" : "http"
+        return res
     }
     
 }
