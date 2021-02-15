@@ -193,7 +193,7 @@ public class ECGServiceImpl implements ECGService {
 	
 	private double[] digitalizacion(File f) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
 		
-		double[] res = null;
+		Object[] res = null;
 		
 		Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
         MatlabEngine eng = engine.get();
@@ -202,164 +202,34 @@ public class ECGServiceImpl implements ECGService {
         eng.eval("cd " + functionsDir);
         
         // Procesamos la imagen
-        res = eng.feval("main", f.getAbsolutePath());
+        // feval(numero de argumentos a recibir, nombre de la funciona a ejecutar, argumentos a pasar)
+        double[] values = eng.feval("main", f.getAbsolutePath());
+        //System.out.println("ECG: " + Arrays.toString(values));
+        // Aqui deberiamos determinar si con la digitalizacion
+        // que hemos conseguido podemos o no llamar al pantompkins
+        // dado que si no posee la suficiente longitud no funciona
+        
+        
+       // res = eng.feval(5, "pantompkins_qrs", eng.feval("main", f.getAbsolutePath()), 500);
+                                    
+        //double[] qrs_pos = (double[]) res[0];
+//        double[] filt_dat = (double[]) res[2];
+//        double[] int_dat = (double[]) res[3];
+//        double[] thF1 = (double[]) res[4];
+//        double[] thI1 = (double[]) res[5];
+//        
+        //System.out.println("qrs_pos: " + Arrays.toString(qrs_pos));
+//        System.out.println("filt_dat: " + Arrays.toString(filt_dat));
+//        System.out.println("int_dat: " + Arrays.toString(int_dat));
+//        System.out.println("thF1: " + Arrays.toString(thF1));
+//        System.out.println("thI1: " + Arrays.toString(thI1));
         
         eng.close();
-        
-        int[] QRS = detect(res);
-        System.out.println(Arrays.toString(QRS));
 		
-		return res;
+		return values;
 	}
 	
-	private static int[] detect(double[] ecg) {
-		
-		// circular buffer for input ecg signal
-		// we need to keep a history of M + 1 samples for HP filter
-		double[] ecg_circ_buff = new double[M + 1];
-		int ecg_circ_WR_idx = 0;
-		int ecg_circ_RD_idx = 0;
 	
-		// circular buffer for input ecg signal
-		// we need to keep a history of N+1 samples for LP filter
-		double[] hp_circ_buff = new double[N+1];
-		int hp_circ_WR_idx = 0;
-		int hp_circ_RD_idx = 0;		
-	
-		// LP filter outputs a single point for every input point
-		// This goes straight to adaptive filtering for eval
-		double next_eval_pt = 0;
-		
-		// output 
-		int[] QRS = new int[ecg.length];
-		
-		// running sums for HP and LP filters, values shifted in FILO
-		double hp_sum = 0;
-		double lp_sum = 0;
-        
-        // parameters for adaptive thresholding
-		double treshold = 0;
-		boolean triggered = false;
-		int trig_time = 0;
-		double win_max = 0;
-		int win_idx = 0;
-			
-		for(int i = 0; i < ecg.length; i++){
-			ecg_circ_buff[ecg_circ_WR_idx++] = ecg[i];
-			ecg_circ_WR_idx %= (M+1);
-			
-			/* High pass filtering */
-			if(i < M){
-				// first fill buffer with enough points for HP filter
-				hp_sum += ecg_circ_buff[ecg_circ_RD_idx];
-				hp_circ_buff[hp_circ_WR_idx] = 0;
-			}
-			else{
-				hp_sum += ecg_circ_buff[ecg_circ_RD_idx];
-				
-				int tmp = ecg_circ_RD_idx - M;
-				if(tmp < 0){
-					tmp += M + 1;
-				}
-				hp_sum -= ecg_circ_buff[tmp];
-				
-				double y1 = 0;
-				double y2 = 0;
-
-				tmp = (ecg_circ_RD_idx - ((M+1)/2));
-				if(tmp < 0){
-					tmp += M + 1;
-				}
-				y2 = ecg_circ_buff[tmp];
-
-				y1 = HP_CONSTANT * hp_sum; 
-				
-				hp_circ_buff[hp_circ_WR_idx] = y2 - y1;
-			}
-			
-			ecg_circ_RD_idx++;
-			ecg_circ_RD_idx %= (M+1);
-			
-			hp_circ_WR_idx++;
-			hp_circ_WR_idx %= (N+1);
-				
-			/* Low pass filtering */
-			
-			// shift in new sample from high pass filter
-			lp_sum += hp_circ_buff[hp_circ_RD_idx] * hp_circ_buff[hp_circ_RD_idx];
-			
-			if(i < N){
-				// first fill buffer with enough points for LP filter
-				next_eval_pt = 0;
-				
-			}
-			else{
-				// shift out oldest data point
-				int tmp = hp_circ_RD_idx - N;
-				if(tmp < 0){
-					tmp += N+1;
-				}					
-				lp_sum -= hp_circ_buff[tmp] * hp_circ_buff[tmp];
-				
-				next_eval_pt = lp_sum;
-			}
-			
-			hp_circ_RD_idx++;
-			hp_circ_RD_idx %= (N+1);
-			
-			/* Adapative thresholding beat detection */
-			// set initial threshold				
-			if(i < winSize) {
-				if(next_eval_pt > treshold) {
-					treshold = next_eval_pt;
-				}
-			}
-        
-			// check if detection hold off period has passed
-			if(triggered){
-				trig_time++;
-			
-				if(trig_time >= 100){
-					triggered = false;
-					trig_time = 0;
-				}
-			}
-
-			// find if we have a new max
-			if(next_eval_pt > win_max) win_max = next_eval_pt;
-
-			// find if we are above adaptive threshold
-            if(next_eval_pt > treshold && !triggered) {
-				QRS[i] = 1;
-
-				triggered = true;
-            }
-            else {
-				QRS[i] = 0;
-            }
-            
-			// adjust adaptive threshold using max of signal found 
-			// in previous window            
-	    	if(++win_idx > winSize){
-				// weighting factor for determining the contribution of
-				// the current peak value to the threshold adjustment
-	        	double gamma = 0.175;
-	        	
-	        	// forgetting factor - 
-	        	// rate at which we forget old observations
-				double alpha = 0.01 + (Math.random() * ((0.1 - 0.01)));
-				
-				treshold = alpha * gamma * win_max + (1 - alpha) * treshold;
-		
-				// reset current window ind
-				win_idx = 0;
-				win_max = -10000000;
-            }
-		}
-
-		return QRS;
-	}
-
 	@Override
 	public File findImageById(Integer id) throws NoECGException {
 		
@@ -371,3 +241,4 @@ public class ECGServiceImpl implements ECGService {
 	}
 	
 }
+

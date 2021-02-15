@@ -42,21 +42,45 @@ struct DetailsView: View {
          .navigationBarItems(trailing:
              Button(action: {
                  
-                self.saveFile()
+                self.writeFile()
                 
              }) {
-                 Image(systemName: "square.and.arrow.up").imageScale(.large)
+                 Text("Guardar")
              }
          )
     }
-    
-    func saveFile() {
         
+    func writeFile() -> Void{
+        
+        let store = XML(name: "ecg")
+            .addAttribute(name: "xml:id", value: "test")
+            .addChildren([
+                // attributes can be added in the initializer
+                XML(name: "image", attributes: [
+                    "name": "football"
+                ]),
+                XML(name: "paciente", attributes: [
+                    "nombre": patient.name
+                ])
+            ])
+        
+        let file = "ecg.xml"
+        let dir = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(file)
+        let contents = store.toXMLString()
 
-        print("Test")
-        //let activityController = UIActivityViewController(activityItems: [documentData], applicationActivities: nil)
-        //self.present(activityController, animated: true, completion: nil)
+        do {
+            try contents.write(to: dir!, atomically: true, encoding: .utf8)
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        var filesToShare = [Any]()
+        filesToShare.append(dir!)
+        let av = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
+        av.isModalInPresentation = true
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
+    
 }
 
 struct DetailsView_Previews: PreviewProvider {

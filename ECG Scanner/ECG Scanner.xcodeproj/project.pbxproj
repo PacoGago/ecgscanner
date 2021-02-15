@@ -23,6 +23,7 @@
 		192C38D32577FF9A00350864 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C38D22577FF9A00350864 /* User.swift */; };
 		1937994E259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937994D259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift */; };
 		19379954259A3F3D00AF29B1 /* GridChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19379953259A3F3D00AF29B1 /* GridChart.swift */; };
+		1940314325D488DE00FCDCF9 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940314225D488DE00FCDCF9 /* DocumentPicker.swift */; };
 		194478C324D87C0B00D43324 /* ImageText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194478C224D87C0B00D43324 /* ImageText.swift */; };
 		19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19492E14256C3D1E00E0CE31 /* CropImageView.swift */; };
 		194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D8E7B24C5FAC2004A2FEC /* Patient.swift */; };
@@ -56,6 +57,7 @@
 		19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A92EBA2522544C00C2471F /* TestDataView.swift */; };
 		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
 		19C0F902259135E70090743C /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0F901259135E70090743C /* JWT.swift */; };
+		19C5E28D25C0C6450090803F /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C5E28C25C0C6450090803F /* XML.swift */; };
 		19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */; };
 		19E31E9924FD566D008AD45A /* ECG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9824FD566D008AD45A /* ECG.swift */; };
 		19E31E9C24FD6F2F008AD45A /* ECGEquipementModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */; };
@@ -101,6 +103,7 @@
 		192C38D22577FF9A00350864 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1937994D259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebasUnitariasAPIUtils.swift; sourceTree = "<group>"; };
 		19379953259A3F3D00AF29B1 /* GridChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridChart.swift; sourceTree = "<group>"; };
+		1940314225D488DE00FCDCF9 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		194478C224D87C0B00D43324 /* ImageText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageText.swift; sourceTree = "<group>"; };
 		19492E14256C3D1E00E0CE31 /* CropImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageView.swift; sourceTree = "<group>"; };
 		194D8E7B24C5FAC2004A2FEC /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 		19A92EBA2522544C00C2471F /* TestDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataView.swift; sourceTree = "<group>"; };
 		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
 		19C0F901259135E70090743C /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		19C5E28C25C0C6450090803F /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
 		19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsUtils.swift; sourceTree = "<group>"; };
 		19E31E9824FD566D008AD45A /* ECG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG.swift; sourceTree = "<group>"; };
 		19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGEquipementModal.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				19711F3D255C770E000423DC /* LoadingView.swift */,
 				19379953259A3F3D00AF29B1 /* GridChart.swift */,
 				198C5E1225A73A3A0015035B /* PointView.swift */,
+				1940314225D488DE00FCDCF9 /* DocumentPicker.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 		19B010F8247C56950045470A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				19C5E28C25C0C6450090803F /* XML.swift */,
 				198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */,
 				198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */,
 				19B010F9247C56B60045470A /* ConstantsViews.swift */,
@@ -508,6 +514,7 @@
 				19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */,
 				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
 				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
+				1940314325D488DE00FCDCF9 /* DocumentPicker.swift in Sources */,
 				192B122125A77D1700B69751 /* OpenCVWrapper.mm in Sources */,
 				19711F3E255C770E000423DC /* LoadingView.swift in Sources */,
 				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
@@ -529,6 +536,7 @@
 				192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */,
 				19FECAA3259298C500EA6F00 /* APIPreferences.swift in Sources */,
 				194478C324D87C0B00D43324 /* ImageText.swift in Sources */,
+				19C5E28D25C0C6450090803F /* XML.swift in Sources */,
 				19E3A4C1253781790067DF4A /* LineView.swift in Sources */,
 				19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */,
 				194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */,

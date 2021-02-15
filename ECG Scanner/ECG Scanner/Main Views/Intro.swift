@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var pwd: String = UserDefaults.standard.string(forKey: "pwd") ?? ""
     @State private var jwt: String = UserDefaults.standard.string(forKey: "jwt") ?? ""
     @State private var preferences = APIPreferencesLoader.load()
+    @State private var fileContent = ""
     let APIUtils = APIUtilsImpl()
     
     var cardNew: Card = Card(
@@ -74,17 +75,20 @@ struct ContentView: View {
                             //obtener con esta apertura.
                             Button(action: {
                                 self.showDocPicker.toggle()
+                                
                             }, label: {
                                 CardView(card: cardAdd).padding()
                             })
                             .offset(x: 0, y: -30)
                             .sheet(isPresented: self.$showDocPicker){
-                                 DocumentPickerView()
+                                DocumentPicker(fileContent: self.$fileContent)
+                                
                             }
                             
                             //Settings
                             Button(action: {
                                 self.showConfig.toggle()
+                                print("El fichero contiene: " + self.fileContent)
                             }, label: {
                                 Image(systemName: "gear")
                                 .font(.system(size: 22.0))
@@ -144,19 +148,6 @@ struct ContentView: View {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 
-struct DocumentPickerView: UIViewControllerRepresentable {
-  func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-    let documentPicker = UIDocumentPickerViewController(documentTypes: [(kUTTypeImage as String)], in: .import)
-    return documentPicker
-  }
 
-  func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {
 
-  }
-}

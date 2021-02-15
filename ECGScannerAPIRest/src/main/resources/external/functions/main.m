@@ -1,4 +1,4 @@
-function HASIL_AKHIRAVF = main(x)
+function[HASIL_AKHIRAVF] = main(x)
 
     Y = imread(x);
     [BW,rgb] = createMaskbr(Y);
@@ -40,11 +40,14 @@ function HASIL_AKHIRAVF = main(x)
         jj = jj + 1;
     end
 
-    HASIL_AKHIRAVF=sementara2(:,2);
-    HASIL_AKHIRAVF=(HASIL_AKHIRAVF)*ld;
-    maksim=max(HASIL_AKHIRAVF);
-    minim=min(HASIL_AKHIRAVF);
-    media=median((HASIL_AKHIRAVF));
-    HASIL_AKHIRAVF=HASIL_AKHIRAVF-media;
+    HASIL_AKHIRAVF = sementara2(:,2);
+    HASIL_AKHIRAVF = (HASIL_AKHIRAVF)*ld;
+    maksim = max(HASIL_AKHIRAVF);
+    minim = min(HASIL_AKHIRAVF);
+    media = median((HASIL_AKHIRAVF));
+    HASIL_AKHIRAVF = HASIL_AKHIRAVF-media;
+
+    %fs = 500;
+    %[qrs_pos,filt_dat,int_dat,thF1,thI1] = pantompkins_qrs(HASIL_AKHIRAVF,fs);
 
 end

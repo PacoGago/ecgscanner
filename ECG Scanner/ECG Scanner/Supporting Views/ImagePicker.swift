@@ -6,7 +6,6 @@
 //  Copyright © 2020 Francisco Gago. All rights reserved.
 //
 
-
 import UIKit
 import SwiftUI
 
@@ -44,7 +43,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            
+            print("desde images::")
             if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
                 parent.selectedImage = image
             }
