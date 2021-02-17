@@ -1,35 +1,17 @@
-//
-//  ECG.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 31/08/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 class ECG: ObservableObject{
     
     @Published var origin = ""
     @Published var ecgModel = ""
-    
-    //presion sanguinea (Body Pressure)
-    @Published var bodypress: Double?
-    
-    //temperatura corporal (body-temperature)
-    @Published var bodytemp: Double?
-    @Published var glucose: Double?
+    @Published var bodypresssystolic = 120.0
+    @Published var bodypressdiastolic = 80.0
+    @Published var bodytemp = 36.5
+    @Published var glucose = 80.0
     @Published var reason = ""
     @Published var ecgType = ""
-    @Published var heartRate = ""
-    
+    @Published var heartRate = 80.0
     @Published var imagePro = UIImage()
     @Published var imageSource = UIImage()
-    
-    /*
-     Image(uiImage: p.ecg.imageSource)
-     .resizable()
-     .scaledToFit()
-     */
     
 }

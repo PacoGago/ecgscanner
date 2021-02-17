@@ -1,11 +1,3 @@
-//
-//  ECGData.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 25/08/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 struct ECGDataView: View {
@@ -13,21 +5,60 @@ struct ECGDataView: View {
     @EnvironmentObject var p: Patient
     @State var smk: String = ""
     
-    // Datos asociados al ECG del paciente
-    //@State private var origin = ""
-    //@State private var ecgModel = ""
-    //presion sanguinea (Body Pressure)
-    //@State private var bp = 30
-    //temperatura corporal (body-temperature)
-    //@State private var bt = 30
-    //@State private var glucose = 30
-    //@State private var reason = ""
-    //@State private var ecgType = ""
-    //@State private var heartRate = ""
-    
     //Variables de la vista
     @State private var ecgequipementModalView: Bool = false
     @State var value : CGFloat = 0 // valor por defecto para el offset del teclado
+    
+    // Binding para la conversion de text to double
+    var bodypresssystolic: Binding<String> {
+        Binding<String>(
+            get: { String(format: "%.02f", Double(self.p.ecg.bodypresssystolic)) },
+            set: {
+                let newString = $0.replacingOccurrences(of: ",", with: ".")
+                self.p.ecg.bodypresssystolic = (newString as NSString).doubleValue
+            }
+        )
+    }
+    
+    var bodypressdiastolic: Binding<String> {
+        Binding<String>(
+            get: { String(format: "%.02f", Double(self.p.ecg.bodypressdiastolic)) },
+            set: {
+                let newString = $0.replacingOccurrences(of: ",", with: ".")
+                self.p.ecg.bodypressdiastolic = (newString as NSString).doubleValue
+            }
+        )
+    }
+    
+    var bodytemp: Binding<String> {
+        Binding<String>(
+            get: { String(format: "%.02f", Double(self.p.ecg.bodytemp)) },
+            set: {
+                let newString = $0.replacingOccurrences(of: ",", with: ".")
+                self.p.ecg.bodytemp = (newString as NSString).doubleValue
+            }
+        )
+    }
+    
+    var glucose: Binding<String> {
+        Binding<String>(
+            get: { String(format: "%.02f", Double(self.p.ecg.glucose)) },
+            set: {
+                let newString = $0.replacingOccurrences(of: ",", with: ".")
+                self.p.ecg.glucose = (newString as NSString).doubleValue
+            }
+        )
+    }
+    
+    var heartRate: Binding<String> {
+        Binding<String>(
+            get: { String(format: "%.02f", Double(self.p.ecg.heartRate)) },
+            set: {
+                let newString = $0.replacingOccurrences(of: ",", with: ".")
+                self.p.ecg.heartRate = (newString as NSString).doubleValue
+            }
+        )
+    }
     
     var body: some View {
         
@@ -65,25 +96,36 @@ struct ECGDataView: View {
                 }
                 // END: Equipamiento
                 
-                // Presión Sanguínea
-                TextField("Presión Sanguínea: ", value: $p.ecg.bodypress, formatter: NumberFormatter()).keyboardType(.decimalPad)
-                
-                // Temperatura
-                TextField("Temperatura: ", value: $p.ecg.bodytemp, formatter: NumberFormatter()).keyboardType(.decimalPad)
-                
-                // Glucosa
-                
-                TextField("Glucosa: ", value: $p.ecg.glucose, formatter: NumberFormatter()).keyboardType(.decimalPad)
-                
                 // Motivo de la prueba
                 TextField("Motivo de la prueba: ", text: $p.ecg.reason)
                 
                 // Tipo de ECG
                 TextField("Tipo de ECG: ", text: $p.ecg.ecgType)
                 
-                // Tasa cardíaca
-                TextField("Tasa cardíaca: ", text: $p.ecg.heartRate)
-            
+                HStack {
+                    Text("Presión Sistólica (mmHg):")
+                    TextField(" ", text: bodypresssystolic).keyboardType(.decimalPad)
+                }
+                
+                HStack {
+                    Text("Presión Diastólica (mmHg):")
+                    TextField(" ", text: bodypressdiastolic).keyboardType(.decimalPad)
+                }
+                
+                HStack {
+                    Text("Temperatura (ºC):")
+                    TextField(" ", text: bodytemp).keyboardType(.decimalPad)
+                }
+                
+                HStack {
+                    Text("Glucosa (mg/dl):")
+                    TextField(" ", text: glucose).keyboardType(.decimalPad)
+                }
+                
+                HStack {
+                    Text("Tasa cardíaca (PPM):")
+                    TextField(" ", text: heartRate).keyboardType(.decimalPad)
+                }
                 
             }//END: DATOS GENERALES
             
@@ -116,5 +158,21 @@ struct ECGDataView_Previews: PreviewProvider {
     static var previews: some View {
         ECGDataView()
         
+    }
+}
+
+extension String {
+    static let numberFormatter = NumberFormatter()
+    var doubleValue: Double {
+        String.numberFormatter.decimalSeparator = "."
+        if let result =  String.numberFormatter.number(from: self) {
+            return result.doubleValue
+        } else {
+            String.numberFormatter.decimalSeparator = ","
+            if let result = String.numberFormatter.number(from: self) {
+                return result.doubleValue
+            }
+        }
+        return 0
     }
 }

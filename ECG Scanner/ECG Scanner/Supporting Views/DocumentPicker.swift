@@ -1,5 +1,5 @@
 //
-//  XMLPicker.swift
+//  DocumentPicker.swift
 //  ECG Scanner
 //
 //  Created by Paco Gago on 10/02/2021.

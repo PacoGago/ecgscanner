@@ -52,19 +52,58 @@ struct DetailsView: View {
         
     func writeFile() -> Void{
         
+        var fileName = "ECG-DATA"
+        
+        if !patient.name.isEmpty {
+            fileName = patient.name.replacingOccurrences(of: " ", with: "-")
+            fileName = fileName.trimmingCharacters(in: .whitespaces).lowercased()
+            fileName = fileName.folding(options: .diacriticInsensitive, locale: .current)
+        }
+        //controlar que haya imagen claro
+        let imageData:NSData = patient.ecg.imageSource.pngData()! as NSData
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        
+//        let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
+//        let decodedimage = UIImage(data: dataDecoded)
+//        print(decodedimage as Any)
+        
         let store = XML(name: "ecg")
             .addAttribute(name: "xml:id", value: "test")
             .addChildren([
-                // attributes can be added in the initializer
+                
                 XML(name: "image", attributes: [
-                    "name": "football"
+                    "value": strBase64
                 ]),
                 XML(name: "paciente", attributes: [
-                    "nombre": patient.name
+                    "nombre": patient.name,
+                    "primer-apellido": patient.firstSurname,
+                    "segundo-apellido": patient.secondSurname,
+                    "direccion": patient.address,
+                    "ciudad": patient.city,
+                    "provincia": patient.province,
+                    "genero": patient.genre,
+                    "edad": patient.age,
+                    "peso": patient.weight,
+                    "altura": patient.height,
+                    "fumador": patient.smoker,
+                    "alergias": patient.allergy,
+                    "enfermedad-cronica": patient.chronic,
+                    "medicacion": patient.hospital
+                    
+                ]),
+                XML(name: "ecg", attributes: [
+                    "origen": patient.ecg.origin,
+                    "equipamiento": patient.ecg.ecgModel,
+                    "presion-sanguinea": patient.ecg.bodypressdiastolic,
+                    "temperatura": patient.ecg.bodytemp,
+                    "glucosa": patient.ecg.glucose,
+                    "motivo": patient.ecg.reason,
+                    "tipo": patient.ecg.ecgType,
+                    "tasa-cardiaca": patient.ecg.heartRate
                 ])
             ])
         
-        let file = "ecg.xml"
+        let file = fileName + ".xml"
         let dir = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(file)
         let contents = store.toXMLString()
 
