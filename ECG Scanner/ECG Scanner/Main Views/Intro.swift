@@ -1,16 +1,9 @@
-//
-//  ContentView.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 05/05/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 import MobileCoreServices
 
 struct ContentView: View {
     
+    @EnvironmentObject var patient: Patient
     @State private var showConfig = false
     @State private var showDocPicker = false
     @State private var user: String = UserDefaults.standard.string(forKey: "user") ?? ""
@@ -18,6 +11,7 @@ struct ContentView: View {
     @State private var jwt: String = UserDefaults.standard.string(forKey: "jwt") ?? ""
     @State private var preferences = APIPreferencesLoader.load()
     @State private var fileContent = ""
+    @State private var showFileConfig = false
     let APIUtils = APIUtilsImpl()
     
     var cardNew: Card = Card(
@@ -31,10 +25,32 @@ struct ContentView: View {
         cardImageColor: Color.blue
     )
     
+    var cardContinue: Card = Card(
+        img: "btn_new_scan",
+        description: "Ver datos del ECG escogido",
+        buttonText: "Continuar",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.green,
+        cardFontColor: Color.black,
+        cardImageColor: Color.green
+    )
+    
     var cardAdd: Card = Card(
         img: "btn_add_folder",
         description: "Seleccionar un ECG anterior",
         buttonText: "Seleccionar un fichero",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.orange,
+        cardFontColor: Color.black,
+        cardImageColor: Color.orange
+    )
+    
+    var cardAddOther: Card = Card(
+        img: "btn_add_folder",
+        description: "Seleccionar un ECG anterior",
+        buttonText: "Seleccionar otro fichero",
         backgroundCardColor: Color.white,
         buttonFontColor: Color.white,
         buttonBackgroundColor: Color.orange,
@@ -65,39 +81,59 @@ struct ContentView: View {
                                 .padding()
                                 .offset(x: 0, y: 5)
                             
-                            //Nuevo ECG
-                            NavigationLink(destination: FormView()) {
-                                CardView(card: cardNew).padding()
+                            // Nuevo ECG
+                            NavigationLink(destination: FormView(fileContent: self.fileContent)) {
+                                CardView(card: self.fileContent.isEmpty ? cardNew : cardContinue).padding()
                             }.offset(x: 0, y: -10)
                             
-                            //Examinar un fichero
-                            //TODO: Tenemos que indicar cual el tipo de fichero que queremos
-                            //obtener con esta apertura.
+                            
+                            // Import ECG
                             Button(action: {
                                 self.showDocPicker.toggle()
-                                
                             }, label: {
-                                CardView(card: cardAdd).padding()
+                                
+                                CardView(card: self.fileContent.isEmpty ? cardAdd : cardAddOther)
+                                
                             })
                             .offset(x: 0, y: -30)
+                            .padding()
                             .sheet(isPresented: self.$showDocPicker){
                                 DocumentPicker(fileContent: self.$fileContent)
-                                
                             }
                             
-                            //Settings
-                            Button(action: {
-                                self.showConfig.toggle()
-                                print("El fichero contiene: " + self.fileContent)
-                            }, label: {
-                                Image(systemName: "gear")
-                                .font(.system(size: 22.0))
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.black)
-                            })
-                            .offset(x: 150, y: -40)
-                            .sheet(isPresented: self.$showConfig){
-                                SettingsView()
+                            
+                            HStack{
+                                
+                                // Borrar fichero
+                                // TODO: poner el fichero a 0
+                                 Button(action: {
+                                    self.fileContent = ""
+                                 }, label: {
+                                    if !self.fileContent.isEmpty {
+                                        Image(systemName: "text.badge.minus")
+                                         .font(.system(size: 22.0))
+                                         .frame(width: 50, height: 50)
+                                         .foregroundColor(.black)
+                                        Text("Deseleccionar fichero").offset(x: -13, y: 2)
+                                    }
+                                     
+                                 })
+                                 .offset(x: -40, y: -45)
+                                 
+                                //Settings
+                                Button(action: {
+                                    self.showConfig.toggle()
+                                }, label: {
+                                    Image(systemName: "gear")
+                                    .font(.system(size: 22.0))
+                                    .frame(width: 50, height: 50)
+                                    .foregroundColor(.black)
+                                    //.offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
+                                }).offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
+                                .sheet(isPresented: self.$showConfig){
+                                    SettingsView()
+                                }
+                                
                             }
                            
                         }.navigationBarTitle(Text("ECG Scanner"))
@@ -106,14 +142,16 @@ struct ContentView: View {
                     
                 }//ZStack
             
-            }//Navigation
+            } //Navigation
        
         }.onAppear(){
             self.login()
-        }//VStack
+        }
+        
+        //VStack
         
     }//body
-        
+    
     func login(){
         
         let parameters = "user=" + user + "&password=" + pwd
@@ -148,6 +186,10 @@ struct ContentView: View {
     
 }
 
+struct Intro_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
 
-
-
+   

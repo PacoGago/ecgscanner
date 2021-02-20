@@ -10,6 +10,8 @@ import SwiftUI
 
 struct FormView: View {
     
+    var fileContent: String
+    
     // Variables del model: Esto se pasara a un modelo Paciente
     // Datos relativos al paciente
     @EnvironmentObject var patient: Patient
@@ -434,13 +436,17 @@ struct FormView: View {
             }){
                 Text("Continuar")
             }
-        )//END FORM
+        ).onAppear(){
+            if !self.fileContent.isEmpty {
+                print("aqui se procesa")
+            }
+        }//END FORM
         
     }
 }
 
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
-        FormView()
+        FormView(fileContent: "")
     }
 }

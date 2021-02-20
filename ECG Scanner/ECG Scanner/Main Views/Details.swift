@@ -1,11 +1,3 @@
-//
-//  Details.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 28/07/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 
@@ -59,13 +51,12 @@ struct DetailsView: View {
             fileName = fileName.trimmingCharacters(in: .whitespaces).lowercased()
             fileName = fileName.folding(options: .diacriticInsensitive, locale: .current)
         }
-        //controlar que haya imagen claro
-        let imageData:NSData = patient.ecg.imageSource.pngData()! as NSData
-        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         
-//        let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
-//        let decodedimage = UIImage(data: dataDecoded)
-//        print(decodedimage as Any)
+        var strBase64 = ""
+        if patient.ecg.imageSource.hasContent {
+            let imageData:NSData = patient.ecg.imageSource.pngData()! as NSData
+            strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        }
         
         let store = XML(name: "ecg")
             .addAttribute(name: "xml:id", value: "test")
@@ -94,7 +85,8 @@ struct DetailsView: View {
                 XML(name: "ecg", attributes: [
                     "origen": patient.ecg.origin,
                     "equipamiento": patient.ecg.ecgModel,
-                    "presion-sanguinea": patient.ecg.bodypressdiastolic,
+                    "presion-sanguinea-sistolica": patient.ecg.bodypresssystolic,
+                    "presion-sanguinea-diastolica": patient.ecg.bodypressdiastolic,
                     "temperatura": patient.ecg.bodytemp,
                     "glucosa": patient.ecg.glucose,
                     "motivo": patient.ecg.reason,
@@ -125,5 +117,11 @@ struct DetailsView: View {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         DetailsView()
+    }
+}
+
+public extension UIImage {
+    var hasContent: Bool {
+        return cgImage != nil || ciImage != nil
     }
 }

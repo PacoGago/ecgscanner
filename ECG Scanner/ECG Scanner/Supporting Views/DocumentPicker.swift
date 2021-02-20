@@ -1,11 +1,3 @@
-//
-//  DocumentPicker.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 10/02/2021.
-//  Copyright © 2021 Francisco Gago. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 import MobileCoreServices
@@ -33,8 +25,8 @@ struct DocumentPicker: UIViewControllerRepresentable{
     
         var parent: DocumentPicker
     
-       init(_ parent: DocumentPicker) {
-            self.parent = parent
+        init(_ parent: DocumentPicker) {
+        self.parent = parent
         }
     
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]){
