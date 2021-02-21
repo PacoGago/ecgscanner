@@ -3,7 +3,6 @@ import MobileCoreServices
 
 struct ContentView: View {
     
-    @EnvironmentObject var patient: Patient
     @State private var showConfig = false
     @State private var showDocPicker = false
     @State private var user: String = UserDefaults.standard.string(forKey: "user") ?? ""

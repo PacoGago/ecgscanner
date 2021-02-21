@@ -1,11 +1,3 @@
-//
-//  Form.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 05/05/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 struct FormView: View {
@@ -437,9 +429,114 @@ struct FormView: View {
                 Text("Continuar")
             }
         ).onAppear(){
+            
             if !self.fileContent.isEmpty {
-                print("aqui se procesa")
+                
+                let xml = XML(data: self.fileContent.data(using: .utf8)!)
+                
+                if let imageBase64 = xml?.image.$value.stringValue {
+                    let dataDecoded : Data = Data(base64Encoded: imageBase64, options: .ignoreUnknownCharacters)!
+                    let decodedimage = UIImage(data: dataDecoded)
+                    self.patient.ecg.imageSource = decodedimage!
+                }
+                
+                if let nombre = xml?.paciente.$nombre.stringValue {
+                    self.patient.name = nombre
+                }
+                
+                if let primerApellido = xml?.paciente.$primerApellido.stringValue {
+                    self.patient.firstSurname = primerApellido
+                }
+                
+                if let segundoApellido = xml?.paciente.$segundoApellido.stringValue {
+                    self.patient.secondSurname = segundoApellido
+                }
+                
+                if let direccion = xml?.paciente.$direccion.stringValue {
+                    self.patient.address = direccion
+                }
+                
+                if let ciudad = xml?.paciente.$ciudad.stringValue {
+                    self.patient.city = ciudad
+                }
+                
+                if let provincia = xml?.paciente.$provincia.stringValue {
+                    self.patient.province = provincia
+                }
+                
+                if let genero = xml?.paciente.$genero.stringValue {
+                    self.patient.genre = genero
+                }
+                
+                if let edad = xml?.paciente.$edad.stringValue {
+                    self.patient.age = Int(edad)!
+                }
+                
+                if let peso = xml?.paciente.$peso.stringValue {
+                    self.patient.weight = Double(peso)!
+                }
+                
+                if let altura = xml?.paciente.$altura.stringValue {
+                    self.patient.height = Int(altura)!
+                }
+                
+                if let fumador = xml?.paciente.$fumador.stringValue {
+                    self.patient.smoker = Bool(fumador)!
+                }
+                
+                if let alergias = xml?.paciente.$alergias.stringValue {
+                    self.patient.allergy = alergias
+                }
+                
+                if let enfermedadCronica = xml?.paciente.$enfermedadCronica.stringValue {
+                    self.patient.chronic = enfermedadCronica
+                }
+                
+                if let medicacion = xml?.paciente.$medicacion.stringValue {
+                    self.patient.medication = medicacion
+                }
+                
+                if let hospital = xml?.paciente.$hospital.stringValue {
+                    self.patient.hospital = hospital
+                }
+                
+                if let origen = xml?.ecg.$origen.stringValue {
+                    self.patient.ecg.origin = origen
+                }
+                
+                if let equipamiento = xml?.ecg.$equipamiento.stringValue {
+                    self.patient.ecg.ecgModel = equipamiento
+                }
+                
+                if let presionSanguineaSistolica = xml?.ecg.$presionSanguineaSistolica.stringValue {
+                    self.patient.ecg.bodypresssystolic = Double(presionSanguineaSistolica)!
+                }
+                
+                if let presionSanguineaDiastolica = xml?.ecg.$presionSanguineaDiastolica.stringValue {
+                    self.patient.ecg.bodypressdiastolic = Double(presionSanguineaDiastolica)!
+                }
+                
+                if let temperatura = xml?.ecg.$temperatura.stringValue {
+                    self.patient.ecg.bodytemp = Double(temperatura)!
+                }
+                
+                if let glucosa = xml?.ecg.$glucosa.stringValue {
+                    self.patient.ecg.glucose = Double(glucosa)!
+                }
+                
+                if let motivo = xml?.ecg.$motivo.stringValue {
+                    self.patient.ecg.reason = motivo
+                }
+                
+                if let tipo = xml?.ecg.$tipo.stringValue {
+                    self.patient.ecg.ecgType = tipo
+                }
+                
+                if let tasaCardiaca = xml?.ecg.$tasaCardiaca.stringValue {
+                    self.patient.ecg.heartRate = Double(tasaCardiaca)!
+                }
             }
+            
         }//END FORM
         
     }

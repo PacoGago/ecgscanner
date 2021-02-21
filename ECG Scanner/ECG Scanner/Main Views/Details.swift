@@ -67,8 +67,8 @@ struct DetailsView: View {
                 ]),
                 XML(name: "paciente", attributes: [
                     "nombre": patient.name,
-                    "primer-apellido": patient.firstSurname,
-                    "segundo-apellido": patient.secondSurname,
+                    "primerApellido": patient.firstSurname,
+                    "segundoApellido": patient.secondSurname,
                     "direccion": patient.address,
                     "ciudad": patient.city,
                     "provincia": patient.province,
@@ -78,20 +78,21 @@ struct DetailsView: View {
                     "altura": patient.height,
                     "fumador": patient.smoker,
                     "alergias": patient.allergy,
-                    "enfermedad-cronica": patient.chronic,
-                    "medicacion": patient.hospital
+                    "enfermedadCronica": patient.chronic,
+                    "medicacion": patient.medication,
+                    "hospital": patient.hospital
                     
                 ]),
                 XML(name: "ecg", attributes: [
                     "origen": patient.ecg.origin,
                     "equipamiento": patient.ecg.ecgModel,
-                    "presion-sanguinea-sistolica": patient.ecg.bodypresssystolic,
-                    "presion-sanguinea-diastolica": patient.ecg.bodypressdiastolic,
+                    "presionSanguineaSistolica": patient.ecg.bodypresssystolic,
+                    "presionSanguineaDiastolica": patient.ecg.bodypressdiastolic,
                     "temperatura": patient.ecg.bodytemp,
                     "glucosa": patient.ecg.glucose,
                     "motivo": patient.ecg.reason,
                     "tipo": patient.ecg.ecgType,
-                    "tasa-cardiaca": patient.ecg.heartRate
+                    "tasaCardiaca": patient.ecg.heartRate
                 ])
             ])
         
