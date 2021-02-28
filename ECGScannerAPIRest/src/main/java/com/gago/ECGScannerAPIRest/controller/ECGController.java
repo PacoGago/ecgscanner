@@ -26,11 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.http.MediaType;
 
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
+import com.gago.ECGScannerAPIRest.dto.PatientDTO;
 import com.gago.ECGScannerAPIRest.exception.FileStorageException;
 import com.gago.ECGScannerAPIRest.exception.NoECGException;
+import com.gago.ECGScannerAPIRest.model.Patient;
 import com.gago.ECGScannerAPIRest.service.ECGService;
 import com.mathworks.engine.EngineException;
-
 
 @RestController
 @RequestMapping(value = "/ecg")
@@ -111,12 +112,33 @@ public class ECGController {
 	}
 	
 	@RequestMapping(value = "/upload", method = { RequestMethod.POST })
-	public ECGDTO handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws FileStorageException, EngineException, IllegalArgumentException, IllegalStateException, RejectedExecutionException, InterruptedException, ExecutionException {
-
-		//storageService.store(file);
-		//redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-
-		return ecgservice.digitalizeImage(file);
+	public ECGDTO handleFileUpload(@RequestParam("file") MultipartFile file, 
+			RedirectAttributes redirectAttributes,
+			@RequestParam(name = "genre") String genre,
+			@RequestParam(name = "age") Integer age,
+			@RequestParam(name = "weight") Double weight,
+			@RequestParam(name = "height") Double height,
+			@RequestParam(name = "bmi") Double bmi,
+			@RequestParam(name = "smoker") Boolean smoker,
+			@RequestParam(name = "allergy") String allergy,
+			@RequestParam(name = "chronic") String chronic,
+			@RequestParam(name = "medication") String medication,
+			@RequestParam(name = "hospital") String hospital,
+			@RequestParam(name = "hospitalProvidence") String hospitalProvidence,
+			@RequestParam(name = "origin") String origin,
+			@RequestParam(name = "ecgModel") String ecgModel,
+			@RequestParam(name = "bodypresssystolic") Double bodypresssystolic,
+			@RequestParam(name = "bodypressdiastolic") Double bodypressdiastolic,
+			@RequestParam(name = "bodytemp") Double bodytemp,
+			@RequestParam(name = "glucose") Double glucose,
+			@RequestParam(name = "reason") String reason,
+			@RequestParam(name = "ecgType") String ecgType,
+			@RequestParam(name = "heartRate") Double heartRate) throws FileStorageException, EngineException, IllegalArgumentException, IllegalStateException, RejectedExecutionException, InterruptedException, ExecutionException {
+			
+			
+		return ecgservice.digitalizeImage(file, genre, age, weight, height, bmi, smoker, 
+				allergy, chronic, medication, hospital, hospitalProvidence, origin, ecgModel, 
+				bodypresssystolic, bodypressdiastolic, bodytemp, glucose, reason, ecgType, heartRate);
 	}
 	
 	

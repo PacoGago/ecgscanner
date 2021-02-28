@@ -80,8 +80,9 @@ struct DetailsView: View {
                     "alergias": patient.allergy,
                     "enfermedadCronica": patient.chronic,
                     "medicacion": patient.medication,
-                    "hospital": patient.hospital
-                    
+                    "hospital": patient.hospital,
+                    "bmi": patient.bmi,
+                    "hospitalProvidence": patient.hospitalProvidence
                 ]),
                 XML(name: "ecg", attributes: [
                     "origen": patient.ecg.origin,

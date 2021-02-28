@@ -32,6 +32,7 @@ class Patient: ObservableObject{
     @Published var chronic = ""
     @Published var medication = ""
     @Published var hospital = ""
+    @Published var hospitalProvidence = ""
     
     @Published var ecg = ECG()
     

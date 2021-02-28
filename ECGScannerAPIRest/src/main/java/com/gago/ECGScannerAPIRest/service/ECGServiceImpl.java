@@ -29,10 +29,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gago.ECGScannerAPIRest.constants.ConstantsUtils;
 import com.gago.ECGScannerAPIRest.dao.ECGDao;
+import com.gago.ECGScannerAPIRest.dao.PatientDao;
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
+import com.gago.ECGScannerAPIRest.dto.PatientDTO;
 import com.gago.ECGScannerAPIRest.exception.FileStorageException;
 import com.gago.ECGScannerAPIRest.exception.NoECGException;
 import com.gago.ECGScannerAPIRest.model.ECG;
+import com.gago.ECGScannerAPIRest.model.Patient;
 import com.mathworks.engine.EngineException;
 import com.mathworks.engine.MatlabEngine;
 import com.mathworks.engine.MatlabExecutionException;
@@ -54,6 +57,9 @@ public class ECGServiceImpl implements ECGService {
 	
 	@Autowired
 	private ECGDao ecgDao;
+	
+	@Autowired
+	private PatientDao patientDao;
 	
 	@Autowired
 	private DozerBeanMapper dozer;
@@ -85,6 +91,16 @@ public class ECGServiceImpl implements ECGService {
 	}
 	
 	@Override
+	public PatientDTO transform(Patient p) {
+		return dozer.map(p, PatientDTO.class);
+	}
+	
+	@Override
+	public Patient transform(PatientDTO p) {
+		return dozer.map(p, Patient.class);
+	}
+	
+	@Override
 	public ECGDTO create(ECGDTO ecg){
 		
 		final ECG e = transform(ecg);
@@ -92,6 +108,12 @@ public class ECGServiceImpl implements ECGService {
 		final ECGDTO eDTO = transform(ecgDao.save(e));
 		
 		return eDTO;
+	}
+	
+	public PatientDTO create(Patient p) {
+		
+		return transform(patientDao.save(p));
+		
 	}
 	
 	@Override
@@ -137,7 +159,12 @@ public class ECGServiceImpl implements ECGService {
 	}
 	
 	@Override
-	public ECGDTO digitalizeImage(MultipartFile file) throws FileStorageException, IllegalArgumentException, IllegalStateException, InterruptedException, RejectedExecutionException, ExecutionException {
+	public ECGDTO digitalizeImage(MultipartFile file, String genre, Integer age, Double weight, Double height, 
+			Double bmi, Boolean smoker, String allergy, String chronic, String medication, String hospital, 
+			String hospitalProvidence, String origin, String ecgModel, Double bodypresssystolic, 
+			Double bodypressdiastolic, Double bodytemp, Double glucose, String reason, String ecgType, 
+			Double heartRate) throws FileStorageException, IllegalArgumentException, 
+			IllegalStateException, InterruptedException, RejectedExecutionException, ExecutionException {
 		
 		if (!file.isEmpty()) {
 			
@@ -162,10 +189,36 @@ public class ECGServiceImpl implements ECGService {
 	            // Conversion
 	            ArrayList<Double> values = DoubleStream.of(ecgdigi).boxed().collect(Collectors.toCollection(ArrayList::new));
 	            ECGDTO ecgdto = new ECGDTO();
+	            Patient p = new Patient();
+	            
+	            p.setGenre(genre);
+	            p.setAge(age);
+	            p.setWeight(weight);
+	            p.setHeight(height);
+	            p.setBmi(bmi);
+	            p.setSmoker(smoker);
+	            p.setAllergy(allergy);
+	            p.setChronic(chronic);
+	            p.setMedication(medication);
+	            p.setHospital(hospital);
+	            p.setHospitalProvidence(hospitalProvidence);
+	            p.setOrigin(origin);
+	            p.setEcgModel(ecgModel);
+	            p.setBodypresssystolic(bodypresssystolic);
+	            p.setBodypressdiastolic(bodypressdiastolic);
+	            p.setBodytemp(bodytemp);
+	            p.setGlucose(glucose);
+	            p.setReason(reason);
+	            p.setEcgType(ecgType);
+	            p.setHeartRate(heartRate);
 	            ecgdto.setValues(values);
 	            ecgdto.setFile(fileName);
+	            p.setEcg(transform(ecgdto));
 	            
-	            return create(ecgdto);
+	            ECGDTO e = create(ecgdto);
+	            create(p);
+	            
+	            return e;
 	            
 	        } catch (IOException ex) {
 	            throw new FileStorageException();

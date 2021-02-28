@@ -194,14 +194,14 @@ struct FormView: View {
                     }
                     
                     if pickerVisibleAge {
+                        
                         HStack{
                             Spacer()
                             Picker(selection: $selectionAge, label: Text("")) {
                                 ForEach((1...120), id: \.self) {
                                     Text("\($0)").foregroundColor(.secondary)
                                 }
-                            }
-                            .pickerStyle(WheelPickerStyle())
+                            }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleAge.toggle()
                                 self.patient.age = self.selectionAge
@@ -299,7 +299,6 @@ struct FormView: View {
                         }
                     }//End Altura
                     
-                    
                     //BMI
                     HStack{
                         Text("IMC " + self.bmiText).foregroundColor(bmiColor)
@@ -310,7 +309,6 @@ struct FormView: View {
                     
                     
                 }
-                        
                 
                 // DATOS MEDICOS
                 Section(header: ImageTextView(img: Image(systemName: "heart.circle.fill"), txt: Text("Datos médicos"))){
@@ -354,10 +352,11 @@ struct FormView: View {
                             }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleHospitalProvince.toggle()
-                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince].capitalized
+                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince]
                                 self.hospitalNames = HospitalNames(province: self.hospitalProvinces.names[self.selectionHospitalProvince])
                             }.onDisappear{
-                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince].capitalized
+                                self.hospitalProvince = self.hospitalProvinces.names[self.selectionHospitalProvince]
+                                self.patient.hospitalProvidence = self.hospitalProvince
                                 self.hospitalNames = HospitalNames(province: self.hospitalProvinces.names[self.selectionHospitalProvince])
                             }
                             Spacer()
@@ -384,9 +383,9 @@ struct FormView: View {
                             }.pickerStyle(WheelPickerStyle())
                             .onTapGesture {
                                 self.pickerVisibleHospitalName.toggle()
-                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName]
                             }.onDisappear{
-                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName].capitalized
+                                self.patient.hospital = self.hospitalNames.names[self.selectionHospitalName]
                             }
                             Spacer()
                         }
@@ -420,14 +419,7 @@ struct FormView: View {
                 }
                 
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
-         .navigationBarItems(trailing:
-            NavigationLink(destination: DetailsView().onAppear {
-                
-                
-                
-            }){
-                Text("Continuar")
-            }
+         .navigationBarItems(trailing:NavigationLink(destination: DetailsView().onAppear {}){Text("Continuar")}
         ).onAppear(){
             
             if !self.fileContent.isEmpty {
@@ -461,22 +453,34 @@ struct FormView: View {
                 }
                 
                 if let provincia = xml?.paciente.$provincia.stringValue {
+                    self.selectionProvince = ConstantsViews.provinceOptions.firstIndex(of: provincia)!
                     self.patient.province = provincia
                 }
                 
                 if let genero = xml?.paciente.$genero.stringValue {
+                    if !genero.isEmpty{
+                        self.selectionGenre = ConstantsViews.genderOptions.firstIndex(of: genero)!
+                    }
                     self.patient.genre = genero
                 }
                 
                 if let edad = xml?.paciente.$edad.stringValue {
+                    self.selectionAge = Int(edad)!
                     self.patient.age = Int(edad)!
                 }
                 
                 if let peso = xml?.paciente.$peso.stringValue {
+                    self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: Double(peso)!)!
                     self.patient.weight = Double(peso)!
                 }
                 
+                if let bmi = xml?.paciente.$bmi.stringValue{
+                    self.patient.bmi = Double(bmi)!
+                    self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
+                }
+                
                 if let altura = xml?.paciente.$altura.stringValue {
+                    self.selectionHeight = Int(altura)!
                     self.patient.height = Int(altura)!
                 }
                 
@@ -496,7 +500,21 @@ struct FormView: View {
                     self.patient.medication = medicacion
                 }
                 
+                if let hospitalProvidence = xml?.paciente.$hospitalProvidence.stringValue {
+                    
+                    if !hospitalProvidence.isEmpty{
+                        self.selectionHospitalProvince = self.hospitalProvinces.names.firstIndex(of: hospitalProvidence)!
+                        self.hospitalProvince = hospitalProvidence
+                         self.hospitalNames = HospitalNames(province: self.hospitalProvinces.names[self.selectionHospitalProvince])
+                    }
+                    self.patient.hospitalProvidence = hospitalProvidence
+                }
+                
                 if let hospital = xml?.paciente.$hospital.stringValue {
+                    
+                    if !hospital.isEmpty{
+                        self.selectionHospitalName = self.hospitalNames.names.firstIndex(of: hospital)!
+                    }
                     self.patient.hospital = hospital
                 }
                 

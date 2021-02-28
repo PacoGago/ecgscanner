@@ -28,14 +28,21 @@ public class EcgScannerApiRestApplication {
 	@EnableWebSecurity
 	@Configuration
 	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable()
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/user").permitAll()
+				//.antMatchers(HttpMethod.POST, "/user").permitAll()
+				.antMatchers("/user","/v2/api-docs", 
+		        		"/swagger-resources/configuration/ui", 
+		        		"/swagger-resources", 
+		        		"/swagger-resources/configuration/security", 
+		        		"/swagger-ui/**", 
+		        		"/webjars/**").permitAll()
 				.anyRequest().authenticated();
+			
 		}
 	}
 
