@@ -83,6 +83,18 @@ public class PatientController {
 		return patientservice.findEcgById(id);
 	}
 	
+	/**
+	 * 
+	 * Metodo para obtener los pacientes almacenados con los siguientes filtros:
+	 * 
+	 * @param hospital
+	 * @param age
+	 * @param weight
+	 * @param page
+	 * @param size
+	 * @return Listado de pacientes
+	 * @throws NoPatientException
+	 */
 	@RequestMapping(method={RequestMethod.GET})
 	public ResponseEntity<Map<String, Object>> get(@RequestParam(value="hospital",required=false) String hospital,
 								@RequestParam(value="age",required=false) Integer age,
@@ -96,6 +108,7 @@ public class PatientController {
 		patients = pagePatientDTO.getContent();
 		
 		Map<String, Object> response = new HashMap<>();
+		
 		response.put("pacientes", patients);
 		response.put("currentPage", pagePatientDTO.getNumber());
 		response.put("totalItems", pagePatientDTO.getTotalElements());
@@ -103,31 +116,6 @@ public class PatientController {
 				
 		return new ResponseEntity<>(response, HttpStatus.OK);
 		
-		
 	}
-						
-	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
