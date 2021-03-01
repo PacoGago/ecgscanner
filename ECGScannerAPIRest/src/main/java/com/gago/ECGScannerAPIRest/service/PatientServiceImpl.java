@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -104,24 +106,25 @@ public class PatientServiceImpl implements PatientService{
 		
 	}
 
-	@Override
-	public List<PatientDTO> find(String hospital, Pageable pages) throws NoPatientException {
-		
-		List<PatientDTO> patients;
-		
-		if (pages.getPageSize()>10) {
-			patients = transform(patientDao.find(hospital, PageRequest.of(pages.getPageNumber(),10)));
-		}else {
-			patients = transform(patientDao.find(hospital, pages));
-		}
-		
-		
-		if (patients.isEmpty()) {
-			throw new NoPatientException();
-		}else {
-			return patients;
-		}
-		
-	}
+//	@Override
+//	public Page<PatientDTO> find(String hospital, Integer age, Double weight, Pageable pages) throws NoPatientException {
+//		
+//		List<PatientDTO> patients;
+//		
+//		if (pages.getPageSize()>10) {
+//			patients = transform(patientDao.find(hospital, age, weight, PageRequest.of(pages.getPageNumber(),pages.getPageSize())));
+//		}else {
+//			patients = transform(patientDao.find(hospital, age, weight, pages));
+//		}
+//		
+//		if (patients.isEmpty()) {
+//			throw new NoPatientException();
+//		}else {
+//			Page<PatientDTO> pagePatients = new PageImpl<>(patients, pages, patients.size());
+//			
+//			return pagePatients;
+//		}
+//		
+//	}
 
 }
