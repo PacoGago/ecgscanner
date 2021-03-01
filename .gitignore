@@ -88,3 +88,10 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+ECG Scanner/ECG Scanner/opencv2.framework/*
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.properties
+ECGScannerAPIRest/.mvn/wrapper/MavenWrapperDownloader.java
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar
+ECGScannerAPIRest/.mvn/wrapper/maven-wrapper.jar

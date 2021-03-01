@@ -1,0 +1,963 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1906AFFC2519131700F168FF /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906AFFB2519131700F168FF /* Info.swift */; };
+		190E442424C74E2600A0F53A /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442324C74E2600A0F53A /* CameraController.swift */; };
+		190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442524C74EE000A0F53A /* CameraViewController.swift */; };
+		190E442924C7541900A0F53A /* CameraView in Frameworks */ = {isa = PBXBuildFile; productRef = 190E442824C7541900A0F53A /* CameraView */; };
+		190E442B24C7648400A0F53A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E442A24C7648400A0F53A /* ImagePicker.swift */; };
+		19146B0524D082EE00BEE559 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19146B0424D082EE00BEE559 /* Details.swift */; };
+		19146B0824D08AB600BEE559 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 19146B0724D08AB600BEE559 /* SwiftUICharts */; };
+		19146B0A24D0A03D00BEE559 /* ResumePatientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19146B0924D0A03D00BEE559 /* ResumePatientData.swift */; };
+		191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191E994224B6247700B28F22 /* ArrayUtils.swift */; };
+		192757B024B4D70600EAF61F /* HospitalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757AF24B4D70600EAF61F /* HospitalData.swift */; };
+		192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192757B124B4F92F00EAF61F /* IMCUtils.swift */; };
+		192B122125A77D1700B69751 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 192B121E25A77D1700B69751 /* OpenCVWrapper.mm */; };
+		192B122325A77D3600B69751 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 192B122225A77D3600B69751 /* opencv2.framework */; };
+		192C38D32577FF9A00350864 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C38D22577FF9A00350864 /* User.swift */; };
+		1937994E259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937994D259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift */; };
+		19379954259A3F3D00AF29B1 /* GridChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19379953259A3F3D00AF29B1 /* GridChart.swift */; };
+		1940314325D488DE00FCDCF9 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940314225D488DE00FCDCF9 /* DocumentPicker.swift */; };
+		194478C324D87C0B00D43324 /* ImageText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194478C224D87C0B00D43324 /* ImageText.swift */; };
+		19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19492E14256C3D1E00E0CE31 /* CropImageView.swift */; };
+		194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194D8E7B24C5FAC2004A2FEC /* Patient.swift */; };
+		1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */; };
+		1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */; };
+		1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */; };
+		1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B1012461F0FF0038E9F9 /* Intro.swift */; };
+		1957B1042461F1010038E9F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1957B1032461F1010038E9F9 /* Assets.xcassets */; };
+		1957B1072461F1010038E9F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1957B1062461F1010038E9F9 /* Preview Assets.xcassets */; };
+		1957B10A2461F1010038E9F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1957B1082461F1010038E9F9 /* LaunchScreen.storyboard */; };
+		1957B1152461F1010038E9F9 /* ECG_ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B1142461F1010038E9F9 /* ECG_ScannerTests.swift */; };
+		1957B1202461F1010038E9F9 /* ECG_ScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B11F2461F1010038E9F9 /* ECG_ScannerUITests.swift */; };
+		1957B1302461F3CC0038E9F9 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B12F2461F3CC0038E9F9 /* Form.swift */; };
+		195B2E9B24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */; };
+		196AC1E42469DBEA001809F9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AC1E32469DBEA001809F9 /* Card.swift */; };
+		196AC1E62469DC8C001809F9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196AC1E52469DC8C001809F9 /* CardView.swift */; };
+		19711F3E255C770E000423DC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19711F3D255C770E000423DC /* LoadingView.swift */; };
+		19722B432471A7C3004EFD6F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19722B422471A7C3004EFD6F /* Settings.swift */; };
+		19722B452471A7FF004EFD6F /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19722B442471A7FF004EFD6F /* Open.swift */; };
+		1986BFA82463421A006313C4 /* RotatedBadgeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA42463421A006313C4 /* RotatedBadgeSymbol.swift */; };
+		1986BFA92463421A006313C4 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA52463421A006313C4 /* Badge.swift */; };
+		1986BFAA2463421A006313C4 /* BadgeBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA62463421A006313C4 /* BadgeBackground.swift */; };
+		1986BFAB2463421A006313C4 /* BadgeSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFA72463421A006313C4 /* BadgeSymbol.swift */; };
+		1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAC24634278006313C4 /* HexagonParameters.swift */; };
+		1986BFB024634575006313C4 /* animationcurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986BFAF24634575006313C4 /* animationcurves.swift */; };
+		198921DD24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */; };
+		198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */; };
+		198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 198921E324B3950A00EF3A0D /* SwiftyJSON */; };
+		198C5E1325A73A3A0015035B /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C5E1225A73A3A0015035B /* PointView.swift */; };
+		199AD38424F56BE5008D55FE /* ECGData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AD38324F56BE5008D55FE /* ECGData.swift */; };
+		19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A92EBA2522544C00C2471F /* TestDataView.swift */; };
+		19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B010F9247C56B60045470A /* ConstantsViews.swift */; };
+		19C0F902259135E70090743C /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C0F901259135E70090743C /* JWT.swift */; };
+		19C5E28D25C0C6450090803F /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C5E28C25C0C6450090803F /* XML.swift */; };
+		19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */; };
+		19E31E9924FD566D008AD45A /* ECG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9824FD566D008AD45A /* ECG.swift */; };
+		19E31E9C24FD6F2F008AD45A /* ECGEquipementModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */; };
+		19E3A4C1253781790067DF4A /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3A4C0253781790067DF4A /* LineView.swift */; };
+		19E3A4C3253782570067DF4A /* ECGChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3A4C2253782570067DF4A /* ECGChart.swift */; };
+		19FECA9F2592950F00EA6F00 /* api_preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19FECA9E2592950F00EA6F00 /* api_preferences.plist */; };
+		19FECAA1259296DC00EA6F00 /* APIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FECAA0259296DC00EA6F00 /* APIUtils.swift */; };
+		19FECAA3259298C500EA6F00 /* APIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FECAA2259298C500EA6F00 /* APIPreferences.swift */; };
+		19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 19FFA208248055CE00E4BA02 /* KeyboardObserving */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1957B1112461F1010038E9F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1957B0EF2461F0FF0038E9F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1957B0F62461F0FF0038E9F9;
+			remoteInfo = "ECG Scanner";
+		};
+		1957B11C2461F1010038E9F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1957B0EF2461F0FF0038E9F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1957B0F62461F0FF0038E9F9;
+			remoteInfo = "ECG Scanner";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1906AFFB2519131700F168FF /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		190E442324C74E2600A0F53A /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		190E442524C74EE000A0F53A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		190E442A24C7648400A0F53A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		19146B0424D082EE00BEE559 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		19146B0924D0A03D00BEE559 /* ResumePatientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumePatientData.swift; sourceTree = "<group>"; };
+		191E994224B6247700B28F22 /* ArrayUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtils.swift; sourceTree = "<group>"; };
+		192757AF24B4D70600EAF61F /* HospitalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalData.swift; sourceTree = "<group>"; };
+		192757B124B4F92F00EAF61F /* IMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCUtils.swift; sourceTree = "<group>"; };
+		192B121E25A77D1700B69751 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		192B121F25A77D1700B69751 /* ECG Scanner-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECG Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
+		192B122025A77D1700B69751 /* OpenCVWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenCVWrapper.hpp; sourceTree = "<group>"; };
+		192B122225A77D3600B69751 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "ECG Scanner/opencv2.framework"; sourceTree = "<group>"; };
+		192C38D22577FF9A00350864 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1937994D259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebasUnitariasAPIUtils.swift; sourceTree = "<group>"; };
+		19379953259A3F3D00AF29B1 /* GridChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridChart.swift; sourceTree = "<group>"; };
+		1940314225D488DE00FCDCF9 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		194478C224D87C0B00D43324 /* ImageText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageText.swift; sourceTree = "<group>"; };
+		19492E14256C3D1E00E0CE31 /* CropImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageView.swift; sourceTree = "<group>"; };
+		194D8E7B24C5FAC2004A2FEC /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1957B0FF2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ECG_Scanner.xcdatamodel; sourceTree = "<group>"; };
+		1957B1012461F0FF0038E9F9 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
+		1957B1032461F1010038E9F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/gago/Dropbox/Proyecto/Dev/repo/ecgscanner/ECG Scanner/ECG Scanner/Assets.xcassets"; sourceTree = "<absolute>"; };
+		1957B1062461F1010038E9F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1957B1092461F1010038E9F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1957B10B2461F1010038E9F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1957B1102461F1010038E9F9 /* ECG ScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ECG ScannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1957B1142461F1010038E9F9 /* ECG_ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ScannerTests.swift; sourceTree = "<group>"; };
+		1957B1162461F1010038E9F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1957B11B2461F1010038E9F9 /* ECG ScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ECG ScannerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1957B11F2461F1010038E9F9 /* ECG_ScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ScannerUITests.swift; sourceTree = "<group>"; };
+		1957B1212461F1010038E9F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1957B12F2461F3CC0038E9F9 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PruebasUnitariasIMCUtils.swift; sourceTree = "<group>"; };
+		196AC1E32469DBEA001809F9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		196AC1E52469DC8C001809F9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		19711F3D255C770E000423DC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		19722B422471A7C3004EFD6F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		19722B442471A7FF004EFD6F /* Open.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open.swift; sourceTree = "<group>"; };
+		1986BFA42463421A006313C4 /* RotatedBadgeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatedBadgeSymbol.swift; sourceTree = "<group>"; };
+		1986BFA52463421A006313C4 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		1986BFA62463421A006313C4 /* BadgeBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeBackground.swift; sourceTree = "<group>"; };
+		1986BFA72463421A006313C4 /* BadgeSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeSymbol.swift; sourceTree = "<group>"; };
+		1986BFAC24634278006313C4 /* HexagonParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
+		1986BFAF24634575006313C4 /* animationcurves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = animationcurves.swift; sourceTree = "<group>"; };
+		198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnSwipe.swift; sourceTree = "<group>"; };
+		198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dismissKeyboardOnTap.swift; sourceTree = "<group>"; };
+		198C5E1225A73A3A0015035B /* PointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointView.swift; sourceTree = "<group>"; };
+		199AD38324F56BE5008D55FE /* ECGData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGData.swift; sourceTree = "<group>"; };
+		19A92EBA2522544C00C2471F /* TestDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataView.swift; sourceTree = "<group>"; };
+		19B010F9247C56B60045470A /* ConstantsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsViews.swift; sourceTree = "<group>"; };
+		19C0F901259135E70090743C /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		19C5E28C25C0C6450090803F /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
+		19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsUtils.swift; sourceTree = "<group>"; };
+		19E31E9824FD566D008AD45A /* ECG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG.swift; sourceTree = "<group>"; };
+		19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGEquipementModal.swift; sourceTree = "<group>"; };
+		19E3A4C0253781790067DF4A /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		19E3A4C2253782570067DF4A /* ECGChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGChart.swift; sourceTree = "<group>"; };
+		19FECA9E2592950F00EA6F00 /* api_preferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = api_preferences.plist; sourceTree = "<group>"; };
+		19FECAA0259296DC00EA6F00 /* APIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUtils.swift; sourceTree = "<group>"; };
+		19FECAA2259298C500EA6F00 /* APIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPreferences.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1957B0F42461F0FF0038E9F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				198921E424B3950A00EF3A0D /* SwiftyJSON in Frameworks */,
+				19146B0824D08AB600BEE559 /* SwiftUICharts in Frameworks */,
+				19FFA209248055CE00E4BA02 /* KeyboardObserving in Frameworks */,
+				192B122325A77D3600B69751 /* opencv2.framework in Frameworks */,
+				190E442924C7541900A0F53A /* CameraView in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B10D2461F1010038E9F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B1182461F1010038E9F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1957B0EE2461F0FF0038E9F9 = {
+			isa = PBXGroup;
+			children = (
+				1957B0F92461F0FF0038E9F9 /* ECG Scanner */,
+				1957B1132461F1010038E9F9 /* ECG ScannerTests */,
+				1957B11E2461F1010038E9F9 /* ECG ScannerUITests */,
+				1957B0F82461F0FF0038E9F9 /* Products */,
+				19CD794A24F430A100CBC8E7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1957B0F82461F0FF0038E9F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */,
+				1957B1102461F1010038E9F9 /* ECG ScannerTests.xctest */,
+				1957B11B2461F1010038E9F9 /* ECG ScannerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1957B0F92461F0FF0038E9F9 /* ECG Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				195824C625A77C9C00EFFF6E /* opencv */,
+				19E31E9A24FD6F08008AD45A /* Modals */,
+				19B010F8247C56950045470A /* Utils */,
+				1986BFAE24634289006313C4 /* Models */,
+				1957B12E2461F15E0038E9F9 /* Main Views */,
+				1957B12D2461F1420038E9F9 /* Supporting Views */,
+				1957B0FA2461F0FF0038E9F9 /* AppDelegate.swift */,
+				1957B0FC2461F0FF0038E9F9 /* SceneDelegate.swift */,
+				1957B1032461F1010038E9F9 /* Assets.xcassets */,
+				1957B1082461F1010038E9F9 /* LaunchScreen.storyboard */,
+				1957B10B2461F1010038E9F9 /* Info.plist */,
+				19FECA9E2592950F00EA6F00 /* api_preferences.plist */,
+				1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */,
+				1957B1052461F1010038E9F9 /* Preview Content */,
+			);
+			path = "ECG Scanner";
+			sourceTree = "<group>";
+		};
+		1957B1052461F1010038E9F9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1957B1062461F1010038E9F9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1957B1132461F1010038E9F9 /* ECG ScannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				195B2E9A24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift */,
+				1957B1142461F1010038E9F9 /* ECG_ScannerTests.swift */,
+				1957B1162461F1010038E9F9 /* Info.plist */,
+				1937994D259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift */,
+			);
+			path = "ECG ScannerTests";
+			sourceTree = "<group>";
+		};
+		1957B11E2461F1010038E9F9 /* ECG ScannerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1957B11F2461F1010038E9F9 /* ECG_ScannerUITests.swift */,
+				1957B1212461F1010038E9F9 /* Info.plist */,
+			);
+			path = "ECG ScannerUITests";
+			sourceTree = "<group>";
+		};
+		1957B12D2461F1420038E9F9 /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				19492E14256C3D1E00E0CE31 /* CropImageView.swift */,
+				1986BFAF24634575006313C4 /* animationcurves.swift */,
+				19E3A4C0253781790067DF4A /* LineView.swift */,
+				1986BFAC24634278006313C4 /* HexagonParameters.swift */,
+				1986BFA52463421A006313C4 /* Badge.swift */,
+				1986BFA62463421A006313C4 /* BadgeBackground.swift */,
+				1986BFA72463421A006313C4 /* BadgeSymbol.swift */,
+				1986BFA42463421A006313C4 /* RotatedBadgeSymbol.swift */,
+				196AC1E52469DC8C001809F9 /* CardView.swift */,
+				190E442324C74E2600A0F53A /* CameraController.swift */,
+				190E442524C74EE000A0F53A /* CameraViewController.swift */,
+				190E442A24C7648400A0F53A /* ImagePicker.swift */,
+				194478C224D87C0B00D43324 /* ImageText.swift */,
+				19711F3D255C770E000423DC /* LoadingView.swift */,
+				19379953259A3F3D00AF29B1 /* GridChart.swift */,
+				198C5E1225A73A3A0015035B /* PointView.swift */,
+				1940314225D488DE00FCDCF9 /* DocumentPicker.swift */,
+			);
+			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		1957B12E2461F15E0038E9F9 /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				1957B1012461F0FF0038E9F9 /* Intro.swift */,
+				1957B12F2461F3CC0038E9F9 /* Form.swift */,
+				19722B422471A7C3004EFD6F /* Settings.swift */,
+				19722B442471A7FF004EFD6F /* Open.swift */,
+				19146B0424D082EE00BEE559 /* Details.swift */,
+				19146B0924D0A03D00BEE559 /* ResumePatientData.swift */,
+				199AD38324F56BE5008D55FE /* ECGData.swift */,
+				19A92EBA2522544C00C2471F /* TestDataView.swift */,
+				19E3A4C2253782570067DF4A /* ECGChart.swift */,
+			);
+			path = "Main Views";
+			sourceTree = "<group>";
+		};
+		195824C625A77C9C00EFFF6E /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+				192B121F25A77D1700B69751 /* ECG Scanner-Bridging-Header.h */,
+				192B122025A77D1700B69751 /* OpenCVWrapper.hpp */,
+				192B121E25A77D1700B69751 /* OpenCVWrapper.mm */,
+			);
+			path = opencv;
+			sourceTree = "<group>";
+		};
+		1986BFAE24634289006313C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				196AC1E32469DBEA001809F9 /* Card.swift */,
+				194D8E7B24C5FAC2004A2FEC /* Patient.swift */,
+				19E31E9824FD566D008AD45A /* ECG.swift */,
+				1906AFFB2519131700F168FF /* Info.swift */,
+				192C38D22577FF9A00350864 /* User.swift */,
+				19C0F901259135E70090743C /* JWT.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		19B010F8247C56950045470A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				19C5E28C25C0C6450090803F /* XML.swift */,
+				198921DE24B3825400EF3A0D /* dismissKeyboardOnTap.swift */,
+				198921DC24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift */,
+				19B010F9247C56B60045470A /* ConstantsViews.swift */,
+				192757AF24B4D70600EAF61F /* HospitalData.swift */,
+				192757B124B4F92F00EAF61F /* IMCUtils.swift */,
+				191E994224B6247700B28F22 /* ArrayUtils.swift */,
+				19DCC82D24BF6EF900CABE04 /* ConstantsUtils.swift */,
+				19FECAA0259296DC00EA6F00 /* APIUtils.swift */,
+				19FECAA2259298C500EA6F00 /* APIPreferences.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		19CD794A24F430A100CBC8E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				192B122225A77D3600B69751 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19E31E9A24FD6F08008AD45A /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				19E31E9B24FD6F2F008AD45A /* ECGEquipementModal.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1957B0F62461F0FF0038E9F9 /* ECG Scanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1957B1242461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG Scanner" */;
+			buildPhases = (
+				1957B0F32461F0FF0038E9F9 /* Sources */,
+				1957B0F42461F0FF0038E9F9 /* Frameworks */,
+				1957B0F52461F0FF0038E9F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ECG Scanner";
+			packageProductDependencies = (
+				19FFA208248055CE00E4BA02 /* KeyboardObserving */,
+				198921E324B3950A00EF3A0D /* SwiftyJSON */,
+				190E442824C7541900A0F53A /* CameraView */,
+				19146B0724D08AB600BEE559 /* SwiftUICharts */,
+			);
+			productName = "ECG Scanner";
+			productReference = 1957B0F72461F0FF0038E9F9 /* ECG Scanner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1957B10F2461F1010038E9F9 /* ECG ScannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1957B1272461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG ScannerTests" */;
+			buildPhases = (
+				1957B10C2461F1010038E9F9 /* Sources */,
+				1957B10D2461F1010038E9F9 /* Frameworks */,
+				1957B10E2461F1010038E9F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1957B1122461F1010038E9F9 /* PBXTargetDependency */,
+			);
+			name = "ECG ScannerTests";
+			productName = "ECG ScannerTests";
+			productReference = 1957B1102461F1010038E9F9 /* ECG ScannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1957B11A2461F1010038E9F9 /* ECG ScannerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1957B12A2461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG ScannerUITests" */;
+			buildPhases = (
+				1957B1172461F1010038E9F9 /* Sources */,
+				1957B1182461F1010038E9F9 /* Frameworks */,
+				1957B1192461F1010038E9F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1957B11D2461F1010038E9F9 /* PBXTargetDependency */,
+			);
+			name = "ECG ScannerUITests";
+			productName = "ECG ScannerUITests";
+			productReference = 1957B11B2461F1010038E9F9 /* ECG ScannerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1957B0EF2461F0FF0038E9F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Francisco Gago";
+				TargetAttributes = {
+					1957B0F62461F0FF0038E9F9 = {
+						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1150;
+					};
+					1957B10F2461F1010038E9F9 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 1957B0F62461F0FF0038E9F9;
+					};
+					1957B11A2461F1010038E9F9 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 1957B0F62461F0FF0038E9F9;
+					};
+				};
+			};
+			buildConfigurationList = 1957B0F22461F0FF0038E9F9 /* Build configuration list for PBXProject "ECG Scanner" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1957B0EE2461F0FF0038E9F9;
+			packageReferences = (
+				19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+				198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */,
+				19146B0624D08AB600BEE559 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
+			productRefGroup = 1957B0F82461F0FF0038E9F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1957B0F62461F0FF0038E9F9 /* ECG Scanner */,
+				1957B10F2461F1010038E9F9 /* ECG ScannerTests */,
+				1957B11A2461F1010038E9F9 /* ECG ScannerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1957B0F52461F0FF0038E9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1957B10A2461F1010038E9F9 /* LaunchScreen.storyboard in Resources */,
+				1957B1072461F1010038E9F9 /* Preview Assets.xcassets in Resources */,
+				19FECA9F2592950F00EA6F00 /* api_preferences.plist in Resources */,
+				1957B1042461F1010038E9F9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B10E2461F1010038E9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B1192461F1010038E9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1957B0F32461F0FF0038E9F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19C0F902259135E70090743C /* JWT.swift in Sources */,
+				196AC1E62469DC8C001809F9 /* CardView.swift in Sources */,
+				1986BFAD24634278006313C4 /* HexagonParameters.swift in Sources */,
+				190E442B24C7648400A0F53A /* ImagePicker.swift in Sources */,
+				1986BFA92463421A006313C4 /* Badge.swift in Sources */,
+				19E31E9C24FD6F2F008AD45A /* ECGEquipementModal.swift in Sources */,
+				190E442424C74E2600A0F53A /* CameraController.swift in Sources */,
+				19146B0524D082EE00BEE559 /* Details.swift in Sources */,
+				198921DD24B3816B00EF3A0D /* dismissKeyboardOnSwipe.swift in Sources */,
+				1957B0FB2461F0FF0038E9F9 /* AppDelegate.swift in Sources */,
+				19722B432471A7C3004EFD6F /* Settings.swift in Sources */,
+				196AC1E42469DBEA001809F9 /* Card.swift in Sources */,
+				19FECAA1259296DC00EA6F00 /* APIUtils.swift in Sources */,
+				1986BFAB2463421A006313C4 /* BadgeSymbol.swift in Sources */,
+				1957B0FD2461F0FF0038E9F9 /* SceneDelegate.swift in Sources */,
+				1986BFAA2463421A006313C4 /* BadgeBackground.swift in Sources */,
+				1957B1302461F3CC0038E9F9 /* Form.swift in Sources */,
+				19492E15256C3D1E00E0CE31 /* CropImageView.swift in Sources */,
+				19B010FA247C56B70045470A /* ConstantsViews.swift in Sources */,
+				198921DF24B3825400EF3A0D /* dismissKeyboardOnTap.swift in Sources */,
+				1940314325D488DE00FCDCF9 /* DocumentPicker.swift in Sources */,
+				192B122125A77D1700B69751 /* OpenCVWrapper.mm in Sources */,
+				19711F3E255C770E000423DC /* LoadingView.swift in Sources */,
+				1986BFB024634575006313C4 /* animationcurves.swift in Sources */,
+				19E3A4C3253782570067DF4A /* ECGChart.swift in Sources */,
+				1957B1022461F0FF0038E9F9 /* Intro.swift in Sources */,
+				19146B0A24D0A03D00BEE559 /* ResumePatientData.swift in Sources */,
+				19E31E9924FD566D008AD45A /* ECG.swift in Sources */,
+				19379954259A3F3D00AF29B1 /* GridChart.swift in Sources */,
+				19A92EBB2522544C00C2471F /* TestDataView.swift in Sources */,
+				190E442624C74EE000A0F53A /* CameraViewController.swift in Sources */,
+				198C5E1325A73A3A0015035B /* PointView.swift in Sources */,
+				1957B1002461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld in Sources */,
+				192C38D32577FF9A00350864 /* User.swift in Sources */,
+				191E994324B6247700B28F22 /* ArrayUtils.swift in Sources */,
+				1986BFA82463421A006313C4 /* RotatedBadgeSymbol.swift in Sources */,
+				192757B024B4D70600EAF61F /* HospitalData.swift in Sources */,
+				19722B452471A7FF004EFD6F /* Open.swift in Sources */,
+				199AD38424F56BE5008D55FE /* ECGData.swift in Sources */,
+				192757B224B4F92F00EAF61F /* IMCUtils.swift in Sources */,
+				19FECAA3259298C500EA6F00 /* APIPreferences.swift in Sources */,
+				194478C324D87C0B00D43324 /* ImageText.swift in Sources */,
+				19C5E28D25C0C6450090803F /* XML.swift in Sources */,
+				19E3A4C1253781790067DF4A /* LineView.swift in Sources */,
+				19DCC82E24BF6EF900CABE04 /* ConstantsUtils.swift in Sources */,
+				194D8E7C24C5FAC2004A2FEC /* Patient.swift in Sources */,
+				1906AFFC2519131700F168FF /* Info.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B10C2461F1010038E9F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1957B1152461F1010038E9F9 /* ECG_ScannerTests.swift in Sources */,
+				195B2E9B24BE21A500A93E79 /* PruebasUnitariasIMCUtils.swift in Sources */,
+				1937994E259A07D100AF29B1 /* PruebasUnitariasAPIUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1957B1172461F1010038E9F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1957B1202461F1010038E9F9 /* ECG_ScannerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1957B1122461F1010038E9F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1957B0F62461F0FF0038E9F9 /* ECG Scanner */;
+			targetProxy = 1957B1112461F1010038E9F9 /* PBXContainerItemProxy */;
+		};
+		1957B11D2461F1010038E9F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1957B0F62461F0FF0038E9F9 /* ECG Scanner */;
+			targetProxy = 1957B11C2461F1010038E9F9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1957B1082461F1010038E9F9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1957B1092461F1010038E9F9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1957B1222461F1010038E9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1957B1232461F1010038E9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1957B1252461F1010038E9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+				);
+				INFOPLIST_FILE = "ECG Scanner/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-Scanner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ECG Scanner/OpenCV/ECG Scanner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1957B1262461F1010038E9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"ECG Scanner/Preview Content\"";
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+					"$(PROJECT_DIR)/ECG\\ Scanner",
+				);
+				INFOPLIST_FILE = "ECG Scanner/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-Scanner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ECG Scanner/OpenCV/ECG Scanner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		1957B1282461F1010038E9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				INFOPLIST_FILE = "ECG ScannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-ScannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ECG Scanner.app/ECG Scanner";
+			};
+			name = Debug;
+		};
+		1957B1292461F1010038E9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				INFOPLIST_FILE = "ECG ScannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-ScannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ECG Scanner.app/ECG Scanner";
+			};
+			name = Release;
+		};
+		1957B12B2461F1010038E9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				INFOPLIST_FILE = "ECG ScannerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-ScannerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ECG Scanner";
+			};
+			name = Debug;
+		};
+		1957B12C2461F1010038E9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4P6N55ZT28;
+				INFOPLIST_FILE = "ECG ScannerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gago.ECG-ScannerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ECG Scanner";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1957B0F22461F0FF0038E9F9 /* Build configuration list for PBXProject "ECG Scanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1957B1222461F1010038E9F9 /* Debug */,
+				1957B1232461F1010038E9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1957B1242461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG Scanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1957B1252461F1010038E9F9 /* Debug */,
+				1957B1262461F1010038E9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1957B1272461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG ScannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1957B1282461F1010038E9F9 /* Debug */,
+				1957B1292461F1010038E9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1957B12A2461F1010038E9F9 /* Build configuration list for PBXNativeTarget "ECG ScannerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1957B12B2461F1010038E9F9 /* Debug */,
+				1957B12C2461F1010038E9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/brettfazio/CameraView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+		19146B0624D08AB600BEE559 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.3;
+			};
+		};
+		198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		190E442824C7541900A0F53A /* CameraView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 190E442724C7541900A0F53A /* XCRemoteSwiftPackageReference "CameraView" */;
+			productName = CameraView;
+		};
+		19146B0724D08AB600BEE559 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19146B0624D08AB600BEE559 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+		198921E324B3950A00EF3A0D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 198921E224B3950A00EF3A0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		19FFA208248055CE00E4BA02 /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19FFA207248055CE00E4BA02 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		1957B0FE2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1957B0FF2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodel */,
+			);
+			currentVersion = 1957B0FF2461F0FF0038E9F9 /* ECG_Scanner.xcdatamodel */;
+			path = ECG_Scanner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1957B0EF2461F0FF0038E9F9 /* Project object */;
+}

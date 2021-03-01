@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CameraView",
+        "repositoryURL": "https://github.com/brettfazio/CameraView",
+        "state": {
+          "branch": null,
+          "revision": "bb528e129ac23f2888dee51a309bbd4b10374673",
+          "version": "0.0.1"
+        }
+      },
+      {
+        "package": "SwiftUICharts",
+        "repositoryURL": "https://github.com/AppPear/ChartView",
+        "state": {
+          "branch": null,
+          "revision": "c6610f567975469aaa2a8d6eb225c7162e6d0736",
+          "version": "1.5.3"
+        }
+      },
+      {
+        "package": "KeyboardObserving",
+        "repositoryURL": "https://github.com/nickffox/KeyboardObserving",
+        "state": {
+          "branch": "master",
+          "revision": "df105a7c43a93b06492ee5832037e20c8f472b46",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "5.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
