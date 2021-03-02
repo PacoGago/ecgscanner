@@ -2,9 +2,6 @@ package com.gago.ECGScannerAPIRest.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
 import com.gago.ECGScannerAPIRest.dto.PatientDTO;
 import com.gago.ECGScannerAPIRest.exception.NoECGException;
@@ -22,8 +19,5 @@ public interface PatientService {
 	List<PatientDTO> transform(List<Patient> patients);
 	PatientDTO findById(Integer id)  throws NoPatientException;
 	ECGDTO findEcgById(Integer id) throws NoPatientException, NoECGException;
-//	Page<PatientDTO> find(String hospital, Integer age, Double weight, Pageable pages) throws NoPatientException;
-	
-	
 
 }

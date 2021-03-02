@@ -7,10 +7,6 @@ import java.util.Optional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gago.ECGScannerAPIRest.dao.PatientDao;
@@ -105,26 +101,5 @@ public class PatientServiceImpl implements PatientService{
 		}
 		
 	}
-
-//	@Override
-//	public Page<PatientDTO> find(String hospital, Integer age, Double weight, Pageable pages) throws NoPatientException {
-//		
-//		List<PatientDTO> patients;
-//		
-//		if (pages.getPageSize()>10) {
-//			patients = transform(patientDao.find(hospital, age, weight, PageRequest.of(pages.getPageNumber(),pages.getPageSize())));
-//		}else {
-//			patients = transform(patientDao.find(hospital, age, weight, pages));
-//		}
-//		
-//		if (patients.isEmpty()) {
-//			throw new NoPatientException();
-//		}else {
-//			Page<PatientDTO> pagePatients = new PageImpl<>(patients, pages, patients.size());
-//			
-//			return pagePatients;
-//		}
-//		
-//	}
 
 }
