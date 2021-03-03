@@ -190,26 +190,27 @@ public class ECGServiceImpl implements ECGService {
 	            ECGDTO ecgdto = new ECGDTO();
 	            Patient p = new Patient();
 	            
-	            p.setGenre(genre);
-	            p.setAge(age);
-	            p.setWeight(weight);
-	            p.setHeight(height);
-	            p.setBmi(bmi);
-	            p.setSmoker(smoker);
-	            p.setAllergy(allergy);
-	            p.setChronic(chronic);
-	            p.setMedication(medication);
-	            p.setHospital(hospital);
-	            p.setHospitalProvidence(hospitalProvidence);
-	            p.setOrigin(origin);
-	            p.setEcgModel(ecgModel);
-	            p.setBodypresssystolic(bodypresssystolic);
-	            p.setBodypressdiastolic(bodypressdiastolic);
-	            p.setBodytemp(bodytemp);
-	            p.setGlucose(glucose);
-	            p.setReason(reason);
-	            p.setEcgType(ecgType);
-	            p.setHeartRate(heartRate);
+	            if (!StringUtils.isEmpty(genre)){p.setGenre(genre);}
+	            if (age != null){p.setAge(age);}
+	            if (weight != null){p.setWeight(weight);}
+	            if (height != null){p.setHeight(height);}
+	            if (bmi != null){p.setBmi(bmi);}
+	            if (smoker != null){p.setSmoker(smoker);}
+	            if (!StringUtils.isEmpty(allergy)){p.setAllergy(allergy);}
+	            if (!StringUtils.isEmpty(chronic)){p.setChronic(chronic);}
+	            if (!StringUtils.isEmpty(medication)){p.setMedication(medication);}
+	            if (!StringUtils.isEmpty(hospital)){p.setHospital(hospital);}
+	            if (!StringUtils.isEmpty(hospitalProvidence)){p.setHospitalProvidence(hospitalProvidence);}
+	            if (!StringUtils.isEmpty(origin)){p.setOrigin(origin);}
+	            if (!StringUtils.isEmpty(ecgModel)){p.setEcgModel(ecgModel);}
+	            if (bodypresssystolic != null){p.setBodypresssystolic(bodypresssystolic);}
+	            if (bodypressdiastolic != null){p.setBodypressdiastolic(bodypressdiastolic);}
+	            if (bodytemp != null){p.setBodytemp(bodytemp);}
+	            if (glucose != null){p.setGlucose(glucose);}
+	            if (!StringUtils.isEmpty(reason)){p.setReason(reason);}
+	            if (!StringUtils.isEmpty(ecgType)){p.setEcgType(ecgType);}
+	            if (heartRate != null){p.setHeartRate(heartRate);}
+	            
 	            ecgdto.setValues(values);
 	            ecgdto.setFile(fileName);
 	            p.setEcg(transform(ecgdto));

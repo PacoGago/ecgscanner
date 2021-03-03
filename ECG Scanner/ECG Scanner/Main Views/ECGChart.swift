@@ -94,11 +94,39 @@ struct ECGChartView: View {
         return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
     
+    private func createParamBodyItem(paramValue: Double, paramName: String) -> String {
+        return ""
+    }
+    
+    private func createParamBodyItem(paramValue: Int, paramName: String) -> String {
+        return ""
+    }
+    
+    private func createParamBodyItem(paramValue: String, paramName: String) -> String {
+        
+        var postContent = "--\(boundary)\r\n"
+        postContent += "Content-Disposition:form-data; name=\"\(paramName)\""
+        postContent += "\r\nContent-Type: text"
+        postContent += "\r\n\r\n\(paramValue)\r\n"
+        
+        return postContent
+    }
+    
     private func createHttpBody(binaryData: Data, mimeType: String) -> Data {
         
         let fieldName = "file"
+        var postContent = ""
         
-        var postContent = "--\(boundary)\r\n"
+        // Parametros con datos (son opcionales en la API)
+        
+        if (!p.hospital.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.hospital, paramName: "hospital")
+        }
+        
+        // Imagen
+        
+        postContent += "--\(boundary)\r\n"
+        
         let fileName = "\(UUID().uuidString).jpeg"
         postContent += "Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n"
         postContent += "Content-Type: \(mimeType)\r\n\r\n"
@@ -114,7 +142,6 @@ struct ECGChartView: View {
     }
     
     func uploadImage() {
-        
         
         var headers: HTTPHeaders {
             return [
