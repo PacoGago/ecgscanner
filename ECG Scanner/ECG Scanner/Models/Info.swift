@@ -1,11 +1,3 @@
-//
-//  Info.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 21/09/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import Foundation
 
 import SwiftUI

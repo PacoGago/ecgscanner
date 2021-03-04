@@ -1,11 +1,3 @@
-//
-//  Patient.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 20/07/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 class Patient: ObservableObject{

@@ -1,11 +1,3 @@
-//
-//  JWT.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 21/12/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 struct JWT : Codable {
     
     let user: String

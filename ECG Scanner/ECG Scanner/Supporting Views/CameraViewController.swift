@@ -1,11 +1,3 @@
-//
-//  CameraViewController.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 21/07/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 
@@ -30,7 +22,6 @@ final class CameraViewController: UIViewController {
         
     }
 }
-
 
 extension CameraViewController : UIViewControllerRepresentable{
     public typealias UIViewControllerType = CameraViewController

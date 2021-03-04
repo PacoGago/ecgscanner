@@ -1,11 +1,3 @@
-//
-//  PointView.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 07/01/2021.
-//  Copyright © 2021 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 struct PointView: View {
