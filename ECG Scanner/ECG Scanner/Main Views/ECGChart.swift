@@ -1,11 +1,3 @@
-//
-//  ECGChart.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 14/10/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 import Combine
 
@@ -27,10 +19,8 @@ struct ECGChartView: View {
     
     @State var values = [Double]()
     
+    @GestureState private var isPressed = false
     
-   @GestureState private var isPressed = false
-    
-    // For drag gesture
     @GestureState private var dragOffset = CGSize.zero
     @State private var position = CGSize.zero
     
@@ -44,6 +34,7 @@ struct ECGChartView: View {
             }
             
             if showDigitalizationView {
+                
                 LineView(data: self.values, title: "", subtitle: "")
                     .scaleEffect(isPressed ? 1.5 : 1.0)
                     .offset(x: position.width + dragOffset.width, y: position.height + dragOffset.height)
@@ -76,8 +67,6 @@ struct ECGChartView: View {
                             self.position.width += drag.translation.width
                         })
                     )
-                
-                
             }
             
             if showErrorView {
@@ -94,12 +83,36 @@ struct ECGChartView: View {
         return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
     
+    private func createParamBodyItem(paramValue: Bool, paramName: String) -> String {
+        
+        var postContent = "--\(boundary)\r\n"
+        postContent += "Content-Disposition:form-data; name=\"\(paramName)\""
+        postContent += "\r\nContent-Type: text"
+        postContent += "\r\n\r\n\(paramValue.description)\r\n"
+
+        return postContent
+    }
+    
     private func createParamBodyItem(paramValue: Double, paramName: String) -> String {
-        return ""
+        
+        let paramValueString: String = String(format: "%.2f", paramValue)
+        
+        var postContent = "--\(boundary)\r\n"
+        postContent += "Content-Disposition:form-data; name=\"\(paramName)\""
+        postContent += "\r\nContent-Type: text"
+        postContent += "\r\n\r\n\(paramValueString)\r\n"
+
+        return postContent
     }
     
     private func createParamBodyItem(paramValue: Int, paramName: String) -> String {
-        return ""
+        
+        var postContent = "--\(boundary)\r\n"
+        postContent += "Content-Disposition:form-data; name=\"\(paramName)\""
+        postContent += "\r\nContent-Type: text"
+        postContent += "\r\n\r\n\(paramValue)\r\n"
+        
+        return postContent
     }
     
     private func createParamBodyItem(paramValue: String, paramName: String) -> String {
@@ -119,9 +132,67 @@ struct ECGChartView: View {
         
         // Parametros con datos (son opcionales en la API)
         
+        if (!p.genre.isEmpty){
+             postContent += createParamBodyItem(paramValue: p.genre, paramName: "genre")
+        }else{
+            postContent += createParamBodyItem(paramValue: "Hombre", paramName: "genre")
+        }
+        
+        postContent += createParamBodyItem(paramValue: p.age, paramName: "age")
+        
+        postContent += createParamBodyItem(paramValue: p.weight, paramName: "weight")
+        
+        postContent += createParamBodyItem(paramValue: p.height, paramName: "height")
+        
+        postContent += createParamBodyItem(paramValue: p.bmi, paramName: "bmi")
+        
+        postContent += createParamBodyItem(paramValue: p.smoker, paramName: "smoker")
+        
+        if (!p.allergy.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.allergy, paramName: "allergy")
+        }
+        
+        if (!p.chronic.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.chronic, paramName: "chronic")
+        }
+        
+        if (!p.medication.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.medication, paramName: "medication")
+        }
+        
         if (!p.hospital.isEmpty){
             postContent += createParamBodyItem(paramValue: p.hospital, paramName: "hospital")
         }
+        
+        if (!p.hospitalProvidence.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.hospitalProvidence, paramName: "hospitalProvidence")
+        }
+        
+        if (!p.ecg.origin.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.ecg.origin, paramName: "origin")
+        }
+        
+        if (!p.ecg.ecgModel.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.ecg.ecgModel, paramName: "ecgModel")
+        }
+        
+        postContent += createParamBodyItem(paramValue: p.ecg.bodypresssystolic, paramName: "bodypresssystolic")
+        
+        postContent += createParamBodyItem(paramValue: p.ecg.bodypressdiastolic, paramName: "bodypressdiastolic")
+        
+        postContent += createParamBodyItem(paramValue: p.ecg.bodytemp, paramName: "bodytemp")
+        
+        postContent += createParamBodyItem(paramValue: p.ecg.glucose, paramName: "glucose")
+        
+        if (!p.ecg.reason.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.ecg.reason, paramName: "reason")
+        }
+        
+        if (!p.ecg.ecgType.isEmpty){
+            postContent += createParamBodyItem(paramValue: p.ecg.ecgType, paramName: "ecgType")
+        }
+        
+        postContent += createParamBodyItem(paramValue: p.ecg.heartRate, paramName: "heartRate")
         
         // Imagen
         

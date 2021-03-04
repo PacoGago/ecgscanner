@@ -1,11 +1,3 @@
-//
-//  LineView.swift
-//  SwiftUILineChart
-//
-//  Created by Anupam Chugh on 05/03/20.
-//  Copyright © 2020 iowncode. All rights reserved.
-//
-
 import SwiftUI
 
 struct LineView: View {

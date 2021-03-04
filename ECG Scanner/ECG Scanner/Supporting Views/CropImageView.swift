@@ -1,11 +1,3 @@
-//
-//  CropImageView.swift
-//  CropImageView
-//
-//  Created by Xingfa Zhou on 2020/7/30.
-//  Copyright © 2020 Yitesi. All rights reserved.
-//
-
 import SwiftUI
 
 @available(iOS 13.0, OSX 10.15, *)

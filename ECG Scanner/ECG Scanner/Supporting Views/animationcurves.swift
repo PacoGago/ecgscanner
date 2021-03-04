@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  AnimationTimingCurve
-//
-//  Created by Chris Eidhof on 25.09.19.
-//  Copyright © 2019 Chris Eidhof. All rights reserved.
-//
-
 import SwiftUI
 
 struct RecordTimingCurve: GeometryEffect {
@@ -50,7 +42,8 @@ final class AnimationTrace: ObservableObject {
 }
 
 struct Trace: Shape {
-    var values: [(CGFloat, CGFloat)] // the second component should be in range 0...1
+    
+    var values: [(CGFloat, CGFloat)]
     
     func path(in rect: CGRect) -> Path {
         guard let f = values.first, let l = values.last else { return Path() }

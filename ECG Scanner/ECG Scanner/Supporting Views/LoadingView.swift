@@ -1,11 +1,3 @@
-//
-//  LoadingView.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 11/11/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 struct LoadingView: View {
@@ -44,7 +36,6 @@ struct LoadingView: View {
         
     }
 }
-  
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {

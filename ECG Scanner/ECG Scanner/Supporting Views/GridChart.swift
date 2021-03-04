@@ -1,11 +1,3 @@
-//
-//  GridChart.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 28/12/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 import SwiftUI
 
 struct GridChartView: View {
@@ -30,7 +22,6 @@ struct GridChartView: View {
         
     }
 }
-  
 
 struct GridChartView_Previews: PreviewProvider {
     static var previews: some View {
