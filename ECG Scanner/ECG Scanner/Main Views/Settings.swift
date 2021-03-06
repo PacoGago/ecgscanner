@@ -78,6 +78,20 @@ struct SettingsView: View {
                         .cornerRadius(10)
                 })
                 
+                Button(action:{
+                    if(self.validate()){
+                        self.sanitanizeLogin()
+                    }
+                }, label: {
+                     Text("Cerrar sesión")
+                        .font(.headline).bold()
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 250, height: 60)
+                        .background(Color.init(#colorLiteral(red: 0.3449254036, green: 0.2717448175, blue: 0.6082604527, alpha: 1)))
+                        .cornerRadius(10)
+                })
+                
             }.padding()
         
         }.onDisappear(){
@@ -151,12 +165,27 @@ struct SettingsView: View {
                 return
             }
             
+            self.error = "No se ha podido conectar con el servidor."
+            withAnimation(.default){
+                self.invalidAttempts += 1
+            }
+            
             // En caso de error
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
             
         }.resume()
     }
     
+    func sanitanizeLogin(){
+        
+        self.user = ""
+        self.pwd = ""
+        self.jwt = ""
+        UserDefaults.standard.set("", forKey: "user")
+        UserDefaults.standard.set("", forKey: "pwd")
+        UserDefaults.standard.set("", forKey: "jwt")
+        
+    }
 }
 
 struct ShakeEffect: GeometryEffect{

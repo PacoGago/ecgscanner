@@ -24,6 +24,8 @@ struct ECGChartView: View {
     @GestureState private var dragOffset = CGSize.zero
     @State private var position = CGSize.zero
     
+    @State private var errorMsg = "Por favor, pruebe con otro fichero o contacte con el administrador si el error persiste."
+    
     var body: some View {
         
         VStack{
@@ -70,7 +72,7 @@ struct ECGChartView: View {
             }
             
             if showErrorView {
-                Text("Error: ")
+                Text("Error: " + errorMsg).padding()
             }
             
         }.onAppear(perform: uploadImage)
@@ -247,6 +249,10 @@ struct ECGChartView: View {
 
                     return
                 }
+            }
+            
+            if (error?.localizedDescription == "Could not connect to the server."){
+                self.errorMsg = "Error no se ha podido conectar con el servidor."
             }
             
             // En caso de error

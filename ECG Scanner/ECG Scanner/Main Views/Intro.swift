@@ -11,6 +11,8 @@ struct ContentView: View {
     @State private var preferences = APIPreferencesLoader.load()
     @State private var fileContent = ""
     @State private var showFileConfig = false
+    @State private var next = true
+    
     let APIUtils = APIUtilsImpl()
     
     var cardNew: Card = Card(
@@ -24,6 +26,17 @@ struct ContentView: View {
         cardImageColor: Color.blue
     )
     
+    var cardNewDisabled: Card = Card(
+        img: "btn_new_scan",
+        description: "Permite escaner una imagen de un ECG",
+        buttonText: "Escanear un nuevo ECG",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.gray,
+        cardFontColor: Color.black,
+        cardImageColor: Color.gray
+    )
+    
     var cardContinue: Card = Card(
         img: "btn_new_scan",
         description: "Ver datos del ECG escogido",
@@ -33,6 +46,17 @@ struct ContentView: View {
         buttonBackgroundColor: Color.green,
         cardFontColor: Color.black,
         cardImageColor: Color.green
+    )
+    
+    var cardContinueDisabled: Card = Card(
+        img: "btn_new_scan",
+        description: "Ver datos del ECG escogido",
+        buttonText: "Continuar",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.gray,
+        cardFontColor: Color.black,
+        cardImageColor: Color.gray
     )
     
     var cardAdd: Card = Card(
@@ -46,6 +70,17 @@ struct ContentView: View {
         cardImageColor: Color.orange
     )
     
+    var cardAddDisabled: Card = Card(
+        img: "btn_add_folder",
+        description: "Seleccionar un ECG anterior",
+        buttonText: "Seleccionar un fichero",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.gray,
+        cardFontColor: Color.black,
+        cardImageColor: Color.gray
+    )
+    
     var cardAddOther: Card = Card(
         img: "btn_add_folder",
         description: "Seleccionar un ECG anterior",
@@ -55,6 +90,17 @@ struct ContentView: View {
         buttonBackgroundColor: Color.orange,
         cardFontColor: Color.black,
         cardImageColor: Color.orange
+    )
+    
+    var cardAddOtherDisabled: Card = Card(
+        img: "btn_add_folder",
+        description: "Seleccionar un ECG anterior",
+        buttonText: "Seleccionar otro fichero",
+        backgroundCardColor: Color.white,
+        buttonFontColor: Color.white,
+        buttonBackgroundColor: Color.gray,
+        cardFontColor: Color.black,
+        cardImageColor: Color.gray
     )
     
     var body: some View {
@@ -82,8 +128,14 @@ struct ContentView: View {
                             
                             // Nuevo ECG
                             NavigationLink(destination: FormView(fileContent: self.fileContent)) {
-                                CardView(card: self.fileContent.isEmpty ? cardNew : cardContinue).padding()
-                            }.offset(x: 0, y: -10)
+                                
+                                if (self.next){
+                                  CardView(card: self.fileContent.isEmpty ? cardNew : cardContinue).padding()
+                                }else{
+                                  CardView(card: self.fileContent.isEmpty ? cardNewDisabled : cardContinueDisabled).padding()
+                                }
+                                
+                                }.disabled(!self.next).offset(x: 0, y: -10)
                             
                             
                             // Import ECG
@@ -91,9 +143,13 @@ struct ContentView: View {
                                 self.showDocPicker.toggle()
                             }, label: {
                                 
-                                CardView(card: self.fileContent.isEmpty ? cardAdd : cardAddOther)
+                                if (self.next){
+                                  CardView(card: self.fileContent.isEmpty ? cardAdd : cardAddOther)
+                                }else{
+                                  CardView(card: self.fileContent.isEmpty ? cardAddDisabled : cardAddOther)
+                                }
                                 
-                            })
+                            }).disabled(!self.next)
                             .offset(x: 0, y: -30)
                             .padding()
                             .sheet(isPresented: self.$showDocPicker){
@@ -130,7 +186,7 @@ struct ContentView: View {
                                     //.offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
                                 }).offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
                                 .sheet(isPresented: self.$showConfig){
-                                    SettingsView()
+                                    SettingsView().onDisappear(){self.login()}
                                 }
                                 
                             }
@@ -153,6 +209,10 @@ struct ContentView: View {
     
     func login(){
         
+        self.user = UserDefaults.standard.string(forKey: "user") ?? ""
+        self.pwd = UserDefaults.standard.string(forKey: "pwd") ?? ""
+        self.jwt = UserDefaults.standard.string(forKey: "jwt") ?? ""
+        
         let parameters = "user=" + user + "&password=" + pwd
         let postData =  parameters.data(using: .utf8)
         
@@ -163,7 +223,13 @@ struct ContentView: View {
         request.httpBody = postData
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-          
+            
+            // Control de conexion con la API
+            if error != nil {
+                self.showConfig.toggle()
+                self.next = false
+            }
+            
             if let data = data {
                 
                 if let JWTResponse = try? JSONDecoder().decode(JWT.self, from: data){
@@ -172,14 +238,16 @@ struct ContentView: View {
                         if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
                             self.jwt = JWTResponse.token
                             UserDefaults.standard.set(self.jwt, forKey: "jwt")
+                            self.next = true
                         }
                     }
                 }else{
                     self.showConfig.toggle()
+                    self.next = false
                 }
             }
             
-        }.resume()
+            }.resume()
         
     }
     

@@ -134,7 +134,7 @@ public class ECGController {
 			@RequestParam(name = "reason", required = false) String reason,
 			@RequestParam(name = "ecgType", required = false) String ecgType,
 			@RequestParam(name = "heartRate", required = false) Double heartRate) throws FileStorageException, EngineException, IllegalArgumentException, IllegalStateException, RejectedExecutionException, InterruptedException, ExecutionException {
-			
+		
 		return ecgservice.digitalizeImage(file, genre, age, weight, height, bmi, smoker, 
 				allergy, chronic, medication, hospital, hospitalProvidence, origin, ecgModel, 
 				bodypresssystolic, bodypressdiastolic, bodytemp, glucose, reason, ecgType, heartRate);
