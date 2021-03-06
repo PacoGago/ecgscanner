@@ -42,6 +42,7 @@ struct FormView: View {
     @State private var isSheetCameraOrLibrary = false
     @State private var showingActionSheet = false
     @State private var isCamera = false
+    @State private var imageIsSelected = false
     
     //Procesamos la imagen capturada
     func rgb2gray(imageOri: UIImage) -> UIImage{
@@ -59,8 +60,10 @@ struct FormView: View {
        let size = CGSize(width: 0, height: 0)
         
        if (imageName.size.width == size.width){
+        self.imageIsSelected = false
         return false
        }else{
+        self.imageIsSelected = true
         return true
        }
     }
@@ -70,7 +73,6 @@ struct FormView: View {
         Form{
                 //DATOS DE IMAGEN
                 Section(header: ImageTextView(img: Image(systemName: "photo.fill"), txt: Text("Datos de Imagen").bold())){
-                    
                     
                     Button(action: {
                         self.showingActionSheet = true
@@ -419,7 +421,7 @@ struct FormView: View {
                 }
                 
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
-         .navigationBarItems(trailing:NavigationLink(destination: DetailsView().onAppear {}){Text("Continuar")}
+         .navigationBarItems(trailing:NavigationLink(destination: DetailsView().onAppear {}){Text("Continuar")}.disabled(!self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource))
         ).onAppear(){
             
             if !self.fileContent.isEmpty {
