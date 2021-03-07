@@ -37,7 +37,7 @@ struct SettingsView: View {
                 HStack{
                     Image(systemName: "person")
                         .foregroundColor(.secondary)
-                    TextField("Usuario", text: $user)
+                    TextField("Usuario", text: $user).autocapitalization(.none)
                 }
                 .padding()
                 .background(lightGrey)
@@ -152,6 +152,9 @@ struct SettingsView: View {
                     DispatchQueue.main.async {
                         if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
                             self.jwt = JWTResponse.token
+                            UserDefaults.standard.set(self.user, forKey: "user")
+                            UserDefaults.standard.set(self.pwd, forKey: "pwd")
+                            UserDefaults.standard.set(self.jwt, forKey: "jwt")
                         }
                         self.presentation.wrappedValue.dismiss()
                     }

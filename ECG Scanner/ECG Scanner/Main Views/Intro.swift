@@ -186,7 +186,12 @@ struct ContentView: View {
                                     //.offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
                                 }).offset(x: self.fileContent.isEmpty ? 150 : 38, y: self.fileContent.isEmpty ? -40 : -40)
                                 .sheet(isPresented: self.$showConfig){
-                                    SettingsView().onDisappear(){self.login()}
+                                    SettingsView().onDisappear(){
+                                        self.user = UserDefaults.standard.string(forKey: "user") ?? ""
+                                        self.pwd = UserDefaults.standard.string(forKey: "pwd") ?? ""
+                                        self.jwt = UserDefaults.standard.string(forKey: "jwt") ?? ""
+                                        self.login(showConfig: false)
+                                    }
                                 }
                                 
                             }
@@ -200,14 +205,13 @@ struct ContentView: View {
             } //Navigation
        
         }.onAppear(){
-            self.login()
+            self.login(showConfig: true)
         }
-        
         //VStack
         
     }//body
     
-    func login(){
+    func login(showConfig: Bool){
         
         self.user = UserDefaults.standard.string(forKey: "user") ?? ""
         self.pwd = UserDefaults.standard.string(forKey: "pwd") ?? ""
@@ -226,7 +230,9 @@ struct ContentView: View {
             
             // Control de conexion con la API
             if error != nil {
-                self.showConfig.toggle()
+                if (showConfig){
+                    self.showConfig.toggle()
+                }
                 self.next = false
             }
             
@@ -242,7 +248,9 @@ struct ContentView: View {
                         }
                     }
                 }else{
-                    self.showConfig.toggle()
+                    if (showConfig){
+                        self.showConfig.toggle()
+                    }
                     self.next = false
                 }
             }
