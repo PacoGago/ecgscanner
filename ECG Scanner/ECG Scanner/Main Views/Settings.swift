@@ -37,7 +37,7 @@ struct SettingsView: View {
                 HStack{
                     Image(systemName: "person")
                         .foregroundColor(.secondary)
-                    TextField("Usuario", text: $user)
+                    TextField("Usuario", text: $user).autocapitalization(.none)
                 }
                 .padding()
                 .background(lightGrey)
@@ -70,6 +70,20 @@ struct SettingsView: View {
                     }
                 }, label: {
                      Text("Acceder")
+                        .font(.headline).bold()
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 250, height: 60)
+                        .background(Color.init(#colorLiteral(red: 0.3449254036, green: 0.2717448175, blue: 0.6082604527, alpha: 1)))
+                        .cornerRadius(10)
+                })
+                
+                Button(action:{
+                    if(self.validate()){
+                        self.sanitanizeLogin()
+                    }
+                }, label: {
+                     Text("Cerrar sesión")
                         .font(.headline).bold()
                         .foregroundColor(.white)
                         .padding()
@@ -138,6 +152,9 @@ struct SettingsView: View {
                     DispatchQueue.main.async {
                         if(!JWTResponse.token.isEmpty && JWTResponse.token != "null"){
                             self.jwt = JWTResponse.token
+                            UserDefaults.standard.set(self.user, forKey: "user")
+                            UserDefaults.standard.set(self.pwd, forKey: "pwd")
+                            UserDefaults.standard.set(self.jwt, forKey: "jwt")
                         }
                         self.presentation.wrappedValue.dismiss()
                     }
@@ -151,12 +168,27 @@ struct SettingsView: View {
                 return
             }
             
+            self.error = "No se ha podido conectar con el servidor."
+            withAnimation(.default){
+                self.invalidAttempts += 1
+            }
+            
             // En caso de error
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
             
         }.resume()
     }
     
+    func sanitanizeLogin(){
+        
+        self.user = ""
+        self.pwd = ""
+        self.jwt = ""
+        UserDefaults.standard.set("", forKey: "user")
+        UserDefaults.standard.set("", forKey: "pwd")
+        UserDefaults.standard.set("", forKey: "jwt")
+        
+    }
 }
 
 struct ShakeEffect: GeometryEffect{
