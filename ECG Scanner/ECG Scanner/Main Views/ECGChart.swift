@@ -245,6 +245,7 @@ struct ECGChartView: View {
                         self.values = ECGResponse.values
                         self.showLoadingView = false
                         self.showDigitalizationView = true
+                        self.p.ecg.values = self.values
                     }
 
                     return

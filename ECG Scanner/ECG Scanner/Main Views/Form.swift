@@ -42,7 +42,7 @@ struct FormView: View {
     @State private var isSheetCameraOrLibrary = false
     @State private var showingActionSheet = false
     @State private var isCamera = false
-    @State private var imageIsSelected = false
+    @State private var imageIsSelected = true
     
     //Procesamos la imagen capturada
     func rgb2gray(imageOri: UIImage) -> UIImage{
@@ -60,10 +60,10 @@ struct FormView: View {
        let size = CGSize(width: 0, height: 0)
         
        if (imageName.size.width == size.width){
-        self.imageIsSelected = false
+        //self.imageIsSelected = false
         return false
        }else{
-        self.imageIsSelected = true
+        //self.imageIsSelected = true
         return true
        }
     }
@@ -434,42 +434,52 @@ struct FormView: View {
                     self.patient.ecg.imageSource = decodedimage!
                 }
                 
-                if let nombre = xml?.paciente.$nombre.stringValue {
+                if let nombre = xml?.patient.name.firstname.stringValue {
                     self.patient.name = nombre
                 }
                 
-                if let primerApellido = xml?.paciente.$primerApellido.stringValue {
+                if let primerApellido = xml?.patient.name.firstsurname.stringValue {
                     self.patient.firstSurname = primerApellido
                 }
-                
-                if let segundoApellido = xml?.paciente.$segundoApellido.stringValue {
+                    
+                if let segundoApellido = xml?.patient.name.secondsurname.stringValue  {
                     self.patient.secondSurname = segundoApellido
                 }
                 
-                if let direccion = xml?.paciente.$direccion.stringValue {
+                if let direccion = xml?.patient.address.stringValue {
                     self.patient.address = direccion
                 }
                 
-                if let ciudad = xml?.paciente.$ciudad.stringValue {
+                if let ciudad = xml?.patient.city.stringValue{
                     self.patient.city = ciudad
                 }
                 
-                if let provincia = xml?.paciente.$provincia.stringValue {
+                if let provincia = xml?.patient.province.stringValue {
                     self.selectionProvince = ConstantsViews.provinceOptions.firstIndex(of: provincia)!
                     self.patient.province = provincia
                 }
                 
-                if let genero = xml?.paciente.$genero.stringValue {
+                if let genero = xml?.patient.genre.stringValue {
                     if !genero.isEmpty{
                         self.selectionGenre = ConstantsViews.genderOptions.firstIndex(of: genero)!
                     }
                     self.patient.genre = genero
                 }
                 
-                if let edad = xml?.paciente.$edad.stringValue {
-                    self.selectionAge = Int(edad)!
-                    self.patient.age = Int(edad)!
+                if let edad = xml?.patient.age.intValue {
+                    self.selectionAge = edad
+                    self.patient.age = edad
                 }
+                
+                if let peso = xml?.patient.weight.doubleValue {
+                    self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: peso)!
+                    self.patient.weight = peso
+                }
+                
+//                if let peso = xml?.paciente.$peso.stringValue {
+//                    self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: Double(peso)!)!
+//                    self.patient.weight = Double(peso)!
+//                }
                 
                 if let peso = xml?.paciente.$peso.stringValue {
                     self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: Double(peso)!)!

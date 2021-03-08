@@ -1,11 +1,3 @@
-//
-//  ConstantsViews.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 25/05/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 struct ConstantsViews{
     
     static let genderOptions: [String]  = ["Hombre", "Mujer"]
