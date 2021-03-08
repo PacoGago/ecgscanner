@@ -58,13 +58,16 @@ struct DetailsView: View {
             strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         }
         
-        let store = XML(name: "ecg")
-            .addAttribute(name: "xml:id", value: "test")
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let hourandminutes = formatter.string(from: date)
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateXML = formatter.string(from: date)
+        
+        let store = XML(name: "ecgXml")
             .addChildren([
                 
-                XML(name: "image", attributes: [
-                    "value": strBase64
-                ]),
                 XML(name: "paciente", attributes: [
                     "nombre": patient.name,
                     "primerApellido": patient.firstSurname,
@@ -94,6 +97,48 @@ struct DetailsView: View {
                     "motivo": patient.ecg.reason,
                     "tipo": patient.ecg.ecgType,
                     "tasaCardiaca": patient.ecg.heartRate
+                ]),
+                XML(name: "manufacturer").addChildren([
+                    XML(name: "model", value: patient.ecg.ecgModel)
+                ]),
+                XML(name: "patient").addChildren([
+                    XML(name: "name").addChildren([
+                        XML(name: "firstname", value: patient.name),
+                        XML(name: "firstsurname", value: patient.firstSurname),
+                        XML(name: "secondsurname", value: patient.secondSurname)
+                    ]),
+                    XML(name: "address", value: patient.address),
+                    XML(name: "city", value: patient.city),
+                    XML(name: "province", value: patient.province),
+                    XML(name: "genre", value: patient.genre.isEmpty ? "Hombre" : patient.genre),
+                    XML(name: "age", value: patient.age),
+                    XML(name: "weight", value: patient.weight),
+                    XML(name: "height", value: patient.height),
+                    XML(name: "bmi", value: patient.bmi),
+                    XML(name: "smoker", value: patient.smoker),
+                    XML(name: "allergy", value: patient.allergy),
+                    XML(name: "chronic", value: patient.chronic),
+                    XML(name: "medication", value: patient.medication),
+                    XML(name: "hospital", value: patient.hospital),
+                    XML(name: "origin", value: patient.ecg.origin),
+                    XML(name: "bodypresssystolic", value: patient.ecg.bodypresssystolic),
+                    XML(name: "bodypressdiastolic", value: patient.ecg.bodypressdiastolic),
+                    XML(name: "bodytemp", value: patient.ecg.bodytemp),
+                    XML(name: "glucose", value: patient.ecg.glucose),
+                    XML(name: "reason", value: patient.ecg.reason),
+                    XML(name: "ecgType", value: patient.ecg.ecgType),
+                    XML(name: "heartRate", value: patient.ecg.heartRate)
+                ]),
+                XML(name: "date_time").addChildren([
+                    XML(name: "date", value: dateXML),
+                    XML(name: "time", value: hourandminutes)
+                ]),
+                XML(name: "waveforms").addChildren([
+                    XML(name: "signalcharacteristics", value: "test"),
+                    XML(name: "parsedwaveform", value: patient.ecg.values)
+                ]),
+                XML(name: "image", attributes: [
+                    "value": strBase64
                 ])
             ])
         

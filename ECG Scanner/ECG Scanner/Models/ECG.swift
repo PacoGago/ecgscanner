@@ -13,5 +13,6 @@ class ECG: ObservableObject{
     @Published var heartRate = 80.0
     @Published var imagePro = UIImage()
     @Published var imageSource = UIImage()
+    @Published var values = [Double]()
     
 }
