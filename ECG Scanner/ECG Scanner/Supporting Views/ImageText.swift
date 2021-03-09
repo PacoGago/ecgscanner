@@ -18,4 +18,3 @@ struct ImageTextView_Previews: PreviewProvider {
         ImageTextView(img: Image(systemName: "bookmark"), txt: Text("Test"))
     }
 }
-

@@ -32,16 +32,46 @@ struct DetailsView: View {
             
         }.navigationBarTitle(Text("Resumen"), displayMode: .inline)
          .navigationBarItems(trailing:
-             Button(action: {
-                 
-                self.writeFile()
+            
+            HStack{
+                NavigationLink(destination: FormView(fileContent: "").onAppear {
+                    self.flushPatient()
+                }) {
+                    Image(systemName: "trash")
+                }.padding()
                 
-             }) {
-                 Text("Guardar")
-             }
-         )
+                Button(action: {
+                   self.writeFile()
+                }) {
+                   Image(systemName: "tray.and.arrow.down")
+                }
+            }
+        )
     }
+
+    func flushPatient() -> Void{
         
+        self.patient.name = ""
+        self.patient.firstSurname = ""
+        self.patient.secondSurname = ""
+        self.patient.address = ""
+        self.patient.city = ""
+        self.patient.province = ""
+        self.patient.postalCode = ""
+        self.patient.genre = ""
+        self.patient.age = 30
+        self.patient.weight = 60.0
+        self.patient.height = 170
+        self.patient.bmi = 21.25
+        self.patient.smoker = false
+        self.patient.allergy = ""
+        self.patient.chronic = ""
+        self.patient.medication = ""
+        self.patient.hospital = ""
+        self.patient.hospitalProvidence = ""
+        self.patient.ecg = ECG()
+    }
+    
     func writeFile() -> Void{
         
         var fileName = "ECG-DATA"
@@ -119,6 +149,7 @@ struct DetailsView: View {
                     XML(name: "allergy", value: patient.allergy),
                     XML(name: "chronic", value: patient.chronic),
                     XML(name: "medication", value: patient.medication),
+                    XML(name: "hospitalProvidence", value: patient.hospitalProvidence),
                     XML(name: "hospital", value: patient.hospital),
                     XML(name: "origin", value: patient.ecg.origin),
                     XML(name: "bodypresssystolic", value: patient.ecg.bodypresssystolic),

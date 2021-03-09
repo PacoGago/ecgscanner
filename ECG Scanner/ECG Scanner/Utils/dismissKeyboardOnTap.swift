@@ -1,11 +1,3 @@
-//
-//  dismissKeyboardOnTap.swift
-//  SwiftUIKitExampleApp
-//
-//  Created by Youjin Phea on 17/06/20.
-//  Copyright © 2020 youjinp. All rights reserved.
-//
-
 import SwiftUI
 
 public extension View {
