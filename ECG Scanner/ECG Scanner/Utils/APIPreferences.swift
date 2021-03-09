@@ -1,11 +1,3 @@
-//
-//  APIPreferences.swift
-//  ECG Scanner
-//
-//  Created by Paco Gago on 22/12/2020.
-//  Copyright © 2020 Francisco Gago. All rights reserved.
-//
-
 struct APIPreferences: Codable {
     var baseURL: String
     var ssl: Bool
@@ -40,6 +32,3 @@ extension APIPreferencesLoader {
     }
   }
 }
-
-
-

@@ -30,12 +30,11 @@ struct ECGChartView: View {
         
         VStack{
             
-            if showLoadingView {
-                LoadingView().frame(width: 50, height: 50)
-                .foregroundColor(.orange)
+            if (showLoadingView){
+                LoadingView().frame(width: 50, height: 50).foregroundColor(.orange)
             }
             
-            if showDigitalizationView {
+            if (showDigitalizationView) {
                 
                 LineView(data: self.values, title: "", subtitle: "")
                     .scaleEffect(isPressed ? 1.5 : 1.0)
@@ -76,9 +75,6 @@ struct ECGChartView: View {
             }
             
         }.onAppear(perform: uploadImage)
-        
-        
-
     }
     
     func convertImageToBase64String (img: UIImage) -> String {
@@ -216,52 +212,60 @@ struct ECGChartView: View {
     
     func uploadImage() {
         
-        var headers: HTTPHeaders {
-            return [
-                "Content-Type": "multipart/form-data; boundary=\(boundary)",
-                "Accept": "application/json"
-            ]
-        }
-        
-        let imageData = p.ecg.imageSource.jpegData(compressionQuality: 1)!
-        let mimeType = imageData.mimeType!
-
-        var request = URLRequest(url: URL(string: APIUtils.getProtocol(sslPreference: self.preferences.ssl) + "://" + self.preferences.baseURL + ":" + self.preferences.port + "/ecg/upload")!)
-        
-        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue(self.jwt, forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
-        
-        request.httpBody = createHttpBody(binaryData: imageData, mimeType: mimeType)
-        
-        URLSession.shared.dataTask(with: request){ data, response, error in
+        if (self.p.ecg.values.isEmpty){
             
-            if let data = data {
+            var headers: HTTPHeaders {
+                return [
+                    "Content-Type": "multipart/form-data; boundary=\(boundary)",
+                    "Accept": "application/json"
+                ]
+            }
+            
+            let imageData = p.ecg.imageSource.jpegData(compressionQuality: 1)!
+            let mimeType = imageData.mimeType!
+
+            var request = URLRequest(url: URL(string: APIUtils.getProtocol(sslPreference: self.preferences.ssl) + "://" + self.preferences.baseURL + ":" + self.preferences.port + "/ecg/upload")!)
+            
+            request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue(self.jwt, forHTTPHeaderField: "Authorization")
+            request.httpMethod = "POST"
+            
+            request.httpBody = createHttpBody(binaryData: imageData, mimeType: mimeType)
+            
+            URLSession.shared.dataTask(with: request){ data, response, error in
                 
-                if let ECGResponse = try? JSONDecoder().decode(ECGJSON.self, from: data){
+                if let data = data {
                     
-                    DispatchQueue.main.async {
-                        self.values = ECGResponse.values
-                        self.showLoadingView = false
-                        self.showDigitalizationView = true
-                        self.p.ecg.values = self.values
-                    }
+                    if let ECGResponse = try? JSONDecoder().decode(ECGJSON.self, from: data){
+                        
+                        DispatchQueue.main.async {
+                            self.values = ECGResponse.values
+                            self.showLoadingView = false
+                            self.showDigitalizationView = true
+                            self.p.ecg.values = self.values
+                        }
 
-                    return
+                        return
+                    }
                 }
-            }
+                
+                if (error?.localizedDescription == "Could not connect to the server."){
+                    self.errorMsg = "Error no se ha podido conectar con el servidor."
+                }
+                
+                // En caso de error
+                print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                self.showErrorView = true
+                self.showLoadingView = false
+                
+            }.resume()
             
-            if (error?.localizedDescription == "Could not connect to the server."){
-                self.errorMsg = "Error no se ha podido conectar con el servidor."
-            }
-            
-            // En caso de error
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-            self.showErrorView = true
+        }else{
+            self.values = self.p.ecg.values
             self.showLoadingView = false
-            
-        }.resume()
+            self.showDigitalizationView = true
+        }
         
     }
     

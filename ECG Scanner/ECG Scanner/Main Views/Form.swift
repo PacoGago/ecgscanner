@@ -476,43 +476,33 @@ struct FormView: View {
                     self.patient.weight = peso
                 }
                 
-//                if let peso = xml?.paciente.$peso.stringValue {
-//                    self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: Double(peso)!)!
-//                    self.patient.weight = Double(peso)!
-//                }
-                
-                if let peso = xml?.paciente.$peso.stringValue {
-                    self.selectionWeight = self.IMCUtil.weightData().firstIndex(of: Double(peso)!)!
-                    self.patient.weight = Double(peso)!
+                if let altura = xml?.patient.height.intValue {
+                    self.selectionHeight = altura
+                    self.patient.height = altura
                 }
                 
-                if let bmi = xml?.paciente.$bmi.stringValue{
-                    self.patient.bmi = Double(bmi)!
+                if let bmi = xml?.patient.bmi.doubleValue{
+                    self.patient.bmi = bmi
                     self.bmiColor = self.IMCUtil.getAdultColorBMI(bmi_: self.patient.bmi)
                 }
                 
-                if let altura = xml?.paciente.$altura.stringValue {
-                    self.selectionHeight = Int(altura)!
-                    self.patient.height = Int(altura)!
+                if let fumador = xml?.patient.smoker.boolValue {
+                    self.patient.smoker = fumador
                 }
                 
-                if let fumador = xml?.paciente.$fumador.stringValue {
-                    self.patient.smoker = Bool(fumador)!
-                }
-                
-                if let alergias = xml?.paciente.$alergias.stringValue {
+                if let alergias = xml?.patient.allergy.stringValue {
                     self.patient.allergy = alergias
                 }
                 
-                if let enfermedadCronica = xml?.paciente.$enfermedadCronica.stringValue {
+                if let enfermedadCronica = xml?.patient.chronic.stringValue {
                     self.patient.chronic = enfermedadCronica
                 }
                 
-                if let medicacion = xml?.paciente.$medicacion.stringValue {
+                if let medicacion = xml?.patient.medication.stringValue {
                     self.patient.medication = medicacion
                 }
                 
-                if let hospitalProvidence = xml?.paciente.$hospitalProvidence.stringValue {
+                if let hospitalProvidence = xml?.patient.hospitalProvidence.stringValue {
                     
                     if !hospitalProvidence.isEmpty{
                         self.selectionHospitalProvince = self.hospitalProvinces.names.firstIndex(of: hospitalProvidence)!
@@ -522,7 +512,7 @@ struct FormView: View {
                     self.patient.hospitalProvidence = hospitalProvidence
                 }
                 
-                if let hospital = xml?.paciente.$hospital.stringValue {
+                if let hospital = xml?.patient.hospital.stringValue {
                     
                     if !hospital.isEmpty{
                         self.selectionHospitalName = self.hospitalNames.names.firstIndex(of: hospital)!
@@ -530,40 +520,48 @@ struct FormView: View {
                     self.patient.hospital = hospital
                 }
                 
-                if let origen = xml?.ecg.$origen.stringValue {
+                if let origen = xml?.patient.origin.stringValue {
                     self.patient.ecg.origin = origen
                 }
                 
-                if let equipamiento = xml?.ecg.$equipamiento.stringValue {
+                if let equipamiento = xml?.manufacturer.model.stringValue {
                     self.patient.ecg.ecgModel = equipamiento
                 }
                 
-                if let presionSanguineaSistolica = xml?.ecg.$presionSanguineaSistolica.stringValue {
-                    self.patient.ecg.bodypresssystolic = Double(presionSanguineaSistolica)!
+                if let presionSanguineaSistolica = xml?.patient.bodypresssystolic.doubleValue {
+                    self.patient.ecg.bodypresssystolic = presionSanguineaSistolica
                 }
                 
-                if let presionSanguineaDiastolica = xml?.ecg.$presionSanguineaDiastolica.stringValue {
-                    self.patient.ecg.bodypressdiastolic = Double(presionSanguineaDiastolica)!
+                if let presionSanguineaDiastolica = xml?.patient.bodypressdiastolic.doubleValue {
+                    self.patient.ecg.bodypressdiastolic = presionSanguineaDiastolica
                 }
                 
-                if let temperatura = xml?.ecg.$temperatura.stringValue {
-                    self.patient.ecg.bodytemp = Double(temperatura)!
+                if let temperatura = xml?.patient.bodytemp.doubleValue {
+                    self.patient.ecg.bodytemp = temperatura
                 }
                 
-                if let glucosa = xml?.ecg.$glucosa.stringValue {
-                    self.patient.ecg.glucose = Double(glucosa)!
+                if let glucosa = xml?.patient.glucose.doubleValue {
+                    self.patient.ecg.glucose = glucosa
                 }
                 
-                if let motivo = xml?.ecg.$motivo.stringValue {
+                if let motivo = xml?.patient.reason.stringValue {
                     self.patient.ecg.reason = motivo
                 }
                 
-                if let tipo = xml?.ecg.$tipo.stringValue {
+                if let tipo = xml?.patient.ecgType.stringValue {
                     self.patient.ecg.ecgType = tipo
                 }
                 
-                if let tasaCardiaca = xml?.ecg.$tasaCardiaca.stringValue {
-                    self.patient.ecg.heartRate = Double(tasaCardiaca)!
+                if let tasaCardiaca = xml?.patient.heartRate.doubleValue {
+                    self.patient.ecg.heartRate = tasaCardiaca
+                }
+                
+                if let parsedwaveform = xml?.waveforms.parsedwaveform.stringValue {
+                    var strWave = parsedwaveform
+                    strWave.remove(at: strWave.startIndex)
+                    strWave.remove(at: strWave.index(before: strWave.endIndex))
+                    let arrayString = strWave.components(separatedBy: ", ")
+                    self.patient.ecg.values = arrayString.convertToDouble
                 }
             }
             
@@ -575,5 +573,14 @@ struct FormView: View {
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
         FormView(fileContent: "")
+    }
+}
+
+extension Collection where Iterator.Element == String {
+    var convertToDouble: [Double] {
+        return compactMap{ Double($0) }
+    }
+    var convertToFloat: [Float] {
+        return compactMap{ Float($0) }
     }
 }
