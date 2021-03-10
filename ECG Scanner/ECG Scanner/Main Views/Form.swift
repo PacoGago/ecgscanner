@@ -43,6 +43,8 @@ struct FormView: View {
     @State private var showingActionSheet = false
     @State private var isCamera = false
     @State private var imageIsSelected = true
+    @Binding var rootIsActive : Bool
+    @State private var previousImage = UIImage()
     
     //Procesamos la imagen capturada
     func rgb2gray(imageOri: UIImage) -> UIImage{
@@ -60,12 +62,20 @@ struct FormView: View {
        let size = CGSize(width: 0, height: 0)
         
        if (imageName.size.width == size.width){
-        //self.imageIsSelected = false
         return false
        }else{
-        //self.imageIsSelected = true
         return true
        }
+    }
+    
+    func base64Comparison(imageOri: UIImage, imagePre: UIImage) -> Bool{
+        
+        let imageOriData:NSData = imageOri.pngData()! as NSData
+        let imageOriBase64 = imageOriData.base64EncodedString(options: .lineLength64Characters)
+        let imagePreData:NSData = imagePre.pngData()! as NSData
+        let imagePreBase64 = imagePreData.base64EncodedString(options: .lineLength64Characters)
+        
+        return imageOriBase64 == imagePreBase64 ? true : false
     }
 
     var body: some View {
@@ -86,9 +96,39 @@ struct FormView: View {
                 }.sheet(isPresented: $isSheetCameraOrLibrary) {
                     
                     if self.isCamera == true {
+                        
                         ImagePicker(sourceType: .camera, selectedImage: self.$patient.ecg.imageSource)
+                        .onAppear(){
+                            
+                            if self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) {
+                                self.previousImage = self.patient.ecg.imageSource
+                            }
+                            
+                        }.onDisappear(){
+                            
+                            if self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) &&  self.imageIsNullOrNot(imageName: self.previousImage) {
+                                
+                                if !self.base64Comparison(imageOri: self.previousImage, imagePre: self.patient.ecg.imageSource) {
+                                   self.patient.ecg.values = [Double]()
+                                }
+                            }
+                        }
                     }else{
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$patient.ecg.imageSource)
+                        
+                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$patient.ecg.imageSource).onAppear(){
+                            
+                            if self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) {
+                                self.previousImage = self.patient.ecg.imageSource
+                            }
+                            
+                        }.onDisappear(){
+                            
+                            if self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource) &&  self.imageIsNullOrNot(imageName: self.previousImage) {
+                                if !self.base64Comparison(imageOri: self.previousImage, imagePre: self.patient.ecg.imageSource)  {
+                                   self.patient.ecg.values = [Double]()
+                                }
+                            }
+                        }
                     }
                     
                 }.actionSheet(isPresented: $showingActionSheet) {
@@ -421,7 +461,7 @@ struct FormView: View {
                 }
                 
         }.navigationBarTitle(Text("Paciente"), displayMode: .inline)
-         .navigationBarItems(trailing:NavigationLink(destination: DetailsView().onAppear {}){Text("Continuar")}.disabled(!self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource))
+            .navigationBarItems(trailing:NavigationLink(destination: DetailsView(shouldPopToRootView: self.$rootIsActive).onAppear {}){Text("Continuar")}.disabled(!self.imageIsNullOrNot(imageName: self.patient.ecg.imageSource))
         ).onAppear(){
             
             if !self.fileContent.isEmpty {
@@ -567,12 +607,6 @@ struct FormView: View {
             
         }//END FORM
         
-    }
-}
-
-struct FormView_Previews: PreviewProvider {
-    static var previews: some View {
-        FormView(fileContent: "")
     }
 }
 

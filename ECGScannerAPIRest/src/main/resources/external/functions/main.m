@@ -1,4 +1,4 @@
-function[HASIL_AKHIRAVF] = main(x)
+function[HASIL_AKHIRAVF,media] = main(x)
 
     Y = imread(x);
     [BW,rgb] = createMaskbr(Y);

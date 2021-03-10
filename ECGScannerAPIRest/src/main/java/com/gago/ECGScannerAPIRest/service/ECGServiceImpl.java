@@ -247,6 +247,7 @@ public class ECGServiceImpl implements ECGService {
 	private double[] digitalizacion(File f) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
 		
 		Object[] res = null;
+		double[] values;
 		
 		Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
         MatlabEngine eng = engine.get();
@@ -256,15 +257,17 @@ public class ECGServiceImpl implements ECGService {
         
         // Procesamos la imagen
         // feval(numero de argumentos a recibir, nombre de la funciona a ejecutar, argumentos a pasar)
-        double[] values = eng.feval("main", f.getAbsolutePath());
+        //double[] values = eng.feval("main", f.getAbsolutePath());
+        
+        
         //System.out.println("ECG: " + Arrays.toString(values));
         // Aqui deberiamos determinar si con la digitalizacion
         // que hemos conseguido podemos o no llamar al pantompkins
         // dado que si no posee la suficiente longitud no funciona
         
         
-       // res = eng.feval(5, "pantompkins_qrs", eng.feval("main", f.getAbsolutePath()), 500);
-                                    
+        res = eng.feval(2,"main", f.getAbsolutePath());
+        values = (double[]) res[0];                
         //double[] qrs_pos = (double[]) res[0];
 //        double[] filt_dat = (double[]) res[2];
 //        double[] int_dat = (double[]) res[3];

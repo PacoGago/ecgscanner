@@ -9,9 +9,10 @@ struct DetailsView: View {
     @State var testDataView = TestDataView()
     @State var ecgDataView = ECGDataView()
     @State var ecgChartView = ECGChartView()
+    @Binding var shouldPopToRootView : Bool
+    @State private var isAlert = false
     
     var body: some View {
-    
         
         TabView(selection: $tabIndex) {
             
@@ -30,15 +31,22 @@ struct DetailsView: View {
                 Text("Visualizar")
             }}.tag(2)
             
-        }.navigationBarTitle(Text("Resumen"), displayMode: .inline)
-         .navigationBarItems(trailing:
+            }.navigationBarTitle(Text("Resumen"), displayMode: .inline)
+            .navigationBarItems(trailing:
             
             HStack{
-                NavigationLink(destination: FormView(fileContent: "").onAppear {
-                    self.flushPatient()
-                }) {
-                    Image(systemName: "trash")
+                
+                Button (action: {
+                    self.isAlert = true
+                }){
+                    Image(systemName: "trash").frame(width: 30.0, height: 30.0)
                 }.padding()
+                .alert(isPresented: $isAlert) { () -> Alert in
+                        Alert(title: Text("Limpiar datos"), message: Text("¿Desea borrar los datos del paciente?"), primaryButton: .default(Text("Sí"), action: {
+                            self.flushPatient()
+                            self.shouldPopToRootView = false
+                        }), secondaryButton: .default(Text("Cancelar")))
+                }
                 
                 Button(action: {
                    self.writeFile()
@@ -70,6 +78,7 @@ struct DetailsView: View {
         self.patient.hospital = ""
         self.patient.hospitalProvidence = ""
         self.patient.ecg = ECG()
+        
     }
     
     func writeFile() -> Void{
@@ -190,12 +199,6 @@ struct DetailsView: View {
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
     
-}
-
-struct DetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsView()
-    }
 }
 
 public extension UIImage {

@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var fileContent = ""
     @State private var showFileConfig = false
     @State private var next = true
+    @State var isActive : Bool = false
     
     let APIUtils = APIUtilsImpl()
     
@@ -118,7 +119,6 @@ struct ContentView: View {
                     
                         VStack{
                             
-                            //Subtitle
                             Text("Digitalización de ECG")
                                 .font(.body)
                                 .fontWeight(.bold)
@@ -126,8 +126,7 @@ struct ContentView: View {
                                 .padding()
                                 .offset(x: 0, y: 5)
                             
-                            // Nuevo ECG
-                            NavigationLink(destination: FormView(fileContent: self.fileContent)) {
+                            NavigationLink(destination: FormView(fileContent: self.fileContent, rootIsActive: self.$isActive), isActive: self.$isActive) {
                                 
                                 if (self.next){
                                   CardView(card: self.fileContent.isEmpty ? cardNew : cardContinue).padding()
@@ -137,8 +136,6 @@ struct ContentView: View {
                                 
                                 }.disabled(!self.next).offset(x: 0, y: -10)
                             
-                            
-                            // Import ECG
                             Button(action: {
                                 self.showDocPicker.toggle()
                             }, label: {
