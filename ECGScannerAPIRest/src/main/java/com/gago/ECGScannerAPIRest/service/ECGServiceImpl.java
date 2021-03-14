@@ -171,6 +171,8 @@ public class ECGServiceImpl implements ECGService {
 	        String fileName = getSecureName(file);
 	       
 	        try {
+	        	Patient p = new Patient();
+	        	ECGDTO ecgdto = new ECGDTO();
 	        	
 	            if(fileName.contains("..")) {
 	                throw new FileStorageException();
@@ -183,12 +185,10 @@ public class ECGServiceImpl implements ECGService {
 	            File f = new File(uploadDir + fileName);
 	            
 	            // Digitalizamos la imagen y nos quedamos con los valores de la funcion
-	            double[] ecgdigi = digitalizacion(f);
+	            double[] ecgdigi = digitalizacion(f,ecgdto);
 	            
 	            // Conversion
 	            ArrayList<Double> values = DoubleStream.of(ecgdigi).boxed().collect(Collectors.toCollection(ArrayList::new));
-	            ECGDTO ecgdto = new ECGDTO();
-	            Patient p = new Patient();
 	            
 	            if (!StringUtils.isEmpty(genre)){p.setGenre(genre);}
 	            if (age != null){p.setAge(age);}
@@ -244,13 +244,14 @@ public class ECGServiceImpl implements ECGService {
 		return fileName;
 	}
 	
-	private double[] digitalizacion(File f) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
+	private double[] digitalizacion(File f, ECGDTO ecg) throws MatlabExecutionException, MatlabSyntaxException, CancellationException, EngineException, InterruptedException, ExecutionException {
 		
 		Object[] res = null;
 		double[] values;
 		
 		Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
         MatlabEngine eng = engine.get();
+        
         
         // Directorio donde se almacenan las funciones de matLab
         eng.eval("cd " + functionsDir);
@@ -267,19 +268,18 @@ public class ECGServiceImpl implements ECGService {
         
         
         res = eng.feval(2,"main", f.getAbsolutePath());
-        values = (double[]) res[0];                
-        //double[] qrs_pos = (double[]) res[0];
-//        double[] filt_dat = (double[]) res[2];
-//        double[] int_dat = (double[]) res[3];
-//        double[] thF1 = (double[]) res[4];
-//        double[] thI1 = (double[]) res[5];
-//        
-        //System.out.println("qrs_pos: " + Arrays.toString(qrs_pos));
-//        System.out.println("filt_dat: " + Arrays.toString(filt_dat));
-//        System.out.println("int_dat: " + Arrays.toString(int_dat));
-//        System.out.println("thF1: " + Arrays.toString(thF1));
-//        System.out.println("thI1: " + Arrays.toString(thI1));
+        values = (double[]) res[0];
+        String[] R = (String[]) res[1];
+        Double heartRate = Double.parseDouble(R[0]);
+        Double rMSSD = Double.parseDouble(R[1]);
+        Double SDNN = Double.parseDouble(R[2]);
+        Double mRR = Double.parseDouble(R[3]);
         
+        ecg.setHeartRate(heartRate);
+        ecg.setrMSSD(rMSSD);
+        ecg.setSDNN(SDNN);
+        ecg.setmRR(mRR);
+       
         eng.close();
 		
 		return values;

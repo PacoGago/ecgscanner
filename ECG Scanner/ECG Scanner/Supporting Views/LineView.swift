@@ -15,12 +15,30 @@ struct LineView: View {
         self.subtitle = subtitle
     }
     
+    @State private var isAlert = false
+    
     public var body: some View {
         
        //ScrollView(.horizontal) {
-            ZStack {
+            ZStack{
                 
                 GridChartView()
+                
+                Button(action: {
+                   self.isAlert = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .font(Font.system(size: 25, weight: .regular))
+                        .foregroundColor(.black)
+                        .padding(.leading,300)
+                        .padding(.bottom,490)
+                }.alert(isPresented: $isAlert) { () -> Alert in
+                        Alert(
+                            title: Text("Current Location Not Available"),
+                            message: Text("Your current location can’t be " +
+                                            "determined at this time.")
+                        )
+                }
                 
                 GeometryReader{ geometry in
 
@@ -45,7 +63,11 @@ struct LineView: View {
 
                     }
                 }
+                
             }
+        
+        
+        
         //}
 
     }

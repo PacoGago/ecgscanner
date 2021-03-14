@@ -18,6 +18,10 @@ struct ECGChartView: View {
     let APIUtils = APIUtilsImpl()
     
     @State var values = [Double]()
+    @State var heartRate = 0.0
+    @State var rMSSD = 0.0
+    @State var mRR = 0.0
+    @State var sdnn = 0.0
     
     @GestureState private var isPressed = false
     
@@ -241,6 +245,10 @@ struct ECGChartView: View {
                         
                         DispatchQueue.main.async {
                             self.values = ECGResponse.values
+                            self.heartRate = ECGResponse.heartRate
+                            
+                            print("heart rate: " + String(format: "%f", self.heartRate))
+                            
                             self.showLoadingView = false
                             self.showDigitalizationView = true
                             self.p.ecg.values = self.values
@@ -276,12 +284,20 @@ struct ECGJSON : Codable {
     let file: String
     let id: Int
     let values: [Double]
+    let heartRate: Double
+    let rMSSD: Double
+    let mRR: Double
+    let sdnn: Double
     
     private enum CodingKeys: String, CodingKey {
         
         case id = "id"
         case file = "file"
         case values = "values"
+        case heartRate = "heartRate"
+        case rMSSD = "rMSSD"
+        case mRR = "mRR"
+        case sdnn = "sdnn"
     }
 }
 
