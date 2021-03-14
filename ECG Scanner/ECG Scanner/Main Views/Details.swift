@@ -53,6 +53,7 @@ struct DetailsView: View {
                 }) {
                    Image(systemName: "tray.and.arrow.down")
                 }
+                
             }
         )
     }

@@ -13,6 +13,11 @@ public class ECGDTO implements Serializable {
 	
 	private String file;
 	
+	private Double heartRate;
+	private Double rMSSD;
+	private Double SDNN;
+	private Double mRR;
+	
 	public ECGDTO() {
 		super();
 	}
@@ -21,6 +26,38 @@ public class ECGDTO implements Serializable {
 		super();
 		this.id = id;
 		this.values = values;
+	}
+	
+	public Double getHeartRate() {
+		return heartRate;
+	}
+
+	public void setHeartRate(Double heartRate) {
+		this.heartRate = heartRate;
+	}
+
+	public Double getrMSSD() {
+		return rMSSD;
+	}
+
+	public void setrMSSD(Double rMSSD) {
+		this.rMSSD = rMSSD;
+	}
+
+	public Double getSDNN() {
+		return SDNN;
+	}
+
+	public void setSDNN(Double sDNN) {
+		SDNN = sDNN;
+	}
+
+	public Double getmRR() {
+		return mRR;
+	}
+
+	public void setmRR(Double mRR) {
+		this.mRR = mRR;
 	}
 
 	public Integer getId() {
