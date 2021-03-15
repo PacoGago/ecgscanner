@@ -194,7 +194,7 @@ struct ECGChartView: View {
             postContent += createParamBodyItem(paramValue: p.ecg.ecgType, paramName: "ecgType")
         }
         
-        postContent += createParamBodyItem(paramValue: p.ecg.heartRate, paramName: "heartRate")
+        //postContent += createParamBodyItem(paramValue: p.ecg.heartRate, paramName: "heartRate")
         
         // Imagen
         
@@ -246,12 +246,16 @@ struct ECGChartView: View {
                         DispatchQueue.main.async {
                             self.values = ECGResponse.values
                             self.heartRate = ECGResponse.heartRate
-                            
-                            print("heart rate: " + String(format: "%f", self.heartRate))
-                            
+                            self.mRR = ECGResponse.mRR
+                            self.rMSSD = ECGResponse.rMSSD
+                            self.sdnn = ECGResponse.sdnn
                             self.showLoadingView = false
                             self.showDigitalizationView = true
                             self.p.ecg.values = self.values
+                            self.p.ecg.heartRate = self.heartRate
+                            self.p.ecg.rMSSD = self.mRR
+                            self.p.ecg.rMSSD = self.rMSSD
+                            self.p.ecg.SDNN = self.sdnn
                         }
 
                         return

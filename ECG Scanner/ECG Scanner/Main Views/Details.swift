@@ -11,6 +11,8 @@ struct DetailsView: View {
     @State var ecgChartView = ECGChartView()
     @Binding var shouldPopToRootView : Bool
     @State private var isAlert = false
+    @State private var isAlertInfo = false
+    @State private var alertText = ""
     
     var body: some View {
         
@@ -42,10 +44,10 @@ struct DetailsView: View {
                     Image(systemName: "trash").frame(width: 30.0, height: 30.0)
                 }.padding()
                 .alert(isPresented: $isAlert) { () -> Alert in
-                        Alert(title: Text("Limpiar datos"), message: Text("¿Desea borrar los datos del paciente?"), primaryButton: .default(Text("Sí"), action: {
-                            self.flushPatient()
-                            self.shouldPopToRootView = false
-                        }), secondaryButton: .default(Text("Cancelar")))
+                    Alert(title: Text("Limpiar datos"), message: Text("¿Desea borrar los datos del paciente?"), primaryButton: .default(Text("Sí"), action: {
+                        self.flushPatient()
+                        self.shouldPopToRootView = false
+                    }), secondaryButton: .default(Text("Cancelar")))
                 }
                 
                 Button(action: {
@@ -54,8 +56,50 @@ struct DetailsView: View {
                    Image(systemName: "tray.and.arrow.down")
                 }
                 
+                if (self.tabIndex == 2 && self.hasAlert()) {
+                    Button(action: {
+                        self.alertInfo()
+                        self.isAlertInfo = true
+                    }) {
+                       Image(systemName: "info.circle")
+                    }.padding().padding(.top,4)
+                    .alert(isPresented: $isAlertInfo) { () -> Alert in
+                        Alert(
+                            title: Text("Información"),
+                            message:
+                            Text(self.alertText)
+                        )
+                    }
+                }
             }
         )
+    }
+    
+    func hasAlert() -> Bool{
+        if (self.patient.ecg.heartRate != 0.0 || self.patient.ecg.heartRate != nil){return true}
+        if (self.patient.ecg.mRR != 0.0 || self.patient.ecg.mRR != nil){return true}
+        if (self.patient.ecg.rMSSD != 0.0 || self.patient.ecg.rMSSD != nil){return true}
+        if (self.patient.ecg.SDNN != 0.0 || self.patient.ecg.SDNN != nil){return true}
+        return false
+    }
+    
+    func alertInfo() -> Void {
+        
+        if (self.patient.ecg.heartRate != 0.0 && self.patient.ecg.heartRate != nil) {
+            self.alertText = "Tasa Cardiáca: " + self.patient.ecg.heartRate!.description + "\r\n"
+        }
+        
+        if (self.patient.ecg.mRR != 0.0 && self.patient.ecg.mRR != nil){
+            self.alertText = self.alertText + "mRR: " + self.patient.ecg.mRR!.description + "\r\n"
+        }
+        
+        if (self.patient.ecg.rMSSD != 0.0 && self.patient.ecg.rMSSD != nil) {
+            self.alertText = self.alertText + "rMSSD: " + self.patient.ecg.rMSSD!.description + "\r\n"
+        }
+        
+        if (self.patient.ecg.SDNN != 0.0 && self.patient.ecg.SDNN != nil) {
+            self.alertText = self.alertText + "SDNN: " + self.patient.ecg.SDNN!.description + "\r\n"
+        }
     }
 
     func flushPatient() -> Void{
@@ -135,8 +179,7 @@ struct DetailsView: View {
                     "temperatura": patient.ecg.bodytemp,
                     "glucosa": patient.ecg.glucose,
                     "motivo": patient.ecg.reason,
-                    "tipo": patient.ecg.ecgType,
-                    "tasaCardiaca": patient.ecg.heartRate
+                    "tipo": patient.ecg.ecgType
                 ]),
                 XML(name: "manufacturer").addChildren([
                     XML(name: "model", value: patient.ecg.ecgModel)
