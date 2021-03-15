@@ -50,15 +50,15 @@ struct ECGDataView: View {
         )
     }
     
-    var heartRate: Binding<String> {
-        Binding<String>(
-            get: { String(format: "%.02f", Double(self.p.ecg.heartRate)) },
-            set: {
-                let newString = $0.replacingOccurrences(of: ",", with: ".")
-                self.p.ecg.heartRate = (newString as NSString).doubleValue
-            }
-        )
-    }
+//    var heartRate: Binding<String> {
+//        Binding<String>(
+//            get: { String(format: "%.02f", Double(self.p.ecg.heartRate)) },
+//            set: {
+//                let newString = $0.replacingOccurrences(of: ",", with: ".")
+//                self.p.ecg.heartRate = (newString as NSString).doubleValue
+//            }
+//        )
+//    }
     
     var body: some View {
         
@@ -122,10 +122,10 @@ struct ECGDataView: View {
                     TextField(" ", text: glucose).keyboardType(.decimalPad)
                 }
                 
-                HStack {
-                    Text("Tasa cardíaca (PPM):")
-                    TextField(" ", text: heartRate).keyboardType(.decimalPad)
-                }
+//                HStack {
+//                    Text("Tasa cardíaca (PPM):")
+//                    TextField(" ", text: heartRate).keyboardType(.decimalPad)
+//                }
                 
             }//END: DATOS GENERALES
             

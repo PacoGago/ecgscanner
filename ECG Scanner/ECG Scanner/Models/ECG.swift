@@ -10,7 +10,10 @@ class ECG: ObservableObject{
     @Published var glucose = 80.0
     @Published var reason = ""
     @Published var ecgType = ""
-    @Published var heartRate = 80.0
+    @Published var heartRate: Double?
+    @Published var rMSSD: Double?
+    @Published var mRR: Double?
+    @Published var SDNN: Double?
     @Published var imagePro = UIImage()
     @Published var imageSource = UIImage()
     @Published var values = [Double]()
