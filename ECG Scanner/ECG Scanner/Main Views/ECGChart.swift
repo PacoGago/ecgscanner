@@ -253,7 +253,7 @@ struct ECGChartView: View {
                             self.showDigitalizationView = true
                             self.p.ecg.values = self.values
                             self.p.ecg.heartRate = self.heartRate
-                            self.p.ecg.rMSSD = self.mRR
+                            self.p.ecg.mRR = self.mRR
                             self.p.ecg.rMSSD = self.rMSSD
                             self.p.ecg.SDNN = self.sdnn
                         }

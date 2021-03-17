@@ -152,35 +152,6 @@ struct DetailsView: View {
         let store = XML(name: "ecgXml")
             .addChildren([
                 
-                XML(name: "paciente", attributes: [
-                    "nombre": patient.name,
-                    "primerApellido": patient.firstSurname,
-                    "segundoApellido": patient.secondSurname,
-                    "direccion": patient.address,
-                    "ciudad": patient.city,
-                    "provincia": patient.province,
-                    "genero": patient.genre,
-                    "edad": patient.age,
-                    "peso": patient.weight,
-                    "altura": patient.height,
-                    "fumador": patient.smoker,
-                    "alergias": patient.allergy,
-                    "enfermedadCronica": patient.chronic,
-                    "medicacion": patient.medication,
-                    "hospital": patient.hospital,
-                    "bmi": patient.bmi,
-                    "hospitalProvidence": patient.hospitalProvidence
-                ]),
-                XML(name: "ecg", attributes: [
-                    "origen": patient.ecg.origin,
-                    "equipamiento": patient.ecg.ecgModel,
-                    "presionSanguineaSistolica": patient.ecg.bodypresssystolic,
-                    "presionSanguineaDiastolica": patient.ecg.bodypressdiastolic,
-                    "temperatura": patient.ecg.bodytemp,
-                    "glucosa": patient.ecg.glucose,
-                    "motivo": patient.ecg.reason,
-                    "tipo": patient.ecg.ecgType
-                ]),
                 XML(name: "manufacturer").addChildren([
                     XML(name: "model", value: patient.ecg.ecgModel)
                 ]),
@@ -218,7 +189,9 @@ struct DetailsView: View {
                     XML(name: "time", value: hourandminutes)
                 ]),
                 XML(name: "waveforms").addChildren([
-                    XML(name: "signalcharacteristics", value: "test"),
+                    XML(name: "mRR", value: patient.ecg.mRR),
+                    XML(name: "rMSSD", value: patient.ecg.rMSSD),
+                    XML(name: "SDNN", value: patient.ecg.SDNN),
                     XML(name: "parsedwaveform", value: patient.ecg.values)
                 ]),
                 XML(name: "image", attributes: [
