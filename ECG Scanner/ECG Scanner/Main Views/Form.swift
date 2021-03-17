@@ -596,6 +596,18 @@ struct FormView: View {
                     self.patient.ecg.heartRate = tasaCardiaca
                 }
                 
+                if let mRR = xml?.waveforms.mRR.doubleValue {
+                    self.patient.ecg.mRR = mRR
+                }
+                
+                if let rMSSD = xml?.waveforms.rMSSD.doubleValue {
+                    self.patient.ecg.rMSSD = rMSSD
+                }
+                
+                if let SDNN = xml?.waveforms.SDNN.doubleValue {
+                    self.patient.ecg.SDNN = SDNN
+                }
+                
                 if let parsedwaveform = xml?.waveforms.parsedwaveform.stringValue {
                     var strWave = parsedwaveform
                     strWave.remove(at: strWave.startIndex)

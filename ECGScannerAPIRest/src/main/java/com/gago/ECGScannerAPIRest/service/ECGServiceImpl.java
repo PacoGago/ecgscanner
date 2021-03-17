@@ -20,6 +20,8 @@ import java.util.stream.DoubleStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.dozer.DozerBeanMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gago.ECGScannerAPIRest.constants.ConstantsUtils;
+import com.gago.ECGScannerAPIRest.controller.ECGController;
 import com.gago.ECGScannerAPIRest.dao.ECGDao;
 import com.gago.ECGScannerAPIRest.dao.PatientDao;
 import com.gago.ECGScannerAPIRest.dto.ECGDTO;
@@ -42,6 +45,8 @@ import com.mathworks.engine.MatlabSyntaxException;
 
 @Service
 public class ECGServiceImpl implements ECGService {
+	
+	private static final Logger log = LoggerFactory.getLogger(ECGServiceImpl.class);
 	
 	public static final int M = 5;
     public static final int N = 30;
@@ -252,22 +257,10 @@ public class ECGServiceImpl implements ECGService {
 		Future<MatlabEngine> engine = MatlabEngine.startMatlabAsync();
         MatlabEngine eng = engine.get();
         
-        
-        // Directorio donde se almacenan las funciones de matLab
         eng.eval("cd " + functionsDir);
         
-        // Procesamos la imagen
-        // feval(numero de argumentos a recibir, nombre de la funciona a ejecutar, argumentos a pasar)
-        //double[] values = eng.feval("main", f.getAbsolutePath());
-        
-        
-        //System.out.println("ECG: " + Arrays.toString(values));
-        // Aqui deberiamos determinar si con la digitalizacion
-        // que hemos conseguido podemos o no llamar al pantompkins
-        // dado que si no posee la suficiente longitud no funciona
-        
-        
         res = eng.feval(2,"main", f.getAbsolutePath());
+        
         values = (double[]) res[0];
         String[] R = (String[]) res[1];
         Double heartRate = Double.parseDouble(R[0]);
