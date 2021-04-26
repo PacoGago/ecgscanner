@@ -1,0 +1,20 @@
+Test Case '-[ECG_ScannerUITests.ECG_ScannerUITests testExampleCU02]' started.
+    t =     0.00s Start Test at 2021-04-26 20:39:01.278
+    t =     0.02s Set Up
+    t =     0.03s Open gago.ECG-Scanner
+    t =     0.05s     Activate gago.ECG-Scanner
+    t =     0.06s         Wait for gago.ECG-Scanner to idle
+    t =     0.10s Tap "gear" Button
+    t =     0.10s     Wait for gago.ECG-Scanner to idle
+    t =     0.12s     Find the "gear" Button
+    t =     0.14s     Check for interrupting elements affecting "gear" Button
+    t =     0.16s     Synthesize event
+    t =     0.32s     Wait for gago.ECG-Scanner to idle
+    t =     0.58s Tap "Cerrar sesión" Button
+    t =     0.58s     Wait for gago.ECG-Scanner to idle
+    t =     0.62s     Find the "Cerrar sesión" Button
+    t =     0.69s     Check for interrupting elements affecting "Cerrar sesión" Button
+    t =     0.71s     Synthesize event
+    t =     0.79s     Wait for gago.ECG-Scanner to idle
+    t =     1.17s Tear Down
+Test Case '-[ECG_ScannerUITests.ECG_ScannerUITests testExampleCU02]' passed (1.170 seconds).
