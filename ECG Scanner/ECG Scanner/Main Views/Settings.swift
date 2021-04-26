@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    let generator = UINotificationFeedbackGenerator()
+    
     let lightGrey = Color(red: 240.0/255.0,
                           green: 242.0/255.0,
                           blue: 245.0/255.0,
@@ -108,6 +110,7 @@ struct SettingsView: View {
         var res = true
         
         if(user.isEmpty && pwd.isEmpty){
+            self.generator.notificationOccurred(.error)
             withAnimation(.default){
                 self.invalidAttempts += 1
             }
@@ -115,12 +118,14 @@ struct SettingsView: View {
             res = false
         }else{
             if(user.isEmpty){
+                self.generator.notificationOccurred(.error)
                 withAnimation(.default){
                     self.invalidUser += 1
                 }
                 self.error = "Debe introducir el usuario."
                 res = false
             }else if(pwd.isEmpty){
+                self.generator.notificationOccurred(.error)
                 withAnimation(.default){
                     self.invalidPwd += 1
                 }
@@ -156,10 +161,12 @@ struct SettingsView: View {
                             UserDefaults.standard.set(self.pwd, forKey: "pwd")
                             UserDefaults.standard.set(self.jwt, forKey: "jwt")
                         }
+                        self.generator.notificationOccurred(.success)
                         self.presentation.wrappedValue.dismiss()
                     }
                 }else{
                     self.error = "Los datos de acceso son incorrectos."
+                    self.generator.notificationOccurred(.error)
                     withAnimation(.default){
                         self.invalidAttempts += 1
                     }
@@ -169,6 +176,7 @@ struct SettingsView: View {
             }
             
             self.error = "No se ha podido conectar con el servidor."
+            self.generator.notificationOccurred(.error)
             withAnimation(.default){
                 self.invalidAttempts += 1
             }

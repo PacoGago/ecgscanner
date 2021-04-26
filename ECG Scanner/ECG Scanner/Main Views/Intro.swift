@@ -18,8 +18,8 @@ struct ContentView: View {
     
     var cardNew: Card = Card(
         img: "btn_new_scan",
-        description: "Permite escaner una imagen de un ECG",
-        buttonText: "Escanear un nuevo ECG",
+        description: "Permite digitalizar una imagen de un ECG",
+        buttonText: "Digitalizar un nuevo ECG",
         backgroundCardColor: Color.white,
         buttonFontColor: Color.white,
         buttonBackgroundColor: Color.blue,
@@ -29,8 +29,8 @@ struct ContentView: View {
     
     var cardNewDisabled: Card = Card(
         img: "btn_new_scan",
-        description: "Permite escaner una imagen de un ECG",
-        buttonText: "Escanear un nuevo ECG",
+        description: "Permite digitalizar una imagen de un ECG",
+        buttonText: "Digitalizar un nuevo ECG",
         backgroundCardColor: Color.white,
         buttonFontColor: Color.white,
         buttonBackgroundColor: Color.gray,
