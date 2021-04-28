@@ -20,7 +20,7 @@ public interface ECGService {
 	List<ECGDTO> findAll();
 	ECGDTO transform(ECG ecg);
 	ECG transform(ECGDTO ecg);
-	ECGDTO create(ECGDTO book);
+	ECGDTO create(ECGDTO ecgdto);
 	void delete(ECGDTO eDTO) throws NoECGException;
 	ECGDTO update(ECGDTO eDTO) throws NoECGException;
 	void deleteById(Integer id) throws NoECGException;
