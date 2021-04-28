@@ -189,6 +189,7 @@ struct SettingsView: View {
     
     func sanitanizeLogin(){
         
+        self.presentation.wrappedValue.dismiss()
         self.user = ""
         self.pwd = ""
         self.jwt = ""

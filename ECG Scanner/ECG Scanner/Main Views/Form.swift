@@ -79,7 +79,7 @@ struct FormView: View {
     }
 
     var body: some View {
-            
+        
         Form{
                 //DATOS DE IMAGEN
                 Section(header: ImageTextView(img: Image(systemName: "photo.fill"), txt: Text("Datos de Imagen").bold())){
