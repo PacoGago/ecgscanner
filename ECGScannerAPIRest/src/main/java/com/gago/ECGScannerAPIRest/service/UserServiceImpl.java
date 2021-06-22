@@ -15,6 +15,7 @@ import javax.naming.directory.SearchResult;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,37 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class UserServiceImpl implements UserService{
 	
 	private static final Logger log = LoggerFactory.getLogger(ECGController.class);
+	
+	
+	@Value("${ldap.datasource.url}")
+	private String ldapurl_;
+	
+	@Value("${ldap.datasource.user}")
+	private String ldapuser_;
+	
+	@Value("${ldap.datasource.password}")
+	private String ldappwd_;
+	
+	private static String LDAPURL;
+	
+	private static String LDAPUSER;
+	
+	private static String LDAPPWD;
+	
+    @Value("${ldap.datasource.url}")
+    public void setLdapUrl(String ldapurl_){
+    	UserServiceImpl.LDAPURL = ldapurl_;
+    }
+	
+    @Value("${ldap.datasource.user}")
+    public void setLdapUser(String ldapuser_){
+    	UserServiceImpl.LDAPUSER = ldapuser_;
+    }
+	
+    @Value("${ldap.datasource.password}")
+    public void setLdapPwd(String ldappwd_){
+    	UserServiceImpl.LDAPPWD = ldappwd_;
+    }
 	
 	@Override
 	public User autenticate(String username, String pwd) {
@@ -72,8 +104,8 @@ public class UserServiceImpl implements UserService{
 	private static boolean performAuthentication(String user, String pwd) {
 
 	    // service user
-	    String serviceUserDN = "cn=Francisco Gago,ou=Users,dc=example,dc=com";
-	    String serviceUserPassword = "password";
+	    String serviceUserDN = "cn=" + LDAPUSER + ",ou=Users,dc=example,dc=com";
+	    //String serviceUserPassword = "password";
 
 	    // user to authenticate
 	    String identifyingAttribute = "uid";
@@ -82,9 +114,9 @@ public class UserServiceImpl implements UserService{
 	    String base = "ou=Users,dc=example,dc=com";
 
 	    // LDAP connection info
-	    String ldap = "localhost";
-	    int port = 10389;
-	    String ldapUrl = "ldap://" + ldap + ":" + port;
+	    //String ldap = "localhost";
+	    //int port = 10389;
+	    //String ldapUrl = "ldap://" + ldap + ":" + port;
 
 	    // first create the service context
 	    DirContext serviceCtx = null;
@@ -94,10 +126,10 @@ public class UserServiceImpl implements UserService{
 	        // servicio para la autenticacion
 	        Properties serviceEnv = new Properties();
 	        serviceEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-	        serviceEnv.put(Context.PROVIDER_URL, ldapUrl);
+	        serviceEnv.put(Context.PROVIDER_URL, LDAPURL);
 	        serviceEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
 	        serviceEnv.put(Context.SECURITY_PRINCIPAL, serviceUserDN);
-	        serviceEnv.put(Context.SECURITY_CREDENTIALS, serviceUserPassword);
+	        serviceEnv.put(Context.SECURITY_CREDENTIALS, LDAPPWD);
 	        serviceCtx = new InitialDirContext(serviceEnv);
 
 	        // para la autenticacion solo usaremos los atributos necesarios
@@ -119,7 +151,7 @@ public class UserServiceImpl implements UserService{
 	            // intentamos autenticar al usuario
 	            Properties authEnv = new Properties();
 	            authEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-	            authEnv.put(Context.PROVIDER_URL, ldapUrl);
+	            authEnv.put(Context.PROVIDER_URL, LDAPURL);
 	            authEnv.put(Context.SECURITY_PRINCIPAL, distinguishedName);
 	            authEnv.put(Context.SECURITY_CREDENTIALS, password);
 	            new InitialDirContext(authEnv);
